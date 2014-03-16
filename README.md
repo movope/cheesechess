@@ -1,2 +1,3 @@
-cheesechess
+Cheese Chess
 ===========
+I'm trying to write a chess computer that defeats me. So we'll see where it gets me ...
