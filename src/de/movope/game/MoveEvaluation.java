@@ -28,4 +28,8 @@ public class MoveEvaluation {
     public Collection<Square> possibleTargets() {
         return moves;
     }
+
+    public Object possibleAttacks() {
+        return attacks;
+    }
 }
