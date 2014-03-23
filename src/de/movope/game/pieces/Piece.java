@@ -2,6 +2,7 @@ package de.movope.game.pieces;
 
 import de.movope.game.Board;
 import de.movope.game.Color;
+import de.movope.game.MoveEvaluation;
 import de.movope.game.Square;
 
 import java.awt.*;
@@ -42,10 +43,11 @@ public class Piece {
     }
 
 
-    public Collection<Square> getPossibleTargets(Board board) {
+    public MoveEvaluation getPossibleMoves(Board board) {
         Collection<Piece> myPieces = board.getPieces(color);
         Collection<Piece> enemyPieces = board.getPieces(color.invert());
         Set<Square> targets = new HashSet<>();
+        Set<Square> attacks = new HashSet<>();
         for (Point dir : directions) {
             Square target = (Square) currentPosition.clone();
             int i = 1;
@@ -55,6 +57,9 @@ public class Piece {
                     if (squareIsEmpty(myPieces, target) && squareIsEmpty(enemyPieces, target)) {
                         targets.add(target);
                         i++;
+                    } else if (!squareIsEmpty(enemyPieces, target)) {
+                        attacks.add(target);
+                        break;
                     } else {
                         break;
                     }
@@ -63,7 +68,7 @@ public class Piece {
                 }
             }
         }
-        return targets;
+        return new MoveEvaluation(targets, attacks);
     }
 
     public boolean squareIsEmpty(Collection<Piece> pieces, Square target) {

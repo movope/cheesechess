@@ -3,7 +3,6 @@ package de.movope.game;
 import de.movope.game.pieces.Piece;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 
 public class Player {
@@ -17,13 +16,13 @@ public class Player {
     }
 
     public void makeRandomMove() {
-        Piece randomPiece = null;
-        Collection<Square> possibleTargets = Collections.emptyList();
-        while (possibleTargets.size() == 0) {
+        Piece randomPiece = Piece.NULL;
+        MoveEvaluation evaluation = MoveEvaluation.empty();
+        while (!evaluation.isMovePossible()) {
             randomPiece = getRandomPiece();
-            possibleTargets = randomPiece.getPossibleTargets(board);
+            evaluation = randomPiece.getPossibleMoves(board);
         }
-        Square target = chooseOneOf(possibleTargets);
+        Square target = chooseOneOf(evaluation.possibleTargets());
         randomPiece.moveTo(target);
     }
 
