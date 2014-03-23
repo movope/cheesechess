@@ -7,11 +7,11 @@ import java.awt.*;
 
 public class Pawn extends Piece{
 
-    boolean firstMove = true;
+    boolean isFirstMove = true;
 
     public Pawn(Color color, String position) {
         super(color, position);
-        id = "B";
+        id = "P";
         maximumMoves = 2;
         if (color == de.movope.game.Color.WHITE)
             directions = new Point[]{new Point(0,1)};
@@ -21,9 +21,9 @@ public class Pawn extends Piece{
 
     @Override
     public void moveTo(Square square) {
-        if (firstMove == true) {
+        if (isFirstMove) {
             maximumMoves = 1;
-            firstMove = false;
+            isFirstMove = false;
         }
         super.moveTo(square);
     }
