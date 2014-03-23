@@ -1,7 +1,7 @@
 package de.movope.game;
 
 
-import de.movope.game.domain.*;
+import de.movope.game.pieces.*;
 
 import java.util.Collection;
 import java.util.HashSet;

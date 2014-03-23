@@ -1,6 +1,6 @@
 package de.movope.game;
 
-import de.movope.game.domain.Piece;
+import de.movope.game.pieces.Piece;
 
 import java.util.Collection;
 import java.util.Collections;

@@ -1,8 +1,8 @@
 package de.movope.game
 
-import de.movope.game.domain.Knight
-import de.movope.game.domain.Pawn
-import de.movope.game.domain.Rook
+import de.movope.game.pieces.Knight
+import de.movope.game.pieces.Pawn
+import de.movope.game.pieces.Rook
 import spock.lang.Specification
 
 class BoardTest extends Specification {

@@ -1,4 +1,4 @@
-package de.movope.game.domain;
+package de.movope.game.pieces;
 
 import de.movope.game.Board;
 import de.movope.game.Color;
