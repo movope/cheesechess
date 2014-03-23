@@ -48,7 +48,6 @@ public class Board {
 
     public void print() {
         String[][] board = new String[8][8];
-        final String[] ranks = {"A", "B", "C", "D", "E", "F", "G", "H"};
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -95,7 +94,9 @@ public class Board {
             }
         }
         for (Piece p : blackPieces) {
-            return p;
+            if (p.getPosition().equals(Square.create(square))) {
+                return p;
+            }
         }
 
         return Piece.NULL;
