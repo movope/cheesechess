@@ -8,11 +8,14 @@ public class ChessGamePlayer {
         game.init();
 
         Player white = game.getWhitePlayer();
+        Player black = game.getBlackPlayer();
 
         game.print();
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 4; i++) {
             white.makeRandomMove();
+            game.print();
+            black.makeRandomMove();
             game.print();
         }
     }

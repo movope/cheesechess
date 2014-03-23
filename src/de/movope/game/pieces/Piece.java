@@ -37,7 +37,7 @@ public class Piece {
     }
 
     public void moveTo(Square square) {
-        System.out.println("Move: " + id + " " + currentPosition + " -> " + square);
+        System.out.println("Player:" + color + " Move: " + id + " " + currentPosition + " -> " + square);
         currentPosition = square;
     }
 
