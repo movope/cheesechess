@@ -20,18 +20,6 @@ class PieceTest extends Specification {
     }
 
 
-    def "correct targets for rook"() {
-        expect:
-        def evaluation = board.getPieceAt("A1").getPossibleMoves(board)
-        evaluation.possibleTargets().size() == 3
-    }
-
-    def "correct targets for bishop"() {
-        expect:
-        def evaluation = board.getPieceAt("C1").getPossibleMoves(board)
-        evaluation.possibleTargets().size() == 5
-    }
-
     def "correct targets for queen"() {
         expect:
         def evaluation = board.getPieceAt("D1").getPossibleMoves(board)

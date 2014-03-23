@@ -1,11 +1,8 @@
 package de.movope.game.pieces
 
 import de.movope.game.Board
-import de.movope.game.Color
 import de.movope.game.Square
 import spock.lang.Specification
-
-import static org.mockito.Mockito.*
 
 class BishopTest extends Specification {
 
@@ -27,8 +24,13 @@ class BishopTest extends Specification {
 
 
     def "correct targets for bishop"() {
-        expect:
+        when:
         def evaluation = board.getPieceAt("D4").getPossibleMoves(board)
+
+        then:
         evaluation.possibleTargets().size() == 6
+        evaluation.possibleAttacks().size() == 2
+        evaluation.possibleAttacks().contains(Square.create("G7"))
+        evaluation.possibleAttacks().contains(Square.create("B6"))
     }
 }
