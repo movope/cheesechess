@@ -6,10 +6,8 @@ import de.movope.game.MoveEvaluation;
 import de.movope.game.Square;
 
 import java.awt.*;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 
 public class Piece {
 
@@ -88,5 +86,18 @@ public class Piece {
         }
         return true;
     }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public Iterator<Point> directions() {
+        return directions.iterator();
+    }
+
+    public int getMaximumMoves() {
+        return maximumMoves;
+    }
+
 
 }

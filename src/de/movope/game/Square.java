@@ -1,5 +1,6 @@
 package de.movope.game;
 
+import java.awt.*;
 import java.util.Arrays;
 
 public class Square implements Cloneable {
@@ -58,6 +59,10 @@ public class Square implements Cloneable {
         return new Square(file, rank + squares);
     }
 
+    public Square move(Point dir) {
+        return new Square(file + dir.y, rank + dir.x);
+    }
+
     @Override
     public Object clone() {
         Square clone = null;
@@ -95,5 +100,13 @@ public class Square implements Cloneable {
         result = 31 * result + file;
         result = 31 * result + rank;
         return result;
+    }
+
+    public boolean onBoard() {
+        if (getFile() < 0 || getFile() > 7 ||
+                getRank() < 0 || getRank() > 7) {
+            return false;
+        }
+        return true;
     }
 }

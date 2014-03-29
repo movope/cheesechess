@@ -87,20 +87,21 @@ public class Board {
         return blackPieces;
     }
 
-    public Piece getPieceAt(String square) {
+    public Piece getPieceAt(Square square) {
         for (Piece p : whitePieces) {
-            if (p.getPosition().equals(Square.create(square))) {
+            if (p.getPosition().equals(square)) {
                 return p;
             }
         }
         for (Piece p : blackPieces) {
-            if (p.getPosition().equals(Square.create(square))) {
+            if (p.getPosition().equals(square)) {
                 return p;
             }
         }
-
         return Piece.NULL;
     }
 
-
+    public Piece getPieceAt(String square) {
+        return getPieceAt(Square.create(square));
+    }
 }
