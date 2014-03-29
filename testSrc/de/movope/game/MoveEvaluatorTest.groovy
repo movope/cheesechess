@@ -22,7 +22,7 @@ class MoveEvaluatorTest extends Specification {
 
     def "when you enter a square outside the board, return null"() {
         when:
-        MoveEvaluationResult result = evaluator.analyse(board, "A9")
+        def result = evaluator.analyse(board, "A9")
 
         then:
         result == null
@@ -30,7 +30,7 @@ class MoveEvaluatorTest extends Specification {
 
     def "when you enter a square without piece, return null"() {
         when:
-        MoveEvaluationResult result = evaluator.analyse(board, "A4")
+        def result = evaluator.analyse(board, "A4")
 
         then:
         result == null
@@ -38,18 +38,21 @@ class MoveEvaluatorTest extends Specification {
 
     def "when you enter A2 (Pawn), the result contains one direction"() {
         when:
-        def result = evaluator.analyse(board, "A2")
+        MoveEvaluation result = evaluator.analyse(board, "A2")
 
         then:
-        result.getMoveVectors().size() == 1
+        result.possibleTargets().size() == 2
+        result.possibleAttacks().size() == 0
+
     }
 
-    def "when you enter D1 (queen), the result contains one direction"() {
+    def "when you enter D1 (queen), the result contains no moves and attacks"() {
         when:
         def result = evaluator.analyse(board, "D1")
 
         then:
-        result.getMoveVectors().size() == 0
+        result.possibleTargets().size() == 0
+        result.possibleAttacks().size() == 0
     }
 
 
@@ -58,7 +61,6 @@ class MoveEvaluatorTest extends Specification {
         setUpPeacesOnBoardForBishop()
 
         when:
-
         def result = evaluator.analyse(board, "D4");
 
         then:
@@ -73,7 +75,6 @@ class MoveEvaluatorTest extends Specification {
         def result = evaluator.analyse(board,"C4")
 
         then:
-        result.getMoveVectors().size() == 8
         result.possibleTargets().size() == 15
 
     }

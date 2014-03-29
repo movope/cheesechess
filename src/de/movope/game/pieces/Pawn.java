@@ -5,6 +5,7 @@ import de.movope.game.Square;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.List;
 
 public class Pawn extends Piece{
 
@@ -27,5 +28,13 @@ public class Pawn extends Piece{
             isFirstMove = false;
         }
         super.moveTo(square);
+    }
+
+    @Override
+    public List<Point> getAttackDirections() {
+        if (color != Color.WHITE) {
+            return Arrays.asList(new Point(-1, 1), new Point(1, 1));
+        }
+        return Arrays.asList(new Point(-1, -1), new Point(1, -1));
     }
 }

@@ -1,5 +1,6 @@
 package de.movope.game;
 
+import de.movope.game.pieces.Pawn;
 import de.movope.game.pieces.Piece;
 
 import java.awt.*;
@@ -7,10 +8,9 @@ import java.util.Iterator;
 
 public class MoveEvaluator {
 
-    MoveEvaluationResult result;
     Board board;
 
-    public MoveEvaluationResult analyse(Board board, String aSquare) {
+    public MoveEvaluation analyse(Board board, String aSquare) {
 
         this.board = board;
         Square square = Square.create(aSquare);
@@ -22,14 +22,14 @@ public class MoveEvaluator {
             return null;
         }
 
-        result = new MoveEvaluationResult();
-        determinePossibleTargetsOnBoard(square, piece);
-        return result;
+
+        return determinePossibleTargetsOnBoard(square, piece);
     }
 
 
-    private void determinePossibleTargetsOnBoard(Square start, Piece piece) {
+    private MoveEvaluation determinePossibleTargetsOnBoard(Square start, Piece piece) {
 
+        MoveEvaluation.Builder builder = new MoveEvaluation.Builder();
         Iterator<Point> it = piece.directions();
         while (it.hasNext()) {
             Point dir = it.next();
@@ -37,14 +37,25 @@ public class MoveEvaluator {
             target = target.move(dir);
             int max = piece.getMaximumMoves();
             for (int i = 0; i < max && canPieceMoveTo(target); i++) {
-                result.add(target);
+                builder.addMove(target);
                 target = target.move(dir);
             }
-            if (occupiedFromEnemy(target, piece.getColor().invert())) {
-                result.addPossibleAttack(target);
+            if (!(piece instanceof Pawn)) {
+                if (occupiedFromEnemy(target, piece.getColor().invert())) {
+                    builder.addAttack(target);
+                }
             }
-            result.nextDirection();
         }
+        if (piece instanceof Pawn) {
+            for (Point dir: piece.getAttackDirections()) {
+                Square target = (Square) start.clone();
+                target = target.move(dir);
+                if (occupiedFromEnemy(target, piece.getColor().invert())) {
+                    builder.addAttack(target);
+                }
+            }
+        }
+        return builder.create();
     }
 
     private boolean occupiedFromEnemy(Square target, Color enemyColor) {

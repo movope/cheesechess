@@ -6,7 +6,8 @@ import de.movope.game.MoveEvaluation;
 import de.movope.game.Square;
 
 import java.awt.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 public class Piece {
@@ -27,6 +28,10 @@ public class Piece {
         currentPosition = Square.create(position);
     }
 
+    public List<Point> getAttackDirections() {
+        return directions;
+    }
+
 
     public Square getPosition() {
         return currentPosition;
@@ -45,8 +50,8 @@ public class Piece {
     public MoveEvaluation getPossibleMoves(Board board) {
         Collection<Piece> myPieces = board.getPieces(color);
         Collection<Piece> enemyPieces = board.getPieces(color.invert());
-        Set<Square> targets = new HashSet<>();
-        Set<Square> attacks = new HashSet<>();
+
+        MoveEvaluation.Builder builder = new MoveEvaluation.Builder();
         for (Point dir : directions) {
             Square target = (Square) currentPosition.clone();
             int i = 1;
@@ -54,10 +59,10 @@ public class Piece {
                 target = target.moveHorizontical(dir.x).moveVertical(dir.y);
                 if (onBoard(target)) {
                     if (squareIsEmpty(myPieces, target) && squareIsEmpty(enemyPieces, target)) {
-                        targets.add(target);
+                        builder.addMove(target);
                         i++;
                     } else if (!squareIsEmpty(enemyPieces, target)) {
-                        attacks.add(target);
+                        builder.addAttack(target);
                         break;
                     } else {
                         break;
@@ -67,7 +72,7 @@ public class Piece {
                 }
             }
         }
-        return new MoveEvaluation(targets, attacks);
+        return builder.create();
     }
 
     public boolean squareIsEmpty(Collection<Piece> pieces, Square target) {
