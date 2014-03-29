@@ -1,6 +1,9 @@
 package de.movope.game;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 class MoveEvaluationResult {
 
@@ -23,20 +26,6 @@ class MoveEvaluationResult {
         }
     }
 
-    public Iterator<MoveVector> getVectorIterator() {
-        return moveVectors.iterator();
-    }
-
-    public void deleteEmptyVectors() {
-        Iterator<MoveVector> it = moveVectors.iterator();
-        while (it.hasNext()) {
-            MoveVector vector = it.next();
-            if (vector.size() == 0) {
-                it.remove();
-            }
-        }
-    }
-
     public Set<Square> possibleTargets() {
         Set<Square> result = new HashSet<>();
         for (MoveVector vector : moveVectors) {
@@ -55,5 +44,9 @@ class MoveEvaluationResult {
         }
         buffer.append("}");
         return buffer.toString();
+    }
+
+    public void addPossibleAttack(Square target) {
+        currentVector.addAttack(target);
     }
 }

@@ -24,40 +24,34 @@ public class MoveEvaluator {
 
         result = new MoveEvaluationResult();
         determinePossibleTargetsOnBoard(square, piece);
-        removeUnreachableTargets();
         return result;
     }
 
 
     private void determinePossibleTargetsOnBoard(Square start, Piece piece) {
+
         Iterator<Point> it = piece.directions();
         while (it.hasNext()) {
             Point dir = it.next();
             Square target = (Square) start.clone();
             target = target.move(dir);
-            for (int i = 0; i < piece.getMaximumMoves() && target.onBoard(); i++) {
+            int max = piece.getMaximumMoves();
+            for (int i = 0; i < max && canPieceMoveTo(target); i++) {
                 result.add(target);
                 target = target.move(dir);
+            }
+            if (occupiedFromEnemy(target, piece.getColor().invert())) {
+                result.addPossibleAttack(target);
             }
             result.nextDirection();
         }
     }
 
+    private boolean occupiedFromEnemy(Square target, Color enemyColor) {
+        return board.getPieceAt(target).getColor() == enemyColor;
+    }
 
-    private void removeUnreachableTargets() {
-        Iterator<MoveVector> vectorIterator = result.getVectorIterator();
-        while (vectorIterator.hasNext()) {
-            MoveVector moveVector = vectorIterator.next();
-            Iterator<Square> moveIterator = moveVector.iterator();
-            boolean deleteFollowing = false;
-            while (moveIterator.hasNext()) {
-                Square target = moveIterator.next();
-                if ((board.getPieceAt(target) != Piece.NULL) || deleteFollowing) {
-                    moveIterator.remove();
-                    deleteFollowing = true;
-                }
-            }
-        }
-        result.deleteEmptyVectors();
+    private boolean canPieceMoveTo(Square target) {
+        return target.onBoard() && board.getPieceAt(target) == Piece.NULL;
     }
 }
