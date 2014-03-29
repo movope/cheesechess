@@ -35,10 +35,8 @@ public class MoveEvaluator {
             Point dir = it.next();
             Square target = (Square) start.clone();
             target = target.move(dir);
-            int i = 0;
-            while (i < piece.getMaximumMoves() && target.onBoard()) {
+            for (int i = 0; i < piece.getMaximumMoves() && target.onBoard(); i++) {
                 result.add(target);
-                i++;
                 target = target.move(dir);
             }
             result.nextDirection();
@@ -62,5 +60,4 @@ public class MoveEvaluator {
         }
         result.deleteEmptyVectors();
     }
-
 }
