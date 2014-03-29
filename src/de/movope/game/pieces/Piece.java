@@ -8,6 +8,7 @@ import de.movope.game.Square;
 import java.awt.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Piece {
@@ -15,7 +16,7 @@ public class Piece {
     Color color;
     Square currentPosition;
     String id;
-    Point[] directions;
+    List<Point> directions;
     int maximumMoves;
 
     public static Piece NULL= new Piece();

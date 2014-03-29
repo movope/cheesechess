@@ -4,6 +4,7 @@ import de.movope.game.Color;
 import de.movope.game.Square;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class Pawn extends Piece{
 
@@ -14,9 +15,9 @@ public class Pawn extends Piece{
         id = "P";
         maximumMoves = 2;
         if (color == de.movope.game.Color.WHITE)
-            directions = new Point[]{new Point(0,1)};
+            directions = Arrays.asList(new Point(0, 1));
         if (color == de.movope.game.Color.BLACK)
-            directions = new Point[]{new Point(0,-1)};
+            directions = Arrays.asList(new Point(0,-1));
     }
 
     @Override
