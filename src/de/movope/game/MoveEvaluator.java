@@ -34,11 +34,14 @@ public class MoveEvaluator {
         while (it.hasNext()) {
             Point dir = it.next();
             Square target = (Square) start.clone();
-            target = target.move(dir);
             int max = piece.getMaximumMoves();
-            for (int i = 0; i < max && canPieceMoveTo(target); i++) {
-                builder.addMove(target);
+            for (int i = 0; i < max; i++) {
                 target = target.move(dir);
+                if (canPieceMoveTo(target)) {
+                    builder.addMove(target);
+                } else {
+                    break;
+                }
             }
             if (!(piece instanceof Pawn)) {
                 if (occupiedFromEnemy(target, piece.getColor().invert())) {
@@ -47,7 +50,7 @@ public class MoveEvaluator {
             }
         }
         if (piece instanceof Pawn) {
-            for (Point dir: piece.getAttackDirections()) {
+            for (Point dir : piece.getAttackDirections()) {
                 Square target = (Square) start.clone();
                 target = target.move(dir);
                 if (occupiedFromEnemy(target, piece.getColor().invert())) {
@@ -59,6 +62,9 @@ public class MoveEvaluator {
     }
 
     private boolean occupiedFromEnemy(Square target, Color enemyColor) {
+        if (target == null) {
+            return false;
+        }
         return board.getPieceAt(target).getColor() == enemyColor;
     }
 
