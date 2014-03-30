@@ -30,11 +30,13 @@ public class MoveEvaluator {
         final MoveEvaluation.Builder builder = new MoveEvaluation.Builder();
         builder.startAt(start);
 
-        piece.getAttackDirections().stream()
+        piece.directions().stream()
                 .map(dir -> possibleMoves(dir, start, piece))
-                .forEach(result -> result.getMoves().stream().forEach(s -> builder.addMove(s)));
+                .forEach(result -> {
+                    result.getMoves().stream().forEach(builder::addMove);
+                });
 
-        piece.getAttackDirections().stream()
+        piece.directions().stream()
                 .map(dir -> possibleMoves(dir, start, piece))
                 .filter(result -> occupiedFromEnemy(result.getAttack(), piece.getColor().invert()))
                 .forEach(result -> builder.addAttack(result.getAttack()));
@@ -46,7 +48,7 @@ public class MoveEvaluator {
         EvaluationResult result = new EvaluationResult();
         Square target = (Square) start.clone();
 
-        for (int i=0; i<piece.getMaximumMoves(); i++) {
+        for (int i = 0; i < piece.getMaximumMoves(); i++) {
             target = target.move(dir);
             if (canPieceMoveTo(target)) {
                 result.addMove(target);

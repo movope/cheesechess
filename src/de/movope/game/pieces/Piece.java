@@ -3,7 +3,6 @@ package de.movope.game.pieces;
 import de.movope.game.Color;
 
 import java.awt.*;
-import java.util.Iterator;
 import java.util.List;
 
 public class Piece {
@@ -22,7 +21,7 @@ public class Piece {
         this.color = color;
     }
 
-    public List<Point> getAttackDirections() {
+    public List<Point> directions() {
         return directions;
     }
 
@@ -34,9 +33,6 @@ public class Piece {
         return color;
     }
 
-    public Iterator<Point> directions() {
-        return directions.iterator();
-    }
 
     public int getMaximumMoves() {
         return maximumMoves;
