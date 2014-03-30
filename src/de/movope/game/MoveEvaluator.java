@@ -1,10 +1,8 @@
 package de.movope.game;
 
-import de.movope.game.pieces.Pawn;
 import de.movope.game.pieces.Piece;
 
 import java.awt.*;
-import java.util.Iterator;
 
 public class MoveEvaluator {
 
@@ -27,39 +25,37 @@ public class MoveEvaluator {
     }
 
 
-    private MoveEvaluation determinePossibleTargetsOnBoard(Square start, Piece piece) {
+    private MoveEvaluation determinePossibleTargetsOnBoard(final Square start, final Piece piece) {
 
-        MoveEvaluation.Builder builder = new MoveEvaluation.Builder();
+        final MoveEvaluation.Builder builder = new MoveEvaluation.Builder();
         builder.startAt(start);
-        Iterator<Point> it = piece.directions();
-        while (it.hasNext()) {
-            Point dir = it.next();
-            Square target = (Square) start.clone();
-            int max = piece.getMaximumMoves();
-            for (int i = 0; i < max; i++) {
-                target = target.move(dir);
-                if (canPieceMoveTo(target)) {
-                    builder.addMove(target);
-                } else {
-                    break;
-                }
-            }
-            if (!(piece instanceof Pawn)) {
-                if (occupiedFromEnemy(target, piece.getColor().invert())) {
-                    builder.addAttack(target);
-                }
-            }
-        }
-        if (piece instanceof Pawn) {
-            for (Point dir : piece.getAttackDirections()) {
-                Square target = (Square) start.clone();
-                target = target.move(dir);
-                if (occupiedFromEnemy(target, piece.getColor().invert())) {
-                    builder.addAttack(target);
-                }
-            }
-        }
+
+        piece.getAttackDirections().stream()
+                .map(dir -> possibleMoves(dir, start, piece))
+                .forEach(result -> result.getMoves().stream().forEach(s -> builder.addMove(s)));
+
+        piece.getAttackDirections().stream()
+                .map(dir -> possibleMoves(dir, start, piece))
+                .filter(result -> occupiedFromEnemy(result.getAttack(), piece.getColor().invert()))
+                .forEach(result -> builder.addAttack(result.getAttack()));
+
         return builder.create();
+    }
+
+    private EvaluationResult possibleMoves(Point dir, Square start, Piece piece) {
+        EvaluationResult result = new EvaluationResult();
+        Square target = (Square) start.clone();
+
+        for (int i=0; i<piece.getMaximumMoves(); i++) {
+            target = target.move(dir);
+            if (canPieceMoveTo(target)) {
+                result.addMove(target);
+            } else {
+                result.setAttack(target);
+                break;
+            }
+        }
+        return result;
     }
 
     private boolean occupiedFromEnemy(Square target, Color enemyColor) {

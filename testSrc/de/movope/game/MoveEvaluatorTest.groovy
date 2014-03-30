@@ -36,16 +36,6 @@ class MoveEvaluatorTest extends Specification {
         result == null
     }
 
-    def "when you enter A2 (Pawn), the result contains one direction"() {
-        when:
-        MoveEvaluation result = evaluator.analyse(board, "A2")
-
-        then:
-        result.possibleTargets().size() == 2
-        result.possibleAttacks().size() == 0
-
-    }
-
     def "when you enter D1 (queen), the result contains no moves and attacks"() {
         when:
         def result = evaluator.analyse(board, "D1")
