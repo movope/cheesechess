@@ -1,17 +1,17 @@
-package de.movope.game.pieces;
+package de.movope.game.piece;
 
 import de.movope.game.Color;
 
 import java.awt.*;
 import java.util.Arrays;
 
-public class Queen extends Piece {
+public class King extends Piece {
 
-    public Queen(Color color) {
+    public King(Color color) {
         super(color);
-        maximumMoves = 7;
+        maximumMoves = 1;
         directions = Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1),
                 new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1));
-        id = "Q";
+        id = "K";
     }
 }

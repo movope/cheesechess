@@ -1,8 +1,8 @@
 package de.movope.game
 
-import de.movope.game.pieces.Knight
-import de.movope.game.pieces.Pawn
-import de.movope.game.pieces.Rook
+import de.movope.game.piece.Knight
+import de.movope.game.piece.Pawn
+import de.movope.game.piece.Rook
 import spock.lang.Specification
 
 class ChessBoardTest extends Specification {

@@ -1,7 +1,7 @@
 package de.movope.game;
 
-import de.movope.game.pieces.Pawn;
-import de.movope.game.pieces.Piece;
+import de.movope.game.piece.Pawn;
+import de.movope.game.piece.Piece;
 
 import java.awt.*;
 import java.util.Arrays;

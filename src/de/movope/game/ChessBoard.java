@@ -1,7 +1,7 @@
 package de.movope.game;
 
 
-import de.movope.game.pieces.*;
+import de.movope.game.piece.*;
 
 import java.util.HashMap;
 import java.util.List;

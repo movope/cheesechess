@@ -1,4 +1,4 @@
-package de.movope.game.pieces;
+package de.movope.game.piece;
 
 import de.movope.game.Color;
 
