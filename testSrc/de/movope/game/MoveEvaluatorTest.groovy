@@ -91,28 +91,28 @@ class MoveEvaluatorTest extends Specification {
     }
 
     def setUpPeacesOnBoardForBishop() {
-        board.getPieceAt("C1").moveTo(Square.create("D4"));
-        board.getPieceAt("E2").moveTo(Square.create("E4"));
-        board.getPieceAt("F2").moveTo(Square.create("F3"));
-        board.getPieceAt("B7").moveTo(Square.create("B6"));
+        board.move("C1", "D4");
+        board.move("E2", "E4");
+        board.move("F2", "F3");
+        board.move("B7", "B6");
         board.print();
     }
 
     def setUpPeacesOnBoardForQueen() {
-        board.getPieceAt("D1").moveTo(Square.create("C4"));
-        board.getPieceAt("A2").moveTo(Square.create("A5"));
-        board.getPieceAt("D2").moveTo(Square.create("D6"));
-        board.getPieceAt("E2").moveTo(Square.create("E4"));
-        board.getPieceAt("C7").moveTo(Square.create("B6"));
+        board.move("D1", "C4");
+        board.move("A2", "A5");
+        board.move("D2", "D6");
+        board.move("E2", "E4");
+        board.move("C7", "B6");
         board.print();
     }
 
     def setUpPeacesOnBoardForKnight() {
-        board.getPieceAt("B1").moveTo(Square.create("C4"));
-        board.getPieceAt("A7").moveTo(Square.create("A5"));
-        board.getPieceAt("D2").moveTo(Square.create("H3"));
-        board.getPieceAt("D7").moveTo(Square.create("D6"));
-        board.getPieceAt("E2").moveTo(Square.create("E4"));
+        board.move("B1", "C4");
+        board.move("A7", "A5");
+        board.move("D2", "H3");
+        board.move("D7", "D6");
+        board.move("E2", "E4");
         board.print();
     }
 }

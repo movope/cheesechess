@@ -30,6 +30,7 @@ public class MoveEvaluator {
     private MoveEvaluation determinePossibleTargetsOnBoard(Square start, Piece piece) {
 
         MoveEvaluation.Builder builder = new MoveEvaluation.Builder();
+        builder.startAt(start);
         Iterator<Point> it = piece.directions();
         while (it.hasNext()) {
             Point dir = it.next();
@@ -62,7 +63,7 @@ public class MoveEvaluator {
     }
 
     private boolean occupiedFromEnemy(Square target, Color enemyColor) {
-        if (target == null) {
+        if ((target == null) || !target.onBoard()) {
             return false;
         }
         return board.getPieceAt(target).getColor() == enemyColor;

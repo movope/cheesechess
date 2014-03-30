@@ -1,7 +1,5 @@
 package de.movope.game;
 
-import de.movope.game.pieces.Piece;
-
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -16,14 +14,14 @@ public class Player {
     }
 
     public void makeRandomMove() {
-        Piece randomPiece = Piece.NULL;
+        String randomSquare;
         MoveEvaluation evaluation = MoveEvaluation.empty();
         while (!evaluation.isMovePossible()) {
-            randomPiece = getRandomPiece();
-            evaluation = randomPiece.getPossibleMoves(board);
+            randomSquare = getRandomSquareWithPiece();
+            evaluation = new MoveEvaluator().analyse(board, randomSquare);
         }
         Square target = chooseOneOf(evaluation.possibleTargets());
-        randomPiece.moveTo(target);
+        board.move(evaluation.getStart(), target);
     }
 
     private Square chooseOneOf(Collection<Square> possibleTargets) {
@@ -32,10 +30,10 @@ public class Player {
         return targets[rand];
     }
 
-    private Piece getRandomPiece() {
-        Collection<Piece> pieces = board.getPieces(color);
-        int randomInt = (int) (Math.random() * pieces.size());
-        Iterator<Piece> it = pieces.iterator();
+    private String getRandomSquareWithPiece() {
+        Collection<String> squares = board.getSquaresWithPiece(color);
+        int randomInt = (int) (Math.random() * squares.size());
+        Iterator<String> it = squares.iterator();
         for (int i = 0; i < randomInt - 1; i++) {
             it.next();
         }

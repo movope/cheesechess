@@ -13,7 +13,7 @@ class ChessBoardTest extends Specification {
         board.initPieces();
     }
 
-    def "you get the risht piece for a specific square"() {
+    def "you get the right piece for a specific square"() {
         expect:
         board.getPieceAt("A1") instanceof Rook
         board.getPieceAt("A2") instanceof Pawn
@@ -22,8 +22,7 @@ class ChessBoardTest extends Specification {
 
     def "correct number of peaces is created"() {
         expect:
-        board.getPieces(Color.WHITE).size() == 16
-        board.getPieces(Color.BLACK).size() == 16
-
+        board.getSquaresWithPiece(Color.WHITE).size() == 16
+        board.getSquaresWithPiece(Color.BLACK).size() == 16
     }
 }

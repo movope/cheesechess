@@ -1,6 +1,7 @@
 package de.movope.game.pieces
 
 import de.movope.game.ChessBoard
+import de.movope.game.MoveEvaluator
 import de.movope.game.Square
 import spock.lang.Specification
 
@@ -15,15 +16,16 @@ class KingTest extends Specification {
     }
 
     def setUpPeacesOnBoard() {
-        board.getPieceAt("E1").moveTo(Square.create("C4"));
-        board.getPieceAt("A8").moveTo(Square.create("B5"));
-        board.getPieceAt("E2").moveTo(Square.create("E4"));
+        board.move("E1", "C4");
+        board.move("A8", "B5");
+        board.move("E2", "E4");
         board.print();
     }
 
     def "correct targets for king"() {
         when:
-        def evaluation = board.getPieceAt("C4").getPossibleMoves(board)
+        MoveEvaluator evaluator = new MoveEvaluator();
+        def evaluation = evaluator.analyse(board, "C4")
 
         then:
         evaluation.possibleTargets().size() == 7

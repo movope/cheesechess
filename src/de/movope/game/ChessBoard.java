@@ -3,35 +3,30 @@ package de.movope.game;
 
 import de.movope.game.pieces.*;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ChessBoard {
 
-    Set<Piece> whitePieces = new HashSet<>();
-    Set<Piece> blackPieces = new HashSet<>();
+    Map<String, Piece> pieces = new HashMap<>();
 
     public void initPieces() {
-        initPieces(Color.WHITE, whitePieces);
-        initPieces(Color.BLACK, blackPieces);
+        initPieces(Color.WHITE);
+        initPieces(Color.BLACK);
     }
 
-    private void initPieces(Color color, Set<Piece> pieces) {
-        int row;
-        if (color == Color.WHITE) {
-            row = 1;
-        } else {
-            row = 8;
-        }
-        pieces.add(new Rook(color, "A" + row));
-        pieces.add(new Rook(color, "H" + row));
-        pieces.add(new Knight(color, "B" + row));
-        pieces.add(new Knight(color, "G" + row));
-        pieces.add(new Bishop(color, "C" + row));
-        pieces.add(new Bishop(color, "F" + row));
-        pieces.add(new Queen(color, "D" + row));
-        pieces.add(new King(color, "E" + row));
+    private void initPieces(Color color) {
+        int row = (color == Color.WHITE) ? 1 : 8;
+        pieces.put("A" + row, new Rook(color));
+        pieces.put("H" + row, new Rook(color));
+        pieces.put("B" + row, new Knight(color));
+        pieces.put("G" + row, new Knight(color));
+        pieces.put("C" + row, new Bishop(color));
+        pieces.put("F" + row, new Bishop(color));
+        pieces.put("D" + row, new Queen(color));
+        pieces.put("E" + row, new King(color));
 
         if (color == Color.WHITE) {
             row++;
@@ -41,10 +36,10 @@ public class ChessBoard {
 
         String[] files = {"A", "B", "C", "D", "E", "F", "G", "H"};
         for (int i = 0; i < 8; i++) {
-            pieces.add(new Pawn(color, files[i] + row));
+            pieces.put(files[i] + row, new Pawn(color));
         }
-    }
 
+    }
 
     public void print() {
         String[][] board = new String[8][8];
@@ -55,23 +50,16 @@ public class ChessBoard {
             }
         }
 
-        for (Piece p : blackPieces) {
-            Square position = p.getPosition();
-            board[position.getFile()][position.getRank()] = p.printIdentifier();
+        for (Map.Entry<String, Piece> p : pieces.entrySet()) {
+            Square position = Square.create(p.getKey());
+            board[position.getFile()][position.getRank()] = p.getValue().printIdentifier();
         }
-
-        for (Piece p : whitePieces) {
-            Square position = p.getPosition();
-            board[position.getFile()][position.getRank()] = p.printIdentifier();
-        }
-
 
         System.out.println("----------------------");
         for (int i = 7; i >= 0; i--) {
             System.out.print(i + 1 + " ");
             for (int j = 0; j < 8; j++) {
                 System.out.print(board[i][j] + " ");
-
             }
             System.out.println();
 
@@ -81,27 +69,33 @@ public class ChessBoard {
         System.out.println();
     }
 
-    public Collection<Piece> getPieces(Color color) {
-        if (color == Color.WHITE)
-            return whitePieces;
-        return blackPieces;
+    public List<String> getSquaresWithPiece(Color color) {
+        return pieces.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().getColor() == color)
+                .map(entry -> entry.getKey())
+                .collect(Collectors.toList());
     }
 
     public Piece getPieceAt(Square square) {
-        for (Piece p : whitePieces) {
-            if (p.getPosition().equals(square)) {
-                return p;
-            }
-        }
-        for (Piece p : blackPieces) {
-            if (p.getPosition().equals(square)) {
-                return p;
-            }
+        Piece result = pieces.get(square.toString());
+        if (result != null) {
+            return result;
         }
         return Piece.NULL;
     }
 
     public Piece getPieceAt(String square) {
         return getPieceAt(Square.create(square));
+    }
+
+    public void move(Square from, Square to) {
+        move(from.toString(), to.toString());
+    }
+
+    public void move(String from, String to) {
+        Piece transfer = getPieceAt(from);
+        pieces.remove(from);
+        pieces.put(to, transfer);
     }
 }
