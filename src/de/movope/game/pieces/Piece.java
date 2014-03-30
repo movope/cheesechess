@@ -44,7 +44,7 @@ public class Piece {
     }
 
 
-    public MoveEvaluation getPossibleMoves(Board board) {
+    public MoveEvaluation getPossibleMoves(ChessBoard board) {
         MoveEvaluator evaluator = new MoveEvaluator();
         return evaluator.analyse(board, currentPosition.toString());
     }

@@ -7,10 +7,10 @@ import java.util.Iterator;
 
 public class Player {
 
-    private Board board;
+    private ChessBoard board;
     private Color color;
 
-    public Player(Board board, Color color) {
+    public Player(ChessBoard board, Color color) {
         this.board = board;
         this.color = color;
     }

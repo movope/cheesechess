@@ -3,7 +3,7 @@ package de.movope.game;
 
 public class ChessGame {
 
-    Board board = new Board();
+    ChessBoard board = new ChessBoard();
     Player white = new Player(board, Color.WHITE);
     Player black = new Player(board, Color.BLACK);
 

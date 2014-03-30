@@ -5,7 +5,7 @@ import spock.lang.Specification
 class MoveEvaluatorTest extends Specification {
 
     MoveEvaluator evaluator = new MoveEvaluator();
-    Board board = new Board();
+    ChessBoard board = new ChessBoard();
 
     def setup() {
         board.initPieces();

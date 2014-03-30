@@ -5,9 +5,9 @@ import de.movope.game.pieces.Pawn
 import de.movope.game.pieces.Rook
 import spock.lang.Specification
 
-class BoardTest extends Specification {
+class ChessBoardTest extends Specification {
 
-    Board board = new Board();
+    ChessBoard board = new ChessBoard();
 
     public setup() {
         board.initPieces();

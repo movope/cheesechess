@@ -1,15 +1,15 @@
 package de.movope.game.pieces
 
-import de.movope.game.Board
+import de.movope.game.ChessBoard
 import de.movope.game.Square
 import spock.lang.Specification
 
 class KnightTest extends Specification {
 
-    Board board;
+    ChessBoard board;
 
     def setup() {
-        board = new Board();
+        board = new ChessBoard();
         board.initPieces();
         setUpPeacesOnBoard()
     }

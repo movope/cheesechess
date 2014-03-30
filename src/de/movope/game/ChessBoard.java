@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Board {
+public class ChessBoard {
 
     Set<Piece> whitePieces = new HashSet<>();
     Set<Piece> blackPieces = new HashSet<>();

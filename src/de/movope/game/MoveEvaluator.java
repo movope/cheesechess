@@ -8,9 +8,9 @@ import java.util.Iterator;
 
 public class MoveEvaluator {
 
-    Board board;
+    ChessBoard board;
 
-    public MoveEvaluation analyse(Board board, String aSquare) {
+    public MoveEvaluation analyse(ChessBoard board, String aSquare) {
 
         this.board = board;
         Square square = Square.create(aSquare);
