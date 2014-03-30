@@ -27,13 +27,18 @@ class PawnTest extends Specification {
         MoveEvaluator evaluator = new MoveEvaluator();
         def evaluation1 = evaluator.analyse(board, "D6")
         evaluation1.possibleTargets().size() == 0
+        evaluation1.possibleAttacks().size() == 2
 
         def evaluation2 = evaluator.analyse(board, "B2")
         evaluation2.possibleTargets().size() == 2
+        evaluation2.possibleAttacks().size() == 0
+
+        def evaluation4 = evaluator.analyse(board, "E7")
+        evaluation4.possibleTargets().size() == 2
+        evaluation4.possibleAttacks().size() == 1
 
         def evaluation3 = evaluator.analyse(board, "E4")
         evaluation3.possibleTargets().size() == 1
-
-        //TODO: Attacks for Pawns ....
+        evaluation3.possibleAttacks().size() == 0
     }
 }

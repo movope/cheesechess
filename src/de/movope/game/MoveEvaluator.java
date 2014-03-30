@@ -1,8 +1,11 @@
 package de.movope.game;
 
+import de.movope.game.pieces.Pawn;
 import de.movope.game.pieces.Piece;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class MoveEvaluator {
 
@@ -32,19 +35,21 @@ public class MoveEvaluator {
 
         piece.directions().stream()
                 .map(dir -> possibleMoves(dir, start, piece))
-                .forEach(result -> {
-                    result.getMoves().stream().forEach(builder::addMove);
-                });
+                .forEach(result -> result.getMoves().stream().forEach(builder::addMove));
 
         piece.directions().stream()
                 .map(dir -> possibleMoves(dir, start, piece))
-                .filter(result -> occupiedFromEnemy(result.getAttack(), piece.getColor().invert()))
-                .forEach(result -> builder.addAttack(result.getAttack()));
+                .forEach(result -> result.getAttacks().stream()
+                        .filter(attack -> occupiedFromEnemy(attack, piece.getColor().invert()))
+                        .forEach(builder::addAttack));
 
         return builder.create();
     }
 
     private EvaluationResult possibleMoves(Point dir, Square start, Piece piece) {
+        if (piece instanceof Pawn) {
+            return possibleMoves(dir, start, (Pawn) piece);
+        }
         EvaluationResult result = new EvaluationResult();
         Square target = (Square) start.clone();
 
@@ -53,12 +58,40 @@ public class MoveEvaluator {
             if (canPieceMoveTo(target)) {
                 result.addMove(target);
             } else {
-                result.setAttack(target);
+                if (target.onBoard()) {
+                    result.addPossibleAttack(target);
+                }
                 break;
             }
         }
+
         return result;
     }
+
+    private EvaluationResult possibleMoves(Point dir, Square start, Pawn pawn) {
+        EvaluationResult result = new EvaluationResult();
+        Square target = (Square) start.clone();
+
+        boolean firstMove = ((pawn.getColor() == Color.BLACK && start.getFile() == 6)) ||
+                ((pawn.getColor() == Color.WHITE) && start.getFile() == 1);
+
+        int maximumMoves = firstMove ? 2 : 1;
+
+        for (int i = 0; i < maximumMoves; i++) {
+            target = target.move(dir);
+            if (canPieceMoveTo(target)) {
+                result.addMove(target);
+            }
+        }
+        List<Point> attackDirections = Arrays.asList(new Point(-1, dir.y), new Point(1, dir.y));
+        attackDirections.stream().map(direction -> ((Square) start.clone()).move(direction))
+                                .filter(Square::onBoard)
+                                .forEach(result::addPossibleAttack);
+
+        return result;
+
+    }
+
 
     private boolean occupiedFromEnemy(Square target, Color enemyColor) {
         if ((target == null) || !target.onBoard()) {

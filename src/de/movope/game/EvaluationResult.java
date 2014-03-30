@@ -6,7 +6,11 @@ import java.util.List;
 public class EvaluationResult {
 
     List<Square> moves = new ArrayList<>();
-    Square attack;
+    List<Square> attacks = new ArrayList<>();
+
+    public List<Square> getAttacks() {
+        return attacks;
+    }
 
     public List<Square> getMoves() {
         return moves;
@@ -16,11 +20,7 @@ public class EvaluationResult {
         moves.add(move);
     }
 
-    public Square getAttack() {
-        return attack;
-    }
-
-    public void setAttack(Square attack) {
-        this.attack = attack;
+    public void addPossibleAttack(Square attack) {
+        attacks.add(attack);
     }
 }
