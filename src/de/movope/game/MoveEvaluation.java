@@ -21,7 +21,7 @@ public class MoveEvaluation {
     }
 
     public boolean isMovePossible() {
-        return moves.size() > 0;
+        return attacks.size() + moves.size() > 0;
     }
 
     public static MoveEvaluation empty() {
@@ -32,7 +32,7 @@ public class MoveEvaluation {
         return moves;
     }
 
-    public Object possibleAttacks() {
+    public Collection<Square> possibleAttacks() {
         return attacks;
     }
 

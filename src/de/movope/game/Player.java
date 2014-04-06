@@ -20,8 +20,14 @@ public class Player {
             randomSquare = getRandomSquareWithPiece();
             evaluation = new MoveEvaluator().analyse(board, randomSquare);
         }
-        Square target = chooseOneOf(evaluation.possibleTargets());
+        Square target;
+        if (evaluation.possibleAttacks().size() > 0) {
+            target = chooseOneOf(evaluation.possibleAttacks());
+        } else {
+            target = chooseOneOf(evaluation.possibleTargets());
+        }
         board.move(evaluation.getStart(), target);
+
     }
 
     private Square chooseOneOf(Collection<Square> possibleTargets) {

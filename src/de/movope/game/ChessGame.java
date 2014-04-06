@@ -36,7 +36,7 @@ public class ChessGame {
 
         game.print();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 40; i++) {
             white.makeRandomMove();
             game.print();
             black.makeRandomMove();
