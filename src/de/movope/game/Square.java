@@ -51,14 +51,6 @@ public class Square implements Cloneable {
         return rank;
     }
 
-    public Square moveVertical(int squares) {
-        return new Square(file + squares, rank);
-    }
-
-    public Square moveHorizontical(int squares) {
-        return new Square(file, rank + squares);
-    }
-
     public Square move(Point dir) {
         return new Square(file + dir.y, rank + dir.x);
     }
