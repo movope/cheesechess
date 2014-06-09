@@ -22,8 +22,6 @@ public class MoveEvaluator {
         if (piece == Piece.NULL) {
             return null;
         }
-
-
         return determinePossibleTargetsOnBoard(square, piece);
     }
 
@@ -40,7 +38,7 @@ public class MoveEvaluator {
         piece.directions().stream()
                 .map(dir -> possibleMoves(dir, start, piece))
                 .forEach(result -> result.getAttacks().stream()
-                        .filter(attack -> occupiedFromEnemy(attack, piece.getColor().invert()))
+                        .filter(attack -> board.occupiedFromEnemy(attack, piece.getColor().invert()))
                         .forEach(builder::addAttack));
 
         return builder.create();
@@ -55,7 +53,7 @@ public class MoveEvaluator {
 
         for (int i = 0; i < piece.getMaximumMoves(); i++) {
             target = target.move(dir.x, dir.y);
-            if (canPieceMoveTo(target)) {
+            if (board.canPieceMoveTo(target)) {
                 result.addMove(target);
             } else {
                 if (target.onBoard()) {
@@ -64,7 +62,6 @@ public class MoveEvaluator {
                 break;
             }
         }
-
         return result;
     }
 
@@ -79,7 +76,7 @@ public class MoveEvaluator {
 
         for (int i = 0; i < maximumMoves; i++) {
             target = target.move(dir.x, dir.y);
-            if (canPieceMoveTo(target)) {
+            if (board.canPieceMoveTo(target)) {
                 result.addMove(target);
             }
         }
@@ -89,18 +86,5 @@ public class MoveEvaluator {
                                 .forEach(result::addPossibleAttack);
 
         return result;
-
-    }
-
-
-    private boolean occupiedFromEnemy(Square target, Color enemyColor) {
-        if ((target == null) || !target.onBoard()) {
-            return false;
-        }
-        return board.getPieceAt(target).getColor() == enemyColor;
-    }
-
-    private boolean canPieceMoveTo(Square target) {
-        return target.onBoard() && board.getPieceAt(target) == Piece.NULL;
     }
 }

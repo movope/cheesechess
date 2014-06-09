@@ -103,4 +103,15 @@ public class ChessBoard {
         pieces.remove(from);
         pieces.put(to, transfer);
     }
+
+    public boolean occupiedFromEnemy(Square target, Color enemyColor) {
+        if ((target == null) || !target.onBoard()) {
+            return false;
+        }
+        return getPieceAt(target).getColor() == enemyColor;
+    }
+
+    public boolean canPieceMoveTo(Square target) {
+        return target.onBoard() && getPieceAt(target) == Piece.NULL;
+    }
 }
