@@ -2,8 +2,6 @@ package de.movope.game
 
 import spock.lang.Specification
 
-import java.awt.*
-
 class SquareTest extends Specification {
 
     Square square;
@@ -18,7 +16,7 @@ class SquareTest extends Specification {
 
     def "move works"() {
         when:
-        square = square.move(new Point(1,0))
+        square = square.move(1,0)
 
         then:
         square.toString() == "E2"
@@ -26,7 +24,7 @@ class SquareTest extends Specification {
 
     def "move works2"() {
         when:
-        square = square.move(new Point(-1,0))
+        square = square.move(-1,0)
 
         then:
         square.toString() == "C2"
@@ -34,7 +32,7 @@ class SquareTest extends Specification {
 
     def "move works3"() {
         when:
-        square = square.move(new Point(0,-1))
+        square = square.move(0,-1)
 
         then:
         square.toString() == "D1"
@@ -42,7 +40,7 @@ class SquareTest extends Specification {
 
     def "move works4"() {
         when:
-        square = square.move(new Point(1,1))
+        square = square.move(1,1)
 
         then:
         square.toString() == "E3"
@@ -50,7 +48,7 @@ class SquareTest extends Specification {
 
     def "move works5"() {
         when:
-        square = square.move(new Point(1,0))
+        square = square.move(1,0)
 
         then:
         square.toString() == "E2"
@@ -58,7 +56,7 @@ class SquareTest extends Specification {
 
     def "move works6"() {
         when:
-        square = square.move(new Point(0,1))
+        square = square.move(0,1)
 
         then:
         square.toString() == "D3"

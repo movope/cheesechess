@@ -1,6 +1,5 @@
 package de.movope.game;
 
-import java.awt.*;
 import java.util.Arrays;
 
 public class Square implements Cloneable {
@@ -51,8 +50,8 @@ public class Square implements Cloneable {
         return rank;
     }
 
-    public Square move(Point dir) {
-        return new Square(file + dir.y, rank + dir.x);
+    public Square move(int x, int y) {
+        return new Square(file + y, rank + x);
     }
 
     @Override

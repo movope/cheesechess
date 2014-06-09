@@ -54,7 +54,7 @@ public class MoveEvaluator {
         Square target = (Square) start.clone();
 
         for (int i = 0; i < piece.getMaximumMoves(); i++) {
-            target = target.move(dir);
+            target = target.move(dir.x, dir.y);
             if (canPieceMoveTo(target)) {
                 result.addMove(target);
             } else {
@@ -78,13 +78,13 @@ public class MoveEvaluator {
         int maximumMoves = firstMove ? 2 : 1;
 
         for (int i = 0; i < maximumMoves; i++) {
-            target = target.move(dir);
+            target = target.move(dir.x, dir.y);
             if (canPieceMoveTo(target)) {
                 result.addMove(target);
             }
         }
         List<Point> attackDirections = Arrays.asList(new Point(-1, dir.y), new Point(1, dir.y));
-        attackDirections.stream().map(direction -> ((Square) start.clone()).move(direction))
+        attackDirections.stream().map(direction -> ((Square) start.clone()).move(direction.x, direction.y))
                                 .filter(Square::onBoard)
                                 .forEach(result::addPossibleAttack);
 
