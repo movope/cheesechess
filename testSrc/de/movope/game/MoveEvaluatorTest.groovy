@@ -4,17 +4,15 @@ import spock.lang.Specification
 
 class MoveEvaluatorTest extends Specification {
 
-    MoveEvaluator evaluator = new MoveEvaluator();
     ChessBoard board = new ChessBoard();
 
     def setup() {
         board.initPieces();
-
     }
 
     def "when entering a board and a position, you return a MoveEvaluationResult"() {
         when:
-        def result = evaluator.analyse(board, "A2")
+        def result = MoveEvaluator.with(board).analyse("A2")
 
         then:
         result != null
@@ -22,7 +20,7 @@ class MoveEvaluatorTest extends Specification {
 
     def "when you enter a square outside the board, return null"() {
         when:
-        def result = evaluator.analyse(board, "A9")
+        def result = MoveEvaluator.with(board).analyse("A9")
 
         then:
         result == null
@@ -30,7 +28,7 @@ class MoveEvaluatorTest extends Specification {
 
     def "when you enter a square without piece, return null"() {
         when:
-        def result = evaluator.analyse(board, "A4")
+        def result = MoveEvaluator.with(board).analyse("A4")
 
         then:
         result == null
@@ -38,7 +36,7 @@ class MoveEvaluatorTest extends Specification {
 
     def "when you enter D1 (queen), the result contains no moves and attacks"() {
         when:
-        def result = evaluator.analyse(board, "D1")
+        def result = MoveEvaluator.with(board).analyse("D1")
 
         then:
         result.possibleTargets().size() == 0
@@ -51,7 +49,7 @@ class MoveEvaluatorTest extends Specification {
         setUpPeacesOnBoardForBishop()
 
         when:
-        def result = evaluator.analyse(board, "D4");
+        def result = MoveEvaluator.with(board).analyse("D4")
 
         then:
         result.possibleTargets().size() == 6
@@ -62,7 +60,7 @@ class MoveEvaluatorTest extends Specification {
         setUpPeacesOnBoardForQueen()
 
         when:
-        def result = evaluator.analyse(board,"C4")
+        def result = MoveEvaluator.with(board).analyse("C4")
 
         then:
         result.possibleTargets().size() == 15
@@ -74,7 +72,7 @@ class MoveEvaluatorTest extends Specification {
         setUpPeacesOnBoardForKnight();
 
         when:
-        def result = evaluator.analyse(board,"C4")
+        def result = MoveEvaluator.with(board).analyse("C4")
 
         then:
         result.possibleTargets().size() == 5

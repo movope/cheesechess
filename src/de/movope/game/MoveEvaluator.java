@@ -11,9 +11,15 @@ public class MoveEvaluator {
 
     ChessBoard board;
 
-    public MoveEvaluation analyse(ChessBoard board, String aSquare) {
-
+    private MoveEvaluator(ChessBoard board) {
         this.board = board;
+    }
+
+    public static MoveEvaluator with(ChessBoard board) {
+        return new MoveEvaluator(board);
+    }
+
+    public MoveEvaluation analyse(String aSquare) {
         Square square = Square.create(aSquare);
         if (!square.onBoard()) {
             return null;
