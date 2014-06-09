@@ -14,10 +14,9 @@ public class Player {
     }
 
     public void makeRandomMove() {
-        String randomSquare;
         MoveEvaluation evaluation = MoveEvaluation.empty();
         while (!evaluation.isMovePossible()) {
-            randomSquare = getRandomSquareWithPiece();
+            String randomSquare = getRandomSquareWithPiece();
             evaluation = new MoveEvaluator().analyse(board, randomSquare);
         }
         Square target;
