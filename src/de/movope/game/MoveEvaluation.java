@@ -51,9 +51,14 @@ public class MoveEvaluation {
             return new Builder(start);
         }
 
-        public void addMovesAndAttacks(List<Square> moves, List<Square> attacks) {
+        public Builder addMoves(List<Square> moves) {
             this.moves.addAll(moves);
+            return this;
+        }
+
+        public Builder addAttacks(List<Square> attacks) {
             this.attacks.addAll(attacks);
+            return this;
         }
 
         public MoveEvaluation create() {
