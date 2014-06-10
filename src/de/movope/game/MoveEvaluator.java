@@ -45,7 +45,7 @@ public class MoveEvaluator {
 
     private EvaluationResult possibleMoves(Point dir, Square start, Piece piece) {
         if (piece instanceof Pawn) {
-            return possibleMoves(dir, start, (Pawn) piece);
+            return possibleMovesForPawn(dir, start, piece);
         }
         EvaluationResult result = new EvaluationResult();
         Square target = (Square) start.clone();
@@ -64,7 +64,7 @@ public class MoveEvaluator {
         return result;
     }
 
-    private EvaluationResult possibleMoves(Point dir, Square start, Pawn pawn) {
+    private EvaluationResult possibleMovesForPawn(Point dir, Square start, Piece pawn) {
         EvaluationResult result = new EvaluationResult();
         Square target = (Square) start.clone();
 
