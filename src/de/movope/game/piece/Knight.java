@@ -5,14 +5,32 @@ import de.movope.game.Color;
 import java.awt.*;
 import java.util.Arrays;
 
-public class Knight extends Piece {
+public class Knight implements Piece {
+
+    private Color color;
 
     public Knight(Color color) {
-        super(color);
-        maximumMoves = 1;
-        directions = Arrays.asList(new Point(2, 1), new Point(2, -1), new Point(-2, 1), new Point(-2, -1),
-                new Point(1, 2), new Point(1, -2), new Point(-1, 2), new Point(-1, -2));
+        this.color = color;
+    }
 
-        id = "K";
+    @Override
+    public java.util.List<Point> directions() {
+        return Arrays.asList(new Point(2, 1), new Point(2, -1), new Point(-2, 1), new Point(-2, -1),
+                new Point(1, 2), new Point(1, -2), new Point(-1, 2), new Point(-1, -2));
+    }
+
+    @Override
+    public String printIdentifier() {
+        return "K";
+    }
+
+    @Override
+    public Color getColor() {
+        return color;
+    }
+
+    @Override
+    public int getMaximumMoves() {
+        return 1;
     }
 }

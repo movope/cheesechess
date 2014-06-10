@@ -3,40 +3,35 @@ package de.movope.game.piece;
 import de.movope.game.Color;
 
 import java.awt.*;
+import java.util.Collections;
 import java.util.List;
 
-public class Piece {
+public interface Piece {
 
-    Color color;
-    String id;
-    List<Point> directions;
-    int maximumMoves;
+    public java.util.List<Point> directions();
+    public String printIdentifier();
+    public Color getColor();
+    public int getMaximumMoves();
 
-    public static Piece NULL= new Piece();
+    public static Piece NULL = new Piece() {
+        @Override
+        public List<Point> directions() {
+            return Collections.emptyList();
+        }
 
-    private Piece() {
-    }
+        @Override
+        public String printIdentifier() {
+            return "-";
+        }
 
-    public Piece(Color color) {
-        this.color = color;
-    }
+        @Override
+        public Color getColor() {
+            return null;
+        }
 
-    public List<Point> directions() {
-        return directions;
-    }
-
-    public String printIdentifier() {
-        return id;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-
-    public int getMaximumMoves() {
-        return maximumMoves;
-    }
-
-
+        @Override
+        public int getMaximumMoves() {
+            return 0;
+        }
+    };
 }

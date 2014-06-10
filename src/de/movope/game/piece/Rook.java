@@ -5,13 +5,31 @@ import de.movope.game.Color;
 import java.awt.*;
 import java.util.Arrays;
 
-public class Rook extends Piece {
+public class Rook implements Piece {
+
+    private Color color;
 
     public Rook(Color color) {
-        super(color);
-        directions = Arrays.asList(new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1));
-        maximumMoves = 7;
-        id = "R";
+        this.color = color;
     }
 
+    @Override
+    public java.util.List<Point> directions() {
+        return Arrays.asList(new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1));
+    }
+
+    @Override
+    public String printIdentifier() {
+        return "R";
+    }
+
+    @Override
+    public Color getColor() {
+        return color;
+    }
+
+    @Override
+    public int getMaximumMoves() {
+        return 7;
+    }
 }

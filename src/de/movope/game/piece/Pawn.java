@@ -5,15 +5,35 @@ import de.movope.game.Color;
 import java.awt.*;
 import java.util.Arrays;
 
-public class Pawn extends Piece{
+public class Pawn implements Piece {
+
+    private Color color;
 
     public Pawn(Color color) {
-        super(color);
-        id = "P";
-        maximumMoves = 2;
+        this.color = color;
+    }
+
+    @Override
+    public java.util.List<Point> directions() {
         if (color == de.movope.game.Color.WHITE)
-            directions = Arrays.asList(new Point(0, 1));
+            return Arrays.asList(new Point(0, 1));
         if (color == de.movope.game.Color.BLACK)
-            directions = Arrays.asList(new Point(0,-1));
+            return Arrays.asList(new Point(0,-1));
+        throw new IllegalArgumentException("Unknown Color.");
+    }
+
+    @Override
+    public String printIdentifier() {
+        return "p";
+    }
+
+    @Override
+    public Color getColor() {
+        return color;
+    }
+
+    @Override
+    public int getMaximumMoves() {
+        return 2;
     }
 }
