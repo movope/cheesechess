@@ -28,24 +28,25 @@ public class MoveEvaluator {
         if (piece == Piece.NULL) {
             return null;
         }
-        return determinePossibleTargetsOnBoard(square, piece);
+        return determinePossibleTargets(square, piece);
     }
 
 
-    private MoveEvaluation determinePossibleTargetsOnBoard(final Square start, final Piece piece) {
+    private MoveEvaluation determinePossibleTargets(final Square start, final Piece piece) {
 
         final MoveEvaluation.Builder builder = new MoveEvaluation.Builder();
         builder.startAt(start);
 
         piece.directions().stream()
-                .map(dir -> possibleMoves(dir, start, piece))
-                .forEach(result -> result.getMoves().stream().forEach(builder::addMove));
+                          .map(dir -> possibleMoves(dir, start, piece))
+                          .forEach(result -> result.getMoves().stream()
+                                                              .forEach(builder::addMove));
 
         piece.directions().stream()
-                .map(dir -> possibleMoves(dir, start, piece))
-                .forEach(result -> result.getAttacks().stream()
-                        .filter(attack -> board.occupiedFromEnemy(attack, piece.getColor().invert()))
-                        .forEach(builder::addAttack));
+                          .map(dir -> possibleMoves(dir, start, piece))
+                          .forEach(result -> result.getAttacks().stream()
+                                                                .filter(attack -> board.occupiedFromEnemy(attack, piece.getColor().invert()))
+                                                                .forEach(builder::addAttack));
 
         return builder.create();
     }
