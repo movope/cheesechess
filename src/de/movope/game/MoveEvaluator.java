@@ -34,8 +34,7 @@ public class MoveEvaluator {
 
     private MoveEvaluation determinePossibleTargets(final Square start, final Piece piece) {
 
-        final MoveEvaluation.Builder builder = new MoveEvaluation.Builder();
-        builder.startAt(start);
+        final MoveEvaluation.Builder builder = MoveEvaluation.Builder.startAt(start);
 
         piece.directions().stream()
                           .map(dir -> possibleMoves(dir, start, piece))

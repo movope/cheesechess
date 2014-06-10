@@ -46,8 +46,12 @@ public class MoveEvaluation {
         private Set<Square> attacks = new HashSet<>();
         private Square start;
 
-        public void startAt(Square start) {
+        private Builder(Square start) {
             this.start = start;
+        }
+
+        public static Builder startAt(Square start) {
+            return new Builder(start);
         }
 
         public void addAttack(Square attack) {
