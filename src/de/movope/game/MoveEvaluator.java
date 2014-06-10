@@ -38,13 +38,7 @@ public class MoveEvaluator {
 
         piece.directions().stream()
                           .map(dir -> possibleMoves(dir, start, piece))
-                          .forEach(result -> result.getMoves().stream()
-                                                              .forEach(builder::addMove));
-
-        piece.directions().stream()
-                          .map(dir -> possibleMoves(dir, start, piece))
-                          .forEach(result -> result.getAttacks().stream()
-                                                                .forEach(builder::addAttack));
+                          .forEach(result -> builder.addMovesAndAttacks(result.getMoves(), result.getAttacks()));
 
         return builder.create();
     }

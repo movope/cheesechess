@@ -1,9 +1,6 @@
 package de.movope.game;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class MoveEvaluation {
 
@@ -54,12 +51,9 @@ public class MoveEvaluation {
             return new Builder(start);
         }
 
-        public void addAttack(Square attack) {
-            attacks.add(attack);
-        }
-
-        public void addMove(Square move) {
-            moves.add(move);
+        public void addMovesAndAttacks(List<Square> moves, List<Square> attacks) {
+            this.moves.addAll(moves);
+            this.attacks.addAll(attacks);
         }
 
         public MoveEvaluation create() {
