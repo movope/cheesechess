@@ -1,7 +1,10 @@
 package de.movope.game.piece;
 
 
+import de.movope.game.ChessBoard;
 import de.movope.game.Color;
+import de.movope.game.MoveEvaluation;
+import de.movope.game.MoveEvaluator;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -27,6 +30,12 @@ public class Bishop implements Piece {
     @Override
     public Color getColor() {
         return color;
+    }
+
+    @Override
+    public MoveEvaluation getMoveEvaluationFor(ChessBoard board, String square) {
+        return MoveEvaluator.with(board).analyse(square.toString());
+
     }
 
     @Override

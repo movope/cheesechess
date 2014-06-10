@@ -1,5 +1,7 @@
 package de.movope.game;
 
+import de.movope.game.piece.Piece;
+
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -17,7 +19,8 @@ public class Player {
         MoveEvaluation evaluation = MoveEvaluation.empty();
         while (!evaluation.isMovePossible()) {
             String randomSquare = getRandomSquareWithPiece();
-            evaluation = MoveEvaluator.with(board).analyse(randomSquare);
+            Piece piece = board.getPieceAt(randomSquare);
+            evaluation = piece.getMoveEvaluationFor(board, randomSquare);
         }
         Square target;
         if (evaluation.possibleAttacks().size() > 0) {

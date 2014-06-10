@@ -1,6 +1,8 @@
 package de.movope.game.piece;
 
+import de.movope.game.ChessBoard;
 import de.movope.game.Color;
+import de.movope.game.MoveEvaluation;
 
 import java.awt.*;
 import java.util.Collections;
@@ -11,6 +13,7 @@ public interface Piece {
     public java.util.List<Point> directions();
     public String printIdentifier();
     public Color getColor();
+    public MoveEvaluation getMoveEvaluationFor(ChessBoard board, String square);
     public int getMaximumMoves();
 
     public static Piece NULL = new Piece() {
@@ -26,6 +29,11 @@ public interface Piece {
 
         @Override
         public Color getColor() {
+            return null;
+        }
+
+        @Override
+        public MoveEvaluation getMoveEvaluationFor(ChessBoard board, String square) {
             return null;
         }
 
