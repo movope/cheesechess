@@ -44,7 +44,6 @@ public class MoveEvaluator {
         piece.directions().stream()
                           .map(dir -> possibleMoves(dir, start, piece))
                           .forEach(result -> result.getAttacks().stream()
-                                                                .filter(attack -> board.occupiedFromEnemy(attack, piece.getColor().invert()))
                                                                 .forEach(builder::addAttack));
 
         return builder.create();
@@ -62,7 +61,7 @@ public class MoveEvaluator {
             if (board.canPieceMoveTo(target)) {
                 result.addMove(target);
             } else {
-                if (target.onBoard()) {
+                if (target.onBoard() && board.occupiedFromEnemy(target, piece.getColor().invert())) {
                     result.addPossibleAttack(target);
                 }
                 break;
@@ -89,6 +88,7 @@ public class MoveEvaluator {
         List<Point> attackDirections = Arrays.asList(new Point(-1, dir.y), new Point(1, dir.y));
         attackDirections.stream().map(direction -> ((Square) start.clone()).move(direction.x, direction.y))
                                 .filter(Square::onBoard)
+                                .filter(attack -> board.occupiedFromEnemy(attack, pawn.getColor().invert()))
                                 .forEach(result::addPossibleAttack);
 
         return result;
