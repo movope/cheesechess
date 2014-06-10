@@ -18,7 +18,7 @@ public class Player {
     public void makeRandomMove() {
         MoveEvaluation evaluation = MoveEvaluation.empty();
         while (!evaluation.isMovePossible()) {
-            String randomSquare = getRandomSquareWithPiece();
+            Square randomSquare = Square.create(getRandomSquareWithPiece());
             Piece piece = board.getPieceAt(randomSquare);
             evaluation = piece.getMoveEvaluationFor(board, randomSquare);
         }

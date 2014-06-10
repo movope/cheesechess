@@ -19,16 +19,16 @@ public class MoveEvaluator {
         return new MoveEvaluator(board);
     }
 
-    public MoveEvaluation analyse(String aSquare) {
-        Square square = Square.create(aSquare);
-        if (!square.onBoard()) {
-            return null;
-        }
-        Piece piece = board.getPieceAt(aSquare);
+    public MoveEvaluation analyse(Square square) {
+        Piece piece = board.getPieceAt(square);
         if (piece == Piece.NULL) {
             return null;
         }
         return determinePossibleTargets(square, piece);
+    }
+
+    public MoveEvaluation analyse(String square) {
+       return analyse(Square.create(square));
     }
 
 
