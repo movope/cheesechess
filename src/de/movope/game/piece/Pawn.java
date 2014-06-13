@@ -5,6 +5,7 @@ import de.movope.game.Color;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.List;
 
 public class Pawn implements Piece {
 
@@ -14,7 +15,7 @@ public class Pawn implements Piece {
         this.color = color;
     }
 
-    public java.util.List<Point> directions() {
+    public List<Point> directions() {
         if (color == de.movope.game.Color.WHITE)
             return Arrays.asList(new Point(0, 1));
         if (color == de.movope.game.Color.BLACK)

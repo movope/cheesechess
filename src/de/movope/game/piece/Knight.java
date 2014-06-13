@@ -5,6 +5,7 @@ import de.movope.game.Color;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.List;
 
 public class Knight implements Piece {
 
@@ -14,7 +15,7 @@ public class Knight implements Piece {
         this.color = color;
     }
 
-    java.util.List<Point> directions = Arrays.asList(new Point(2, 1), new Point(2, -1), new Point(-2, 1), new Point(-2, -1),
+    List<Point> directions = Arrays.asList(new Point(2, 1), new Point(2, -1), new Point(-2, 1), new Point(-2, -1),
                 new Point(1, 2), new Point(1, -2), new Point(-1, 2), new Point(-1, -2));
 
     @Override
