@@ -31,6 +31,7 @@ public class Bishop implements Piece {
     @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
         return MoveEvaluator.with(board)
+                            .pieceColor(color)
                             .forDirections(directions)
                             .maximumMoves(7)
                             .analyse(square);

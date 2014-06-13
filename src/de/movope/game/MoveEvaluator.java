@@ -1,7 +1,5 @@
 package de.movope.game;
 
-import de.movope.game.piece.Piece;
-
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +11,7 @@ public class MoveEvaluator {
     boolean forPawn = false;
     private List<Point> directions;
     private int maximumMoves;
+    private Color color;
 
     private MoveEvaluator(ChessBoard board) {
         this.board = board;
@@ -37,28 +36,24 @@ public class MoveEvaluator {
         return this;
     }
 
-    public MoveEvaluation analyse(Square square) {
-        Piece piece = board.getPieceAt(square);
-        if (piece == Piece.NULL) {
-            return null;
-        }
-        return determinePossibleTargets(square, piece.getColor());
+    public MoveEvaluator pieceColor(Color color) {
+        this.color = color;
+        return this;
     }
 
-    private MoveEvaluation determinePossibleTargets(final Square start, final Color color) {
-
-        final MoveEvaluation.Builder builder = MoveEvaluation.Builder.startAt(start);
+    public MoveEvaluation analyse(Square square) {
+        final MoveEvaluation.Builder builder = MoveEvaluation.Builder.startAt(square);
         directions.stream()
-                  .map(dir -> possibleMoves(dir, start, color))
+                  .map(dir -> possibleMoves(dir, square))
                   .forEach(result -> builder.addMoves(result.getMoves())
                           .addAttacks(result.getAttacks()));
 
         return builder.create();
     }
 
-    private EvaluationResult possibleMoves(Point dir, Square start, Color color) {
+    private EvaluationResult possibleMoves(Point dir, Square start) {
         if (forPawn) {
-            return possibleMovesForPawn(dir, start, color);
+            return possibleMovesForPawn(dir, start);
         }
         EvaluationResult result = new EvaluationResult();
         Square target = (Square) start.clone();
@@ -77,7 +72,7 @@ public class MoveEvaluator {
         return result;
     }
 
-    private EvaluationResult possibleMovesForPawn(Point dir, Square start, Color color) {
+    private EvaluationResult possibleMovesForPawn(Point dir, Square start) {
         EvaluationResult result = new EvaluationResult();
         Square target = (Square) start.clone();
 

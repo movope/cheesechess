@@ -30,6 +30,7 @@ public class King implements Piece {
     @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
         return MoveEvaluator.with(board)
+                            .pieceColor(color)
                             .forDirections(directions)
                             .maximumMoves(1)
                             .analyse(square);
