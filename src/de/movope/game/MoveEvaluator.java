@@ -45,11 +45,6 @@ public class MoveEvaluator {
         return determinePossibleTargets(square, piece);
     }
 
-    public MoveEvaluation analyse(String square) {
-       return analyse(Square.create(square));
-    }
-
-
     private MoveEvaluation determinePossibleTargets(final Square start, final Piece piece) {
 
         final MoveEvaluation.Builder builder = MoveEvaluation.Builder.startAt(start);

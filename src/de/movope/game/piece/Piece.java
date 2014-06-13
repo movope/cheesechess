@@ -10,7 +10,6 @@ public interface Piece {
     public String printIdentifier();
     public Color getColor();
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square);
-    public int getMaximumMoves();
 
     public static Piece NULL = new Piece() {
         @Override
@@ -26,11 +25,6 @@ public interface Piece {
         @Override
         public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
             return null;
-        }
-
-        @Override
-        public int getMaximumMoves() {
-            return 0;
         }
     };
 }

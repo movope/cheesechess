@@ -35,9 +35,4 @@ public class King implements Piece {
                             .analyse(square);
 
     }
-
-    @Override
-    public int getMaximumMoves() {
-        return 1;
-    }
 }

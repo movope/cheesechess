@@ -39,9 +39,4 @@ public class Pawn implements Piece {
                             .forPawn()
                             .analyse(square);
     }
-
-    @Override
-    public int getMaximumMoves() {
-        return 2;
-    }
 }

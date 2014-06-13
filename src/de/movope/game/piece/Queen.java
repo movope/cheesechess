@@ -34,9 +34,4 @@ public class Queen implements Piece {
                             .maximumMoves(7)
                             .analyse(square);
     }
-
-    @Override
-    public int getMaximumMoves() {
-        return 7;
-    }
 }

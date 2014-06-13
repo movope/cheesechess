@@ -34,9 +34,4 @@ public class Knight implements Piece {
                             .maximumMoves(1)
                             .analyse(square);
     }
-
-    @Override
-    public int getMaximumMoves() {
-        return 1;
-    }
 }

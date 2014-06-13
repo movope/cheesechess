@@ -35,9 +35,4 @@ public class Bishop implements Piece {
                             .maximumMoves(7)
                             .analyse(square);
     }
-
-    @Override
-    public int getMaximumMoves() {
-        return 7;
-    }
 }
