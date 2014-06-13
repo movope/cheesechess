@@ -79,10 +79,7 @@ public class ChessBoard {
 
     public Piece getPieceAt(Square square) {
         Piece result = pieces.get(square.toString());
-        if (result != null) {
-            return result;
-        }
-        return Piece.NULL;
+        return result != null ? result : Piece.NULL;
     }
 
     public Piece getPieceAt(String square) {
