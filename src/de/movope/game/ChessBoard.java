@@ -73,7 +73,7 @@ public class ChessBoard {
         return pieces.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().getColor() == color)
-                .map(entry -> entry.getKey())
+                .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
 
