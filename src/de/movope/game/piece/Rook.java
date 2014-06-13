@@ -31,7 +31,9 @@ public class Rook implements Piece {
 
     @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
-        return MoveEvaluator.with(board).analyse(square);
+        return MoveEvaluator.with(board)
+                            .forDirections(directions())
+                            .analyse(square);
     }
 
     @Override

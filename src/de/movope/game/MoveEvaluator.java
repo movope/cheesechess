@@ -1,6 +1,5 @@
 package de.movope.game;
 
-import de.movope.game.piece.Pawn;
 import de.movope.game.piece.Piece;
 
 import java.awt.*;
@@ -11,12 +10,25 @@ public class MoveEvaluator {
 
     ChessBoard board;
 
+    boolean forPawn = false;
+    private List<Point> directions;
+
     private MoveEvaluator(ChessBoard board) {
         this.board = board;
     }
 
     public static MoveEvaluator with(ChessBoard board) {
         return new MoveEvaluator(board);
+    }
+
+    public MoveEvaluator forPawn() {
+        forPawn = true;
+        return this;
+    }
+
+    public  MoveEvaluator forDirections(List<Point> directions) {
+        this.directions = directions;
+        return this;
     }
 
     public MoveEvaluation analyse(Square square) {
@@ -35,17 +47,16 @@ public class MoveEvaluator {
     private MoveEvaluation determinePossibleTargets(final Square start, final Piece piece) {
 
         final MoveEvaluation.Builder builder = MoveEvaluation.Builder.startAt(start);
-
-        piece.directions().stream()
-                          .map(dir -> possibleMoves(dir, start, piece))
-                          .forEach(result -> builder.addMoves(result.getMoves())
-                                                    .addAttacks(result.getAttacks()));
+        directions.stream()
+                  .map(dir -> possibleMoves(dir, start, piece))
+                  .forEach(result -> builder.addMoves(result.getMoves())
+                          .addAttacks(result.getAttacks()));
 
         return builder.create();
     }
 
     private EvaluationResult possibleMoves(Point dir, Square start, Piece piece) {
-        if (piece instanceof Pawn) {
+        if (forPawn) {
             return possibleMovesForPawn(dir, start, piece);
         }
         EvaluationResult result = new EvaluationResult();

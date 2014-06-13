@@ -1,7 +1,6 @@
 package de.movope.game.piece
 
 import de.movope.game.ChessBoard
-import de.movope.game.MoveEvaluator
 import de.movope.game.Square
 import spock.lang.Specification
 
@@ -26,7 +25,8 @@ class KnightTest extends Specification {
 
     def "correct targets for knight"() {
         when:
-        def evaluation = MoveEvaluator.with(board).analyse("C4")
+        def piece = board.getPieceAt("C4")
+        def evaluation = piece.getMoveEvaluationFor(board, Square.create("C4"))
 
         then:
         evaluation.possibleTargets().contains(Square.create("B6"))

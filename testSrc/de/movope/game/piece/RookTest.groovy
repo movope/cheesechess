@@ -1,7 +1,6 @@
 package de.movope.game.piece
 
 import de.movope.game.ChessBoard
-import de.movope.game.MoveEvaluator
 import de.movope.game.Square
 import spock.lang.Specification
 
@@ -26,7 +25,8 @@ class RookTest extends Specification {
 
     def "correct targets for rook"() {
         when:
-        def evaluation = MoveEvaluator.with(board).analyse("C5")
+        def piece = board.getPieceAt("C5")
+        def evaluation = piece.getMoveEvaluationFor(board, Square.create("C5"))
 
         then:
         evaluation.possibleTargets().size() == 9
