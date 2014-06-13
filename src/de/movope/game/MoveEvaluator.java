@@ -12,6 +12,7 @@ public class MoveEvaluator {
 
     boolean forPawn = false;
     private List<Point> directions;
+    private int maximumMoves;
 
     private MoveEvaluator(ChessBoard board) {
         this.board = board;
@@ -28,6 +29,11 @@ public class MoveEvaluator {
 
     public  MoveEvaluator forDirections(List<Point> directions) {
         this.directions = directions;
+        return this;
+    }
+
+    public MoveEvaluator maximumMoves(int maximumMoves) {
+        this.maximumMoves = maximumMoves;
         return this;
     }
 
@@ -62,7 +68,7 @@ public class MoveEvaluator {
         EvaluationResult result = new EvaluationResult();
         Square target = (Square) start.clone();
 
-        for (int i = 0; i < piece.getMaximumMoves(); i++) {
+        for (int i = 0; i < maximumMoves; i++) {
             target = target.move(dir.x, dir.y);
             if (board.canPieceMoveTo(target)) {
                 result.addMove(target);

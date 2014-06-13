@@ -31,6 +31,7 @@ public class Queen implements Piece {
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
         return MoveEvaluator.with(board)
                             .forDirections(directions)
+                            .maximumMoves(7)
                             .analyse(square);
     }
 
