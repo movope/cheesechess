@@ -6,9 +6,8 @@ import java.util.List;
 
 public class MoveEvaluator {
 
-    ChessBoard board;
-
-    boolean forPawn = false;
+    private ChessBoard board;
+    private boolean forPawn = false;
     private List<Point> directions;
     private int maximumMoves;
     private Color color;
