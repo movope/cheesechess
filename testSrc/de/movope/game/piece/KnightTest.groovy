@@ -1,6 +1,7 @@
 package de.movope.game.piece
 
 import de.movope.game.ChessBoard
+import de.movope.game.ChessGameUtils
 import de.movope.game.Square
 import spock.lang.Specification
 
@@ -20,7 +21,7 @@ class KnightTest extends Specification {
         board.move("D2", "H3");
         board.move("D7", "D6");
         board.move("E2", "E4");
-        board.print();
+        ChessGameUtils.print(board);
     }
 
     def "correct targets for knight"() {

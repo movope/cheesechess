@@ -21,7 +21,7 @@ public class ChessGame {
     }
 
     public void print() {
-        board.print();
+        ChessGameUtils.print(board);
         System.out.println();
         System.out.println();
         System.out.println();

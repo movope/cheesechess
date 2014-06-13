@@ -90,7 +90,7 @@ class MoveEvaluatorTest extends Specification {
         board.move("E2", "E4");
         board.move("F2", "F3");
         board.move("B7", "B6");
-        board.print();
+        ChessGameUtils.print(board);
     }
 
     def setUpPeacesOnBoardForQueen() {
@@ -99,7 +99,7 @@ class MoveEvaluatorTest extends Specification {
         board.move("D2", "D6");
         board.move("E2", "E4");
         board.move("C7", "B6");
-        board.print();
+        ChessGameUtils.print(board);
     }
 
     def setUpPeacesOnBoardForKnight() {
@@ -108,6 +108,6 @@ class MoveEvaluatorTest extends Specification {
         board.move("D2", "H3");
         board.move("D7", "D6");
         board.move("E2", "E4");
-        board.print();
+        ChessGameUtils.print(board);
     }
 }

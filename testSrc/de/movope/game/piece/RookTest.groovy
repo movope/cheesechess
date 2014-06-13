@@ -1,6 +1,7 @@
 package de.movope.game.piece
 
 import de.movope.game.ChessBoard
+import de.movope.game.ChessGameUtils
 import de.movope.game.Square
 import spock.lang.Specification
 
@@ -12,7 +13,7 @@ class RookTest extends Specification {
         board = new ChessBoard();
         board.initPieces();
         setUpPeacesOnBoard()
-        board.print();
+        ChessGameUtils.print(board);
     }
 
     def setUpPeacesOnBoard() {
