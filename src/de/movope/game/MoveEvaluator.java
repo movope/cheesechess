@@ -46,7 +46,7 @@ public class MoveEvaluator {
         directions.stream()
                   .map(dir -> possibleMoves(dir, square))
                   .forEach(result -> builder.addMoves(result.getMoves())
-                          .addAttacks(result.getAttacks()));
+                                            .addAttacks(result.getAttacks()));
 
         return builder.create();
     }
