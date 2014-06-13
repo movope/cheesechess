@@ -5,24 +5,14 @@ import de.movope.game.Color;
 import de.movope.game.MoveEvaluation;
 import de.movope.game.Square;
 
-import java.awt.*;
-import java.util.Collections;
-import java.util.List;
-
 public interface Piece {
 
-    public java.util.List<Point> directions();
     public String printIdentifier();
     public Color getColor();
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square);
     public int getMaximumMoves();
 
     public static Piece NULL = new Piece() {
-        @Override
-        public List<Point> directions() {
-            return Collections.emptyList();
-        }
-
         @Override
         public String printIdentifier() {
             return "-";

@@ -14,10 +14,7 @@ public class Rook implements Piece {
         this.color = color;
     }
 
-    @Override
-    public java.util.List<Point> directions() {
-        return Arrays.asList(new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1));
-    }
+    java.util.List<Point> directions = Arrays.asList(new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1));
 
     @Override
     public String printIdentifier() {
@@ -32,7 +29,7 @@ public class Rook implements Piece {
     @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
         return MoveEvaluator.with(board)
-                            .forDirections(directions())
+                            .forDirections(directions)
                             .analyse(square);
     }
 

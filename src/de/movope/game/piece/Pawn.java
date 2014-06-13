@@ -14,7 +14,6 @@ public class Pawn implements Piece {
         this.color = color;
     }
 
-    @Override
     public java.util.List<Point> directions() {
         if (color == de.movope.game.Color.WHITE)
             return Arrays.asList(new Point(0, 1));

@@ -14,11 +14,8 @@ public class Knight implements Piece {
         this.color = color;
     }
 
-    @Override
-    public java.util.List<Point> directions() {
-        return Arrays.asList(new Point(2, 1), new Point(2, -1), new Point(-2, 1), new Point(-2, -1),
+    java.util.List<Point> directions = Arrays.asList(new Point(2, 1), new Point(2, -1), new Point(-2, 1), new Point(-2, -1),
                 new Point(1, 2), new Point(1, -2), new Point(-1, 2), new Point(-1, -2));
-    }
 
     @Override
     public String printIdentifier() {
@@ -33,7 +30,7 @@ public class Knight implements Piece {
     @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
         return MoveEvaluator.with(board)
-                            .forDirections(directions())
+                            .forDirections(directions)
                             .analyse(square);
     }
 

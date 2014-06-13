@@ -6,18 +6,16 @@ import de.movope.game.Color;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.List;
 
 public class Bishop implements Piece {
 
     private Color color;
 
+    List<Point> directions = Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1));
+
     public Bishop(Color color) {
         this.color = color;
-    }
-
-    @Override
-    public java.util.List<Point> directions() {
-        return Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1));
     }
 
     @Override
@@ -33,7 +31,7 @@ public class Bishop implements Piece {
     @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
         return MoveEvaluator.with(board)
-                            .forDirections(directions())
+                            .forDirections(directions)
                             .analyse(square);
     }
 
