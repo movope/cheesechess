@@ -39,6 +39,18 @@ public class MoveEvaluation {
         return start;
     }
 
+    public MoveEvaluation join(MoveEvaluation evaluation) {
+        MoveEvaluation result = MoveEvaluation.empty();
+        result.attacks = new HashSet<>();
+        result.moves = new HashSet<>();
+        result.start = start;
+        result.attacks.addAll(attacks);
+        result.attacks.addAll(evaluation.possibleAttacks());
+        result.moves.addAll(moves);
+        result.moves.addAll(evaluation.possibleTargets());
+        return result;
+    }
+
     public static class Builder {
 
         private Set<Square> moves = new HashSet<>();
