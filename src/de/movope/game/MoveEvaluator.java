@@ -12,7 +12,6 @@ public class MoveEvaluator {
     private ChessBoard board;
     private PieceType pieceType;
     private Color color;
-    List<Point> directions;
 
     public MoveEvaluator(PieceType pieceType, Color color) {
         this.pieceType = pieceType;
@@ -32,16 +31,7 @@ public class MoveEvaluator {
     public MoveEvaluation analyse(Square square) {
         final MoveEvaluation.Builder builder = MoveEvaluation.Builder.startAt(square);
 
-        directions = pieceType.getDirections();
-        if (pieceType == PieceType.PAWN) {
-            if (color == Color.WHITE) {
-                directions = Arrays.asList(new Point(0, 1));
-            } else {
-                directions = Arrays.asList(new Point(0, -1));
-            }
-        }
-
-        directions.stream()
+        directions().stream()
                 .map(dir -> possibleMoves(dir, square))
                 .forEach(result -> builder.addMoves(result.getMoves())
                         .addAttacks(result.getAttacks()));
@@ -91,5 +81,16 @@ public class MoveEvaluator {
                 .forEach(result::addPossibleAttack);
 
         return result;
+    }
+
+    private List<Point> directions() {
+        if (pieceType == PieceType.PAWN) {
+            if (color == Color.WHITE) {
+                return Arrays.asList(new Point(0, 1));
+            } else {
+                return Arrays.asList(new Point(0, -1));
+            }
+        }
+        return pieceType.getDirections();
     }
 }
