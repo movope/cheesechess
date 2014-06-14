@@ -2,8 +2,6 @@ package de.movope.game
 
 import spock.lang.Specification
 
-import java.awt.*
-
 class DirectionTest extends Specification {
 
     def "builder with no flag creates empty list"() {
@@ -20,7 +18,8 @@ class DirectionTest extends Specification {
 
         then:
         directions.size() == 4
-        directions.containsAll(Arrays.asList(new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1)));
+        directions.containsAll(Arrays.asList(Direction.create(0, 1), Direction.create(1, 0), Direction.create(-1, 0),
+                                            Direction.create(0, -1)));
     }
 
     def "builder with diagonal flag creates correct list"() {
@@ -29,7 +28,8 @@ class DirectionTest extends Specification {
 
         then:
         directions.size() == 4
-        directions.containsAll(Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1)))
+        directions.containsAll(Arrays.asList(Direction.create(1, 1), Direction.create(-1, -1), Direction.create(1, -1),
+                                                Direction.create(-1, 1)))
     }
 
     def "builder with parallel and diagonal flag creates correct list"() {
@@ -38,8 +38,8 @@ class DirectionTest extends Specification {
 
         then:
         directions.size() == 8
-        directions.containsAll(Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1),
-                new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1)))
+        directions.containsAll(Arrays.asList(Direction.create(1, 1), Direction.create(-1, -1), Direction.create(1, -1), Direction.create(-1, 1),
+                Direction.create(0, 1), Direction.create(1, 0), Direction.create(-1, 0), Direction.create(0, -1)))
     }
 
     def "builder with knight flag creates correct list"() {
@@ -48,7 +48,7 @@ class DirectionTest extends Specification {
 
         then:
         directions.size() == 8
-        directions.containsAll(Arrays.asList(new Point(2, 1), new Point(2, -1), new Point(-2, 1), new Point(-2, -1),
-                new Point(1, 2), new Point(1, -2), new Point(-1, 2), new Point(-1, -2)))
+        directions.containsAll(Arrays.asList(Direction.create(2, 1), Direction.create(2, -1), Direction.create(-2, 1), Direction.create(-2, -1),
+                Direction.create(1, 2), Direction.create(1, -2), Direction.create(-1, 2), Direction.create(-1, -2)))
     }
 }

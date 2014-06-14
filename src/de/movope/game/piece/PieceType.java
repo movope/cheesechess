@@ -2,15 +2,14 @@ package de.movope.game.piece;
 
 import de.movope.game.Direction;
 
-import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 
 public enum PieceType {
     NULL("+", 0,
-          Collections.<Point>emptyList()),
+          Collections.<Direction>emptyList()),
     PAWN("B", 0,
-          Collections.<Point>emptyList()),
+          Collections.<Direction>emptyList()),
     ROOK("T", 7,
             Direction.Builder.create().parallel().directions()),
     BISHOP("L", 7,
@@ -23,11 +22,11 @@ public enum PieceType {
             Direction.Builder.create().parallel().diagonal().directions());
 
     final private String identifier;
-    final private List<Point> directions;
+    final private List<Direction> directions;
     final private int maximumMoves;
 
 
-    PieceType(String identifier, int maximumMoves, List<Point> points) {
+    PieceType(String identifier, int maximumMoves, List<Direction> points) {
         this.identifier = identifier;
         this.maximumMoves = maximumMoves;
         this.directions = points;
@@ -37,7 +36,7 @@ public enum PieceType {
         return identifier;
     }
 
-    public List<Point> getDirections() {
+    public List<Direction> getDirections() {
         return directions;
     }
 

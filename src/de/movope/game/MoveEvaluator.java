@@ -3,7 +3,6 @@ package de.movope.game;
 import de.movope.game.piece.Piece;
 import de.movope.game.piece.PieceType;
 
-import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class MoveEvaluator {
         return builder.create();
     }
 
-    private EvaluationResult possibleMoves(Point dir, Square start) {
+    private EvaluationResult possibleMoves(Direction dir, Square start) {
         if (pieceType == PieceType.PAWN) {
             return possibleMovesForPawn(dir, start);
         }
@@ -47,7 +46,7 @@ public class MoveEvaluator {
         Square target = (Square) start.clone();
 
         for (int i = 0; i < pieceType.getMaximumMoves(); i++) {
-            target = target.move(dir.x, dir.y);
+            target = target.move(dir.x(), dir.y());
             if (board.canPieceMoveTo(target)) {
                 result.addMove(target);
             } else {
@@ -60,7 +59,7 @@ public class MoveEvaluator {
         return result;
     }
 
-    private EvaluationResult possibleMovesForPawn(Point dir, Square start) {
+    private EvaluationResult possibleMovesForPawn(Direction dir, Square start) {
         EvaluationResult result = new EvaluationResult();
         Square target = (Square) start.clone();
 
@@ -70,25 +69,25 @@ public class MoveEvaluator {
         int maximumMoves = firstMove ? 2 : 1;
 
         for (int i = 0; i < maximumMoves; i++) {
-            target = target.move(dir.x, dir.y);
+            target = target.move(dir.x(), dir.y());
             if (board.canPieceMoveTo(target)) {
                 result.addMove(target);
             }
         }
-        List<Point> attackDirections = Arrays.asList(new Point(-1, dir.y), new Point(1, dir.y));
-        attackDirections.stream().map(direction -> ((Square) start.clone()).move(direction.x, direction.y))
+        List<Direction> attackDirections = Arrays.asList(Direction.create(-1, dir.y()), Direction.create(1, dir.y()));
+        attackDirections.stream().map(direction -> ((Square) start.clone()).move(direction.x(), direction.y()))
                 .filter(attack -> board.occupiedFromEnemy(attack, color.invert()))
                 .forEach(result::addPossibleAttack);
 
         return result;
     }
 
-    private List<Point> directions() {
+    private List<Direction> directions() {
         if (pieceType == PieceType.PAWN) {
             if (color == Color.WHITE) {
-                return Arrays.asList(new Point(0, 1));
+                return Arrays.asList(Direction.create(0, 1));
             } else {
-                return Arrays.asList(new Point(0, -1));
+                return Arrays.asList(Direction.create(0, -1));
             }
         }
         return pieceType.getDirections();
