@@ -11,11 +11,15 @@ import java.util.List;
 public class Bishop implements Piece {
 
     private Color color;
-
-    List<Point> directions = Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1));
+    private MoveEvaluator evaluator;
 
     public Bishop(Color color) {
         this.color = color;
+        List<Point> directions = Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1));
+        evaluator = MoveEvaluator.Builder.forDirections(directions)
+                                        .maximumMoves(7)
+                                        .pieceColor(color)
+                                        .create();
     }
 
     @Override
@@ -30,10 +34,6 @@ public class Bishop implements Piece {
 
     @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
-        return MoveEvaluator.with(board)
-                            .pieceColor(color)
-                            .forDirections(directions)
-                            .maximumMoves(7)
-                            .analyse(square);
+        return evaluator.on(board).analyse(square);
     }
 }

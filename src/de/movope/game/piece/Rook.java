@@ -9,12 +9,17 @@ import java.util.Arrays;
 public class Rook implements Piece {
 
     private Color color;
+    private MoveEvaluator evaluator;
 
     public Rook(Color color) {
         this.color = color;
+        java.util.List<Point> directions = Arrays.asList(new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1));
+        evaluator = MoveEvaluator.Builder.forDirections(directions)
+                                        .maximumMoves(7)
+                                        .pieceColor(color)
+                                        .create();
     }
 
-    java.util.List<Point> directions = Arrays.asList(new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1));
 
     @Override
     public String printIdentifier() {
@@ -28,10 +33,6 @@ public class Rook implements Piece {
 
     @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
-        return MoveEvaluator.with(board)
-                            .pieceColor(color)
-                            .forDirections(directions)
-                            .maximumMoves(7)
-                            .analyse(square);
+        return evaluator.on(board).analyse(square);
     }
 }

@@ -10,17 +10,20 @@ import java.util.List;
 public class Pawn implements Piece {
 
     private Color color;
+    private MoveEvaluator evaluator;
 
     public Pawn(Color color) {
         this.color = color;
-    }
-
-    public List<Point> directions() {
-        if (color == de.movope.game.Color.WHITE)
-            return Arrays.asList(new Point(0, 1));
-        if (color == de.movope.game.Color.BLACK)
-            return Arrays.asList(new Point(0,-1));
-        throw new IllegalArgumentException("Unknown Color.");
+        List<Point> directions;
+        if (color == de.movope.game.Color.WHITE) {
+            directions = Arrays.asList(new Point(0, 1));
+        } else {
+            directions = Arrays.asList(new Point(0, -1));
+        }
+        evaluator = MoveEvaluator.Builder.forDirections(directions)
+                                           .forPawn()
+                                           .pieceColor(color)
+                                           .create();
     }
 
     @Override
@@ -35,10 +38,6 @@ public class Pawn implements Piece {
 
     @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
-        return MoveEvaluator.with(board)
-                            .pieceColor(color)
-                            .forDirections(directions())
-                            .forPawn()
-                            .analyse(square);
+        return evaluator.on(board).analyse(square);
     }
 }

@@ -10,13 +10,17 @@ import java.util.List;
 public class Queen implements Piece {
 
     private Color color;
+    private MoveEvaluator evaluator;
 
     public Queen(Color color) {
         this.color = color;
-    }
-
-    List<Point> directions = Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1),
+        List<Point> directions = Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1),
                 new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1));
+        evaluator = MoveEvaluator.Builder.forDirections(directions)
+                                        .maximumMoves(7)
+                                        .pieceColor(color)
+                                        .create();
+    }
 
     @Override
     public String printIdentifier() {
@@ -30,10 +34,6 @@ public class Queen implements Piece {
 
     @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
-        return MoveEvaluator.with(board)
-                            .pieceColor(color)
-                            .forDirections(directions)
-                            .maximumMoves(7)
-                            .analyse(square);
+        return evaluator.on(board).analyse(square);
     }
 }

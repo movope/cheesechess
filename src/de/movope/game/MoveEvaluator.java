@@ -16,6 +16,13 @@ public class MoveEvaluator {
         this.board = board;
     }
 
+    public MoveEvaluator(List<Point> directions, int maximumMoves, Color color, boolean forPawn) {
+        this.directions = directions;
+        this.maximumMoves = maximumMoves;
+        this.color = color;
+        this.forPawn = forPawn;
+    }
+
     public static MoveEvaluator with(ChessBoard board) {
         return new MoveEvaluator(board);
     }
@@ -92,5 +99,44 @@ public class MoveEvaluator {
                                 .forEach(result::addPossibleAttack);
 
         return result;
+    }
+
+    public MoveEvaluator on(ChessBoard board) {
+        this.board = board;
+        return this;
+    }
+
+    public static class Builder {
+
+        private List<Point> directions;
+        private int maximumMoves;
+        private Color color;
+        private boolean forPawn = false;
+
+        public static Builder forDirections(List<Point> directions) {
+            Builder builder = new Builder();
+            builder.directions = directions;
+            return builder;
+        }
+
+        public Builder maximumMoves(int maximumMoves) {
+            this.maximumMoves = maximumMoves;
+            return this;
+        }
+
+        public Builder pieceColor(Color color) {
+            this.color = color;
+            return this;
+        }
+
+        public Builder forPawn() {
+            this.forPawn = true;
+            return this;
+        }
+
+        public MoveEvaluator create() {
+            return new MoveEvaluator(directions, maximumMoves, color, forPawn);
+        }
+
     }
 }
