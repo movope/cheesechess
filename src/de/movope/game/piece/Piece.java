@@ -2,11 +2,6 @@ package de.movope.game.piece;
 
 import de.movope.game.Color;
 
-import java.awt.*;
-import java.util.List;
-
-
-
 public class Piece {
 
     PieceType pieceType;
@@ -25,14 +20,6 @@ public class Piece {
 
     public Color getColor() {
         return color;
-    }
-
-    public List<Point> getDirections() {
-        return pieceType.getDirections();
-    }
-
-    public int getMaximumMoves() {
-        return pieceType.getMaximumMoves();
     }
 
     public PieceType getPieceType() {

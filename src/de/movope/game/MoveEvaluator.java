@@ -10,23 +10,18 @@ import java.util.List;
 public class MoveEvaluator {
 
     private ChessBoard board;
-    private boolean forPawn = false;
-    private List<Point> directions;
-    private int maximumMoves;
+    private PieceType pieceType;
     private Color color;
+    List<Point> directions;
 
-    public MoveEvaluator(List<Point> directions, int maximumMoves, Color color, boolean forPawn) {
-        this.directions = directions;
-        this.maximumMoves = maximumMoves;
+    public MoveEvaluator(PieceType pieceType, Color color) {
+        this.pieceType = pieceType;
         this.color = color;
-        this.forPawn = forPawn;
     }
 
     public static MoveEvaluator forPiece(Piece piece) {
-        return new MoveEvaluator(piece.getDirections(),
-                piece.getMaximumMoves(),
-                piece.getColor(),
-                piece.getPieceType() == PieceType.PAWN);
+        return new MoveEvaluator(piece.getPieceType(),
+                                 piece.getColor());
     }
 
     public MoveEvaluator on(ChessBoard board) {
@@ -37,7 +32,8 @@ public class MoveEvaluator {
     public MoveEvaluation analyse(Square square) {
         final MoveEvaluation.Builder builder = MoveEvaluation.Builder.startAt(square);
 
-        if (forPawn) {
+        directions = pieceType.getDirections();
+        if (pieceType == PieceType.PAWN) {
             if (color == Color.WHITE) {
                 directions = Arrays.asList(new Point(0, 1));
             } else {
@@ -54,13 +50,13 @@ public class MoveEvaluator {
     }
 
     private EvaluationResult possibleMoves(Point dir, Square start) {
-        if (forPawn) {
+        if (pieceType == PieceType.PAWN) {
             return possibleMovesForPawn(dir, start);
         }
         EvaluationResult result = new EvaluationResult();
         Square target = (Square) start.clone();
 
-        for (int i = 0; i < maximumMoves; i++) {
+        for (int i = 0; i < pieceType.getMaximumMoves(); i++) {
             target = target.move(dir.x, dir.y);
             if (board.canPieceMoveTo(target)) {
                 result.addMove(target);
