@@ -1,13 +1,12 @@
 package de.movope.game;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public class MoveEvaluation {
 
-    private Set<Square> moves = Collections.emptySet();
-    private Set<Square> attacks = Collections.emptySet();
+    private Set<Square> moves = new HashSet<>();
+    private Set<Square> attacks = new HashSet<>();
     private Square start;
 
     private MoveEvaluation() {
@@ -41,9 +40,6 @@ public class MoveEvaluation {
 
     public MoveEvaluation join(MoveEvaluation evaluation) {
         MoveEvaluation result = MoveEvaluation.empty();
-        result.attacks = new HashSet<>();
-        result.moves = new HashSet<>();
-        result.start = start;
         result.attacks.addAll(attacks);
         result.attacks.addAll(evaluation.possibleAttacks());
         result.moves.addAll(moves);
