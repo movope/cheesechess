@@ -14,8 +14,6 @@ public class King implements Piece {
         this.color = color;
     }
 
-
-
     @Override
     public String printIdentifier() {
         return "K";

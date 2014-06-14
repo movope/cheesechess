@@ -14,7 +14,6 @@ public class Knight implements Piece {
         this.color = color;
     }
 
-
     @Override
     public String printIdentifier() {
         return "K";
