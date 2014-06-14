@@ -12,7 +12,7 @@ class PlayerTest extends Specification {
         board.initPieces();
     }
 
-    def "checkmate is detected and player react correctly"() {
+    def "checkmate is detected and player reacts correctly"() {
         when:
         board.move("F1", "H5")
         board.move("F7", "F5")
