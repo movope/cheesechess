@@ -2,8 +2,8 @@ package de.movope.game;
 
 public class Piece {
 
-    PieceType pieceType;
-    Color color;
+    private PieceType pieceType;
+    private Color color;
 
     public Piece(PieceType pieceType, Color color) {
         this.pieceType = pieceType;
