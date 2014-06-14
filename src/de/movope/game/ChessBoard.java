@@ -12,35 +12,6 @@ public class ChessBoard {
 
     Map<String, Piece> pieces = new HashMap<>();
 
-    public void initPieces() {
-        initPieces(Color.WHITE);
-        initPieces(Color.BLACK);
-    }
-
-    private void initPieces(Color color) {
-        int row = (color == Color.WHITE) ? 1 : 8;
-        pieces.put("A" + row, new Rook(color));
-        pieces.put("H" + row, new Rook(color));
-        pieces.put("B" + row, new Knight(color));
-        pieces.put("G" + row, new Knight(color));
-        pieces.put("C" + row, new Bishop(color));
-        pieces.put("F" + row, new Bishop(color));
-        pieces.put("D" + row, new Queen(color));
-        pieces.put("E" + row, new King(color));
-
-        if (color == Color.WHITE) {
-            row++;
-        } else {
-            row--;
-        }
-
-        String[] files = {"A", "B", "C", "D", "E", "F", "G", "H"};
-        for (int i = 0; i < 8; i++) {
-            pieces.put(files[i] + row, new Pawn(color));
-        }
-
-    }
-
     public List<String> getSquaresWithPiece(Color color) {
         return pieces.entrySet()
                 .stream()
@@ -82,5 +53,34 @@ public class ChessBoard {
 
     public boolean canPieceMoveTo(Square target) {
         return target.onBoard() && getPieceAt(target) == Piece.NULL;
+    }
+
+    public void initPieces() {
+        initPieces(Color.WHITE);
+        initPieces(Color.BLACK);
+    }
+
+    private void initPieces(Color color) {
+        int row = (color == Color.WHITE) ? 1 : 8;
+        pieces.put("A" + row, new Rook(color));
+        pieces.put("H" + row, new Rook(color));
+        pieces.put("B" + row, new Knight(color));
+        pieces.put("G" + row, new Knight(color));
+        pieces.put("C" + row, new Bishop(color));
+        pieces.put("F" + row, new Bishop(color));
+        pieces.put("D" + row, new Queen(color));
+        pieces.put("E" + row, new King(color));
+
+        if (color == Color.WHITE) {
+            row++;
+        } else {
+            row--;
+        }
+
+        String[] files = {"A", "B", "C", "D", "E", "F", "G", "H"};
+        for (int i = 0; i < 8; i++) {
+            pieces.put(files[i] + row, new Pawn(color));
+        }
+
     }
 }
