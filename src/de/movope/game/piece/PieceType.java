@@ -1,7 +1,8 @@
 package de.movope.game.piece;
 
+import de.movope.game.Direction;
+
 import java.awt.*;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,18 +12,15 @@ public enum PieceType {
     PAWN("B", 0,
           Collections.<Point>emptyList()),
     ROOK("T", 7,
-          Arrays.asList(new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1))),
+            Direction.Builder.create().parallel().directions()),
     BISHOP("L", 7,
-           Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1))),
+            Direction.Builder.create().diagonal().directions()),
     QUEEN("Q", 7,
-           Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1),
-                    new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1))),
+            Direction.Builder.create().parallel().diagonal().directions()),
     KNIGHT("P", 1,
-            Arrays.asList(new Point(2, 1), new Point(2, -1), new Point(-2, 1), new Point(-2, -1),
-                    new Point(1, 2), new Point(1, -2), new Point(-1, 2), new Point(-1, -2))),
+            Direction.Builder.create().knight().directions()),
     KING("K", 1,
-          Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1),
-                    new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1)));
+            Direction.Builder.create().parallel().diagonal().directions());
 
     final private String identifier;
     final private List<Point> directions;
