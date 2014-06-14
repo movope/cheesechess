@@ -29,9 +29,27 @@ public class Move {
 
     @Override
     public String toString() {
-        return "Move{" +
-                "from=" + from +
-                ", to=" + to +
-                '}';
+        return "Move{" + from +
+                " to=" + to + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Move)) return false;
+
+        Move move = (Move) o;
+
+        if (!from.equals(move.from)) return false;
+        if (!to.equals(move.to)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = from.hashCode();
+        result = 31 * result + to.hashCode();
+        return result;
     }
 }

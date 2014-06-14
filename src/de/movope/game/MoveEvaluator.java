@@ -51,10 +51,10 @@ public class MoveEvaluator {
         for (int i = 0; i < pieceType.getMaximumMoves(); i++) {
             target = target.move(dir.x(), dir.y());
             if (board.canPieceMoveTo(target)) {
-                forOneDirection.addMove(target);
+                forOneDirection.addMove(Move.create(start, target));
             } else {
                 if (board.occupiedFromEnemy(target, color.invert())) {
-                    forOneDirection.addAttack(target);
+                    forOneDirection.addAttack(Move.create(start, target));
                 }
                 break;
             }
@@ -74,13 +74,13 @@ public class MoveEvaluator {
         for (int i = 0; i < maximumMoves; i++) {
             target = target.move(dir.x(), dir.y());
             if (board.canPieceMoveTo(target)) {
-                forOneDirection.addMove(target);
+                forOneDirection.addMove(Move.create(start, target));
             }
         }
         List<Direction> attackDirections = Arrays.asList(Direction.create(-1, dir.y()), Direction.create(1, dir.y()));
         attackDirections.stream().map(direction -> ((Square) start.clone()).move(direction.x(), direction.y()))
                 .filter(attack -> board.occupiedFromEnemy(attack, color.invert()))
-                .forEach(forOneDirection::addAttack);
+                .forEach(attack -> forOneDirection.addAttack(Move.create(start, attack)));
 
         return forOneDirection.create();
     }

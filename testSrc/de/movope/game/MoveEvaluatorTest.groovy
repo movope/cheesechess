@@ -83,7 +83,7 @@ class MoveEvaluatorTest extends Specification {
 
             then:
             def evaluation = MoveEvaluator.on(board).analyse(Color.BLACK);
-            evaluation.possibleTargets().size() == 16
+            evaluation.possibleTargets().size() == 20
     }
 
     def setUpPeacesOnBoardForBishop() {

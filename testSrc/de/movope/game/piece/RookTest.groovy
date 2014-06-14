@@ -1,9 +1,6 @@
 package de.movope.game.piece
 
-import de.movope.game.ChessBoard
-import de.movope.game.ChessGameUtils
-import de.movope.game.MoveEvaluator
-import de.movope.game.Square
+import de.movope.game.*
 import spock.lang.Specification
 
 class RookTest extends Specification {
@@ -32,7 +29,7 @@ class RookTest extends Specification {
         then:
         evaluation.possibleTargets().size() == 9
         evaluation.possibleAttacks().size() == 2
-        evaluation.possibleAttacks().contains(Square.create("C7"))
-        evaluation.possibleAttacks().contains(Square.create("G5"))
+        evaluation.possibleAttacks().contains(Move.create("C5", "C7"))
+        evaluation.possibleAttacks().contains(Move.create("C5", "G5"))
     }
 }

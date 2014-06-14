@@ -5,14 +5,14 @@ import java.util.Set;
 
 public class MoveEvaluation {
 
-    private Set<Square> moves = new HashSet<>();
-    private Set<Square> attacks = new HashSet<>();
+    private Set<Move> moves = new HashSet<>();
+    private Set<Move> attacks = new HashSet<>();
     private Square start;
 
     private MoveEvaluation() {
     }
 
-    private MoveEvaluation(Square start, Set<Square> moves, Set<Square> attacks) {
+    private MoveEvaluation(Square start, Set<Move> moves, Set<Move> attacks) {
         this.start = start;
         this.moves = moves;
         this.attacks = attacks;
@@ -26,11 +26,11 @@ public class MoveEvaluation {
         return new MoveEvaluation();
     }
 
-    public Set<Square> possibleTargets() {
+    public Set<Move> possibleTargets() {
         return moves;
     }
 
-    public Set<Square> possibleAttacks() {
+    public Set<Move> possibleAttacks() {
         return attacks;
     }
 
@@ -49,8 +49,8 @@ public class MoveEvaluation {
 
     public static class Builder {
 
-        private Set<Square> moves = new HashSet<>();
-        private Set<Square> attacks = new HashSet<>();
+        private Set<Move> moves = new HashSet<>();
+        private Set<Move> attacks = new HashSet<>();
         private Square start;
 
         private Builder(Square start) {
@@ -61,12 +61,12 @@ public class MoveEvaluation {
             return new Builder(start);
         }
 
-        public Builder addMoves(Set<Square> moves) {
+        public Builder addMoves(Set<Move> moves) {
             this.moves.addAll(moves);
             return this;
         }
 
-        public Builder addAttacks(Set<Square> attacks) {
+        public Builder addAttacks(Set<Move> attacks) {
             this.attacks.addAll(attacks);
             return this;
         }
@@ -78,11 +78,11 @@ public class MoveEvaluation {
             return new MoveEvaluation(start, moves, attacks);
         }
 
-        public void addMove(Square move) {
+        public void addMove(Move move) {
             this.moves.add(move);
         }
 
-        public void addAttack(Square attack) {
+        public void addAttack(Move attack) {
             this.attacks.add(attack);
         }
     }

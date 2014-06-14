@@ -30,20 +30,20 @@ public class Player {
                 evaluation = MoveEvaluator.on(board).analyse(randomSquare);
             }
         }
-        Square target;
+        Move move;
         if (evaluation.possibleAttacks().size() > 0) {
-            target = chooseOneOf(evaluation.possibleAttacks());
+            move = chooseOneOf(evaluation.possibleAttacks());
         } else {
-            target = chooseOneOf(evaluation.possibleTargets());
+            move = chooseOneOf(evaluation.possibleTargets());
         }
-        board.move(evaluation.getStart(), target);
+        board.move(move.getFrom(), move.getTo());
 
     }
 
     public boolean checkmateOf(Color color) {
         MoveEvaluation evaluation = getMoveEvaluationOfAllPieces(color.invert());
-        for (Square attack : evaluation.possibleAttacks()) {
-            if (board.getPieceAt(attack).getPieceType() == PieceType.KING) {
+        for (Move move : evaluation.possibleAttacks()) {
+            if (board.getPieceAt(move.getTo()).getPieceType() == PieceType.KING) {
                 return true;
             }
         }
@@ -56,10 +56,10 @@ public class Player {
         if (!evaluation.isMovePossible()) {
             gameOverFor(color);
         } else {
-            for (Square target : evaluation.possibleTargets()) {
+            for (Move move : evaluation.possibleTargets()) {
                 MoveEvaluation evaluationOfAllPieces = getMoveEvaluationOfAllPieces(color.invert());
-                if (!evaluationOfAllPieces.possibleTargets().contains(target)) {
-                    board.move(evaluation.getStart(), target);
+                if (!evaluationOfAllPieces.possibleTargets().contains(move.getTo())) {
+                    board.move(evaluation.getStart(), move.getTo());
                     return;
                 }
             }
@@ -72,8 +72,8 @@ public class Player {
         gameOver = true;
     }
 
-    private Square chooseOneOf(Collection<Square> possibleTargets) {
-        Square[] targets = possibleTargets.toArray(new Square[possibleTargets.size()]);
+    private Move chooseOneOf(Collection<Move> possibleTargets) {
+        Move[] targets = possibleTargets.toArray(new Move[possibleTargets.size()]);
         int rand = (int) (possibleTargets.size() * Math.random());
         return targets[rand];
     }
