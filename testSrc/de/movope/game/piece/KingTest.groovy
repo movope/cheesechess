@@ -2,6 +2,7 @@ package de.movope.game.piece
 
 import de.movope.game.ChessBoard
 import de.movope.game.ChessGameUtils
+import de.movope.game.MoveEvaluator
 import de.movope.game.Square
 import spock.lang.Specification
 
@@ -24,7 +25,7 @@ class KingTest extends Specification {
 
     def "correct targets for king"() {
         when:
-        def evaluation = board.getMoveEvaluationFor(Square.create("C4"))
+        def evaluation = MoveEvaluator.on(board).analyse(Square.create("C4"))
 
         then:
         evaluation.possibleTargets().size() == 7

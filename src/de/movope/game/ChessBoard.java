@@ -53,15 +53,6 @@ public class ChessBoard {
         return target.onBoard() && getPieceAt(target) == Piece.NULL;
     }
 
-
-    public MoveEvaluation getMoveEvaluationFor(Square square) {
-        Piece piece = getPieceAt(square);
-        if (piece == Piece.NULL) {
-            return null;
-        }
-        return MoveEvaluator.forPiece(piece).on(this).analyse(square);
-    }
-
     public void initPieces() {
         initPieces(Color.WHITE);
         initPieces(Color.BLACK);

@@ -9,22 +9,22 @@ public class MoveEvaluator {
     private PieceType pieceType;
     private Color color;
 
-    public MoveEvaluator(PieceType pieceType, Color color) {
-        this.pieceType = pieceType;
-        this.color = color;
-    }
-
-    public static MoveEvaluator forPiece(Piece piece) {
-        return new MoveEvaluator(piece.getPieceType(),
-                                 piece.getColor());
-    }
-
-    public MoveEvaluator on(ChessBoard board) {
+    public MoveEvaluator(ChessBoard board) {
         this.board = board;
-        return this;
+    }
+
+    public static MoveEvaluator on(ChessBoard board) {
+        return new MoveEvaluator(board);
     }
 
     public MoveEvaluation analyse(Square square) {
+        Piece piece = board.getPieceAt(square);
+        if (piece == Piece.NULL) {
+            return MoveEvaluation.empty();
+        }
+        pieceType = piece.getPieceType();
+        color = piece.getColor();
+
         final MoveEvaluation.Builder builder = MoveEvaluation.Builder.startAt(square);
 
         directions().stream()

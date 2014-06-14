@@ -17,8 +17,9 @@ public class Player {
         MoveEvaluation evaluation = MoveEvaluation.empty();
         while (!evaluation.isMovePossible()) {
             Square randomSquare = Square.create(getRandomSquareWithPiece());
-            evaluation = board.getMoveEvaluationFor(randomSquare);
+            evaluation = MoveEvaluator.on(board).analyse(randomSquare);
         }
+
         Square target;
         if (evaluation.possibleAttacks().size() > 0) {
             target = chooseOneOf(evaluation.possibleAttacks());
