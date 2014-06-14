@@ -13,7 +13,7 @@ public class Piece {
     public static final Piece NULL = new Piece(PieceType.NULL, Color.UNDEFINED);
 
     public String printIdentifier() {
-        return pieceType.print();
+        return color.print() + pieceType.print();
     }
 
     public Color getColor() {

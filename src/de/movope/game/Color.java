@@ -2,7 +2,13 @@ package de.movope.game;
 
 
 public enum Color {
-    WHITE, BLACK, UNDEFINED;
+    WHITE("w"),
+    BLACK("b"),
+    UNDEFINED("-");
+
+    Color(String id) {
+        this.id = id;
+    }
 
     public Color invert() {
         if (this == Color.WHITE)
@@ -11,4 +17,9 @@ public enum Color {
             return Color.WHITE;
         return Color.UNDEFINED;
     }
+
+    public String print() {
+        return id;
+    }
+    private String id;
 }
