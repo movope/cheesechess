@@ -1,6 +1,5 @@
 package de.movope.game.piece;
 
-import de.movope.game.*;
 import de.movope.game.Color;
 
 import java.awt.*;
@@ -10,16 +9,9 @@ import java.util.List;
 public class Knight implements Piece {
 
     private Color color;
-    private MoveEvaluator evaluator;
 
     public Knight(Color color) {
         this.color = color;
-        List<Point> directions = Arrays.asList(new Point(2, 1), new Point(2, -1), new Point(-2, 1), new Point(-2, -1),
-                new Point(1, 2), new Point(1, -2), new Point(-1, 2), new Point(-1, -2));
-        evaluator = MoveEvaluator.Builder.forDirections(directions)
-                                        .maximumMoves(1)
-                                        .pieceColor(color)
-                                        .create();
     }
 
 
@@ -42,10 +34,5 @@ public class Knight implements Piece {
     @Override
     public int getMaximumMoves() {
         return 1;
-    }
-
-    @Override
-    public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
-        return evaluator.on(board).analyse(square);
     }
 }
