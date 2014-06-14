@@ -22,39 +22,40 @@ public class MoveEvaluator {
         pieceType = piece.getPieceType();
         color = piece.getColor();
 
-        final MoveEvaluation.Builder builder = MoveEvaluation.Builder.startAt(square);
+        final MoveEvaluation.Builder forAllDirections = MoveEvaluation.Builder.startAt(square);
 
         directions().stream()
                 .map(dir -> possibleMoves(dir, square))
-                .forEach(result -> builder.addMoves(result.getMoves())
-                        .addAttacks(result.getAttacks()));
+                .forEach(result -> forAllDirections.addMoves(result.possibleTargets())
+                                          .addAttacks(result.possibleAttacks()));
 
-        return builder.create();
+        return forAllDirections.create();
     }
 
-    private EvaluationResult possibleMoves(Direction dir, Square start) {
+    private MoveEvaluation possibleMoves(Direction dir, Square start) {
         if (pieceType == PieceType.PAWN) {
             return possibleMovesForPawn(dir, start);
         }
-        EvaluationResult result = new EvaluationResult();
+        final MoveEvaluation.Builder forOneDirection = MoveEvaluation.Builder.startAt(start);
+
         Square target = (Square) start.clone();
 
         for (int i = 0; i < pieceType.getMaximumMoves(); i++) {
             target = target.move(dir.x(), dir.y());
             if (board.canPieceMoveTo(target)) {
-                result.addMove(target);
+                forOneDirection.addMove(target);
             } else {
                 if (board.occupiedFromEnemy(target, color.invert())) {
-                    result.addPossibleAttack(target);
+                    forOneDirection.addAttack(target);
                 }
                 break;
             }
         }
-        return result;
+        return forOneDirection.create();
     }
 
-    private EvaluationResult possibleMovesForPawn(Direction dir, Square start) {
-        EvaluationResult result = new EvaluationResult();
+    private MoveEvaluation possibleMovesForPawn(Direction dir, Square start) {
+        final MoveEvaluation.Builder forOneDirection = MoveEvaluation.Builder.startAt(start);
         Square target = (Square) start.clone();
 
         boolean firstMove = ((color == Color.BLACK && start.getFile() == 6)) ||
@@ -65,15 +66,15 @@ public class MoveEvaluator {
         for (int i = 0; i < maximumMoves; i++) {
             target = target.move(dir.x(), dir.y());
             if (board.canPieceMoveTo(target)) {
-                result.addMove(target);
+                forOneDirection.addMove(target);
             }
         }
         List<Direction> attackDirections = Arrays.asList(Direction.create(-1, dir.y()), Direction.create(1, dir.y()));
         attackDirections.stream().map(direction -> ((Square) start.clone()).move(direction.x(), direction.y()))
                 .filter(attack -> board.occupiedFromEnemy(attack, color.invert()))
-                .forEach(result::addPossibleAttack);
+                .forEach(forOneDirection::addAttack);
 
-        return result;
+        return forOneDirection.create();
     }
 
     private List<Direction> directions() {

@@ -1,6 +1,8 @@
 package de.movope.game;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MoveEvaluation {
 
@@ -25,11 +27,11 @@ public class MoveEvaluation {
         return new MoveEvaluation();
     }
 
-    public Collection<Square> possibleTargets() {
+    public Set<Square> possibleTargets() {
         return moves;
     }
 
-    public Collection<Square> possibleAttacks() {
+    public Set<Square> possibleAttacks() {
         return attacks;
     }
 
@@ -51,12 +53,12 @@ public class MoveEvaluation {
             return new Builder(start);
         }
 
-        public Builder addMoves(List<Square> moves) {
+        public Builder addMoves(Set<Square> moves) {
             this.moves.addAll(moves);
             return this;
         }
 
-        public Builder addAttacks(List<Square> attacks) {
+        public Builder addAttacks(Set<Square> attacks) {
             this.attacks.addAll(attacks);
             return this;
         }
@@ -66,6 +68,14 @@ public class MoveEvaluation {
                 throw new IllegalArgumentException("Start-Square must be defined.");
             }
             return new MoveEvaluation(start, moves, attacks);
+        }
+
+        public void addMove(Square move) {
+            this.moves.add(move);
+        }
+
+        public void addAttack(Square attack) {
+            this.attacks.add(attack);
         }
     }
 }
