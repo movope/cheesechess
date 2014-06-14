@@ -77,6 +77,15 @@ class MoveEvaluatorTest extends Specification {
         result.possibleTargets().size() == 5
     }
 
+    def "correct result of MoveEvaluation of all pieces at start"() {
+            when:
+            ChessGameUtils.print(board)
+
+            then:
+            def evaluation = MoveEvaluator.on(board).analyse(Color.BLACK);
+            evaluation.possibleTargets().size() == 16
+    }
+
     def setUpPeacesOnBoardForBishop() {
         board.move("C1", "D4");
         board.move("E2", "E4");

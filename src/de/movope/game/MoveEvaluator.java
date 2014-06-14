@@ -17,7 +17,15 @@ public class MoveEvaluator {
         return new MoveEvaluator(board);
     }
 
-    public MoveEvaluation analyse(Square square) {
+    public MoveEvaluation analyse(Color color) {
+        MoveEvaluation evaluation = MoveEvaluation.empty();
+        for (String square: board.getSquaresWithPiece(color)) {
+            evaluation = evaluation.join(analyse(Square.create(square)));
+        }
+        return evaluation;
+    }
+
+        public MoveEvaluation analyse(Square square) {
         Piece piece = board.getPieceAt(square);
         pieceType = piece.getPieceType();
         color = piece.getColor();
