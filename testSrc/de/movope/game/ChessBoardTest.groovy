@@ -1,8 +1,6 @@
 package de.movope.game
 
-import de.movope.game.piece.Knight
-import de.movope.game.piece.Pawn
-import de.movope.game.piece.Rook
+import de.movope.game.piece.PieceType
 import spock.lang.Specification
 
 class ChessBoardTest extends Specification {
@@ -15,9 +13,9 @@ class ChessBoardTest extends Specification {
 
     def "you get the right piece for a specific square"() {
         expect:
-        board.getPieceAt("A1") instanceof Rook
-        board.getPieceAt("A2") instanceof Pawn
-        board.getPieceAt("B1") instanceof Knight
+        board.getPieceAt("A1").getPieceType() == PieceType.ROOK
+        board.getPieceAt("A2").getPieceType() == PieceType.PAWN
+        board.getPieceAt("B1").getPieceType() == PieceType.KNIGHT
     }
 
     def "correct number of peaces is created"() {

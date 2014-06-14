@@ -5,32 +5,37 @@ import de.movope.game.Color;
 import java.awt.*;
 import java.util.List;
 
-public interface Piece {
 
-    public String printIdentifier();
-    public Color getColor();
-    public List<Point> getDirections();
-    int getMaximumMoves();
 
-    public static Piece NULL = new Piece() {
-        @Override
-        public String printIdentifier() {
-            return "-";
-        }
+public class Piece {
 
-        @Override
-        public Color getColor() {
-            return null;
-        }
+    PieceType pieceType;
+    Color color;
 
-        @Override
-        public List<Point> getDirections() {
-            return null;
-        }
+    public Piece(PieceType pieceType, Color color) {
+        this.pieceType = pieceType;
+        this.color = color;
+    }
 
-        @Override
-        public int getMaximumMoves() {
-            return 0;
-        }
-    };
+    public static final Piece NULL = new Piece(PieceType.NULL, Color.UNDEFINED);
+
+    public String printIdentifier() {
+        return pieceType.print();
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public List<Point> getDirections() {
+        return pieceType.getDirections();
+    }
+
+    public int getMaximumMoves() {
+        return pieceType.getMaximumMoves();
+    }
+
+    public PieceType getPieceType() {
+        return pieceType ;
+    }
 }

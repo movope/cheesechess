@@ -1,7 +1,7 @@
 package de.movope.game;
 
-import de.movope.game.piece.Pawn;
 import de.movope.game.piece.Piece;
+import de.movope.game.piece.PieceType;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -15,10 +15,6 @@ public class MoveEvaluator {
     private int maximumMoves;
     private Color color;
 
-    private MoveEvaluator(ChessBoard board) {
-        this.board = board;
-    }
-
     public MoveEvaluator(List<Point> directions, int maximumMoves, Color color, boolean forPawn) {
         this.directions = directions;
         this.maximumMoves = maximumMoves;
@@ -26,29 +22,11 @@ public class MoveEvaluator {
         this.forPawn = forPawn;
     }
 
-    public static MoveEvaluator with(ChessBoard board) {
-        return new MoveEvaluator(board);
-    }
-
     public static MoveEvaluator forPiece(Piece piece) {
-        if (piece instanceof Pawn) {
-            return createForPawn(piece);
-        }
-        return createFor(piece);
-    }
-
-    private static MoveEvaluator createFor(Piece piece) {
         return new MoveEvaluator(piece.getDirections(),
-                        piece.getMaximumMoves(),
-                        piece.getColor(),
-                        false);
-    }
-
-    private static MoveEvaluator createForPawn(Piece pawn) {
-        return new MoveEvaluator(pawn.getDirections(),
-                                pawn.getMaximumMoves(),
-                                pawn.getColor(),
-                                true);
+                piece.getMaximumMoves(),
+                piece.getColor(),
+                piece.getPieceType() == PieceType.PAWN);
     }
 
     public MoveEvaluator on(ChessBoard board) {
@@ -58,10 +36,19 @@ public class MoveEvaluator {
 
     public MoveEvaluation analyse(Square square) {
         final MoveEvaluation.Builder builder = MoveEvaluation.Builder.startAt(square);
+
+        if (forPawn) {
+            if (color == Color.WHITE) {
+                directions = Arrays.asList(new Point(0, 1));
+            } else {
+                directions = Arrays.asList(new Point(0, -1));
+            }
+        }
+
         directions.stream()
-                  .map(dir -> possibleMoves(dir, square))
-                  .forEach(result -> builder.addMoves(result.getMoves())
-                                            .addAttacks(result.getAttacks()));
+                .map(dir -> possibleMoves(dir, square))
+                .forEach(result -> builder.addMoves(result.getMoves())
+                        .addAttacks(result.getAttacks()));
 
         return builder.create();
     }
@@ -104,43 +91,9 @@ public class MoveEvaluator {
         }
         List<Point> attackDirections = Arrays.asList(new Point(-1, dir.y), new Point(1, dir.y));
         attackDirections.stream().map(direction -> ((Square) start.clone()).move(direction.x, direction.y))
-                                .filter(attack -> board.occupiedFromEnemy(attack, color.invert()))
-                                .forEach(result::addPossibleAttack);
+                .filter(attack -> board.occupiedFromEnemy(attack, color.invert()))
+                .forEach(result::addPossibleAttack);
 
         return result;
-    }
-
-    public static class Builder {
-
-        private List<Point> directions;
-        private int maximumMoves;
-        private Color color;
-        private boolean forPawn = false;
-
-        public static Builder forDirections(List<Point> directions) {
-            Builder builder = new Builder();
-            builder.directions = directions;
-            return builder;
-        }
-
-        public Builder maximumMoves(int maximumMoves) {
-            this.maximumMoves = maximumMoves;
-            return this;
-        }
-
-        public Builder pieceColor(Color color) {
-            this.color = color;
-            return this;
-        }
-
-        public Builder forPawn() {
-            this.forPawn = true;
-            return this;
-        }
-
-        public MoveEvaluator create() {
-            return new MoveEvaluator(directions, maximumMoves, color, forPawn);
-        }
-
     }
 }

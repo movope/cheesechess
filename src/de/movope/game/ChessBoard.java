@@ -1,7 +1,8 @@
 package de.movope.game;
 
 
-import de.movope.game.piece.*;
+import de.movope.game.piece.Piece;
+import de.movope.game.piece.PieceType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -71,14 +72,14 @@ public class ChessBoard {
 
     private void initPieces(Color color) {
         int row = (color == Color.WHITE) ? 1 : 8;
-        pieces.put("A" + row, new Rook(color));
-        pieces.put("H" + row, new Rook(color));
-        pieces.put("B" + row, new Knight(color));
-        pieces.put("G" + row, new Knight(color));
-        pieces.put("C" + row, new Bishop(color));
-        pieces.put("F" + row, new Bishop(color));
-        pieces.put("D" + row, new Queen(color));
-        pieces.put("E" + row, new King(color));
+        pieces.put("A" + row, new Piece(PieceType.ROOK, color));
+        pieces.put("H" + row, new Piece(PieceType.ROOK, color));
+        pieces.put("B" + row, new Piece(PieceType.KNIGHT, color));
+        pieces.put("G" + row, new Piece(PieceType.KNIGHT, color));
+        pieces.put("C" + row, new Piece(PieceType.BISHOP, color));
+        pieces.put("F" + row, new Piece(PieceType.BISHOP, color));
+        pieces.put("D" + row, new Piece(PieceType.QUEEN, color));
+        pieces.put("E" + row, new Piece(PieceType.KING, color));
 
         if (color == Color.WHITE) {
             row++;
@@ -88,7 +89,7 @@ public class ChessBoard {
 
         String[] files = {"A", "B", "C", "D", "E", "F", "G", "H"};
         for (int i = 0; i < 8; i++) {
-            pieces.put(files[i] + row, new Pawn(color));
+            pieces.put(files[i] + row, new Piece(PieceType.PAWN, color));
         }
 
     }
