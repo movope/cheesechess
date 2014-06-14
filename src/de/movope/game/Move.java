@@ -29,8 +29,7 @@ public class Move {
 
     @Override
     public String toString() {
-        return "Move{" + from +
-                " to=" + to + "}";
+        return "{" + from + "->" + to + "}";
     }
 
     @Override
