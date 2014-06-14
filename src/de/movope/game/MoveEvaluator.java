@@ -1,5 +1,8 @@
 package de.movope.game;
 
+import de.movope.game.piece.Pawn;
+import de.movope.game.piece.Piece;
+
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
@@ -27,23 +30,29 @@ public class MoveEvaluator {
         return new MoveEvaluator(board);
     }
 
-    public MoveEvaluator forPawn() {
-        forPawn = true;
-        return this;
+    public static MoveEvaluator forPiece(Piece piece) {
+        if (piece instanceof Pawn) {
+            return createForPawn(piece);
+        }
+        return createFor(piece);
     }
 
-    public  MoveEvaluator forDirections(List<Point> directions) {
-        this.directions = directions;
-        return this;
+    private static MoveEvaluator createFor(Piece piece) {
+        return new MoveEvaluator(piece.getDirections(),
+                        piece.getMaximumMoves(),
+                        piece.getColor(),
+                        false);
     }
 
-    public MoveEvaluator maximumMoves(int maximumMoves) {
-        this.maximumMoves = maximumMoves;
-        return this;
+    private static MoveEvaluator createForPawn(Piece pawn) {
+        return new MoveEvaluator(pawn.getDirections(),
+                                pawn.getMaximumMoves(),
+                                pawn.getColor(),
+                                true);
     }
 
-    public MoveEvaluator pieceColor(Color color) {
-        this.color = color;
+    public MoveEvaluator on(ChessBoard board) {
+        this.board = board;
         return this;
     }
 
@@ -99,11 +108,6 @@ public class MoveEvaluator {
                                 .forEach(result::addPossibleAttack);
 
         return result;
-    }
-
-    public MoveEvaluator on(ChessBoard board) {
-        this.board = board;
-        return this;
     }
 
     public static class Builder {

@@ -26,8 +26,7 @@ class RookTest extends Specification {
 
     def "correct targets for rook"() {
         when:
-        def piece = board.getPieceAt("C5")
-        def evaluation = piece.getMoveEvaluationFor(board, Square.create("C5"))
+        def evaluation = board.getMoveEvaluationFor(Square.create("C5"))
 
         then:
         evaluation.possibleTargets().size() == 9

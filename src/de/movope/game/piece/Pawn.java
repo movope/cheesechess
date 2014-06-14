@@ -37,6 +37,20 @@ public class Pawn implements Piece {
     }
 
     @Override
+    public List<Point> getDirections() {
+        if (color == de.movope.game.Color.WHITE) {
+            return Arrays.asList(new Point(0, 1));
+        } else {
+            return Arrays.asList(new Point(0, -1));
+        }
+    }
+
+    @Override
+    public int getMaximumMoves() {
+        return 2;
+    }
+
+    @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
         return evaluator.on(board).analyse(square);
     }

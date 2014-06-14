@@ -12,8 +12,7 @@ class MoveEvaluatorTest extends Specification {
 
     def "when entering a board and a position, you return a MoveEvaluationResult"() {
         when:
-        def piece = board.getPieceAt("A2")
-        def result = piece.getMoveEvaluationFor(board, Square.create("A2"))
+        def result = board.getMoveEvaluationFor(Square.create("A2"))
 
         then:
         result != null
@@ -21,8 +20,7 @@ class MoveEvaluatorTest extends Specification {
 
     def "when you enter a square outside the board, return null"() {
         when:
-        def piece = board.getPieceAt("A9")
-        def result = piece.getMoveEvaluationFor(board, Square.create("A9"))
+        def result = board.getMoveEvaluationFor(Square.create("A9"))
 
         then:
         result == null
@@ -30,8 +28,7 @@ class MoveEvaluatorTest extends Specification {
 
     def "when you enter a square without piece, return null"() {
         when:
-        def piece = board.getPieceAt("A4")
-        def result = piece.getMoveEvaluationFor(board, Square.create("A4"))
+        def result = board.getMoveEvaluationFor(Square.create("A4"))
 
         then:
         result == null
@@ -39,8 +36,8 @@ class MoveEvaluatorTest extends Specification {
 
     def "when you enter D1 (queen), the result contains no moves and attacks"() {
         when:
-        def piece = board.getPieceAt("D1")
-        def result = piece.getMoveEvaluationFor(board, Square.create("D1"))
+        def result = board.getMoveEvaluationFor(Square.create("D1"))
+
 
         then:
         result.possibleTargets().size() == 0
@@ -53,8 +50,7 @@ class MoveEvaluatorTest extends Specification {
         setUpPeacesOnBoardForBishop()
 
         when:
-        def piece = board.getPieceAt("D4")
-        def result = piece.getMoveEvaluationFor(board, Square.create("D4"))
+        def result = board.getMoveEvaluationFor(Square.create("D4"))
 
         then:
         result.possibleTargets().size() == 6
@@ -65,8 +61,7 @@ class MoveEvaluatorTest extends Specification {
         setUpPeacesOnBoardForQueen()
 
         when:
-        def piece = board.getPieceAt("C4")
-        def result = piece.getMoveEvaluationFor(board, Square.create("C4"))
+        def result = board.getMoveEvaluationFor(Square.create("C4"))
 
         then:
         result.possibleTargets().size() == 15
@@ -78,8 +73,7 @@ class MoveEvaluatorTest extends Specification {
         setUpPeacesOnBoardForKnight();
 
         when:
-        def piece = board.getPieceAt("C4")
-        def result = piece.getMoveEvaluationFor(board, Square.create("C4"))
+        def result = board.getMoveEvaluationFor(Square.create("C4"))
 
         then:
         result.possibleTargets().size() == 5

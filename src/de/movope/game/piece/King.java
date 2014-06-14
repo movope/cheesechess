@@ -35,6 +35,17 @@ public class King implements Piece {
     }
 
     @Override
+    public List<Point> getDirections() {
+        return Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1),
+                new Point(0, 1), new Point(1, 0), new Point(-1, 0), new Point(0, -1));
+    }
+
+    @Override
+    public int getMaximumMoves() {
+        return 1;
+    }
+
+    @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
         return evaluator.on(board).analyse(square);
 

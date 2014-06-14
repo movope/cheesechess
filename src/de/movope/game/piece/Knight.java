@@ -34,6 +34,17 @@ public class Knight implements Piece {
     }
 
     @Override
+    public List<Point> getDirections() {
+        return Arrays.asList(new Point(2, 1), new Point(2, -1), new Point(-2, 1), new Point(-2, -1),
+                new Point(1, 2), new Point(1, -2), new Point(-1, 2), new Point(-1, -2));
+    }
+
+    @Override
+    public int getMaximumMoves() {
+        return 1;
+    }
+
+    @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
         return evaluator.on(board).analyse(square);
     }

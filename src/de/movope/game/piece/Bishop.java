@@ -33,6 +33,16 @@ public class Bishop implements Piece {
     }
 
     @Override
+    public List<Point> getDirections() {
+        return Arrays.asList(new Point(1, 1), new Point(-1, -1), new Point(1, -1), new Point(-1, 1));
+    }
+
+    @Override
+    public int getMaximumMoves() {
+        return 7;
+    }
+
+    @Override
     public MoveEvaluation getMoveEvaluationFor(ChessBoard board, Square square) {
         return evaluator.on(board).analyse(square);
     }
