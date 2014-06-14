@@ -1,7 +1,5 @@
 package de.movope.game;
 
-import de.movope.game.piece.Piece;
-
 import java.util.Map;
 
 public class ChessGameUtils {

@@ -1,6 +1,4 @@
-package de.movope.game.piece;
-
-import de.movope.game.Color;
+package de.movope.game;
 
 public class Piece {
 

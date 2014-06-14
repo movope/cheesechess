@@ -1,6 +1,4 @@
-package de.movope.game.piece;
-
-import de.movope.game.Direction;
+package de.movope.game;
 
 import java.util.Collections;
 import java.util.List;

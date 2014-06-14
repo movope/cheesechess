@@ -1,8 +1,5 @@
 package de.movope.game;
 
-import de.movope.game.piece.Piece;
-import de.movope.game.piece.PieceType;
-
 import java.util.Arrays;
 import java.util.List;
 

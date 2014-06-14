@@ -1,9 +1,6 @@
 package de.movope.game;
 
 
-import de.movope.game.piece.Piece;
-import de.movope.game.piece.PieceType;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

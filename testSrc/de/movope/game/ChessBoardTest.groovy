@@ -1,6 +1,5 @@
 package de.movope.game
 
-import de.movope.game.piece.PieceType
 import spock.lang.Specification
 
 class ChessBoardTest extends Specification {
