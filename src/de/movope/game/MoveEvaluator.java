@@ -19,9 +19,6 @@ public class MoveEvaluator {
 
     public MoveEvaluation analyse(Square square) {
         Piece piece = board.getPieceAt(square);
-        if (piece == Piece.NULL) {
-            return MoveEvaluation.empty();
-        }
         pieceType = piece.getPieceType();
         color = piece.getColor();
 
