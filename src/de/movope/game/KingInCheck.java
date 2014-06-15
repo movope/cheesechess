@@ -6,8 +6,12 @@ public class KingInCheck implements Predicate<ChessBoard> {
 
     private MoveEvaluation enemyMoves;
 
-    public KingInCheck(MoveEvaluation enemyMoves) {
+    private KingInCheck(MoveEvaluation enemyMoves) {
         this.enemyMoves = enemyMoves;
+    }
+
+    static public KingInCheck forEnemyMoves(MoveEvaluation enemyMoves) {
+        return new KingInCheck(enemyMoves);
     }
 
     @Override
