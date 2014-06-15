@@ -18,7 +18,7 @@ public class Player {
     }
 
     public void makeRandomMove() {
-        MoveEvaluation evaluation = MoveEvaluator.on(board).analyse(color);
+        MoveEvaluation evaluation = MoveEvaluatorForPieceSet.on(board).analyse(color);
         if (!evaluation.isMovePossible()) {
             gameOver();
             return;

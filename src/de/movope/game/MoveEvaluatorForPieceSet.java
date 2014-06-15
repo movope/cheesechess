@@ -3,18 +3,18 @@ package de.movope.game;
 import java.util.Arrays;
 import java.util.List;
 
-public class MoveEvaluator {
+public class MoveEvaluatorForPieceSet {
 
     private ChessBoard board;
     private PieceType pieceType;
     private Color color;
 
-    public MoveEvaluator(ChessBoard board) {
+    public MoveEvaluatorForPieceSet(ChessBoard board) {
         this.board = board;
     }
 
-    public static MoveEvaluator on(ChessBoard board) {
-        return new MoveEvaluator(board);
+    public static MoveEvaluatorForPieceSet on(ChessBoard board) {
+        return new MoveEvaluatorForPieceSet(board);
     }
 
     public MoveEvaluation analyse(Color color) {

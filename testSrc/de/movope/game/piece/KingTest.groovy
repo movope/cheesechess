@@ -22,7 +22,7 @@ class KingTest extends Specification {
 
     def "correct targets for king"() {
         when:
-        def evaluation = MoveEvaluator.on(board).analyse(Square.create("C4"))
+        def evaluation = MoveEvaluatorForPieceSet.on(board).analyse(Square.create("C4"))
 
         then:
         evaluation.possibleTargets().size() == 7
