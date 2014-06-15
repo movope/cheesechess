@@ -13,19 +13,18 @@ public class MoveEvaluatorForPieceSet {
     }
 
     public MoveEvaluation analyse(Color color) {
-        MoveEvaluation evaluation = getMoveEvaluationForAllPiecesOf(color);
+        MoveEvaluation evaluation = getMoveEvaluationForAllPiecesOf(board, color);
         evaluation.filterMovesBy(move -> !kingInCheckAfter(move, color));
         return evaluation;
     }
 
     private boolean kingInCheckAfter(Move move, Color color) {
-        board.move(move.getFrom(), move.getTo());
-        boolean checkmate = new KingInCheck(getMoveEvaluationForAllPiecesOf(color.invert())).test(board);
-        board.move(move.getTo(), move.getFrom());
-        return checkmate;
+        ChessBoard copy = new ChessBoard(board);
+        copy.move(move.getFrom(), move.getTo());
+        return new KingInCheck(getMoveEvaluationForAllPiecesOf(copy, color.invert())).test(copy);
     }
 
-    private MoveEvaluation getMoveEvaluationForAllPiecesOf(Color color) {
+    private MoveEvaluation getMoveEvaluationForAllPiecesOf(ChessBoard board, Color color) {
         MoveEvaluation evaluation = MoveEvaluation.empty();
         for (String square : board.getSquaresWithPiece(color)) {
             MoveEvaluation ofSquare = MoveEvaluatorForPiece.on(board).analyse(Square.create(square));
