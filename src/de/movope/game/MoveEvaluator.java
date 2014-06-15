@@ -64,7 +64,7 @@ public class MoveEvaluator {
         directions().stream()
                 .map(dir -> possibleMoves(dir, square))
                 .forEach(result -> forAllDirections.addMoves(result.possibleTargets())
-                        .addAttacks(result.possibleAttacks()));
+                                                   .addAttacks(result.possibleAttacks()));
 
         return forAllDirections.create();
     }
@@ -107,9 +107,10 @@ public class MoveEvaluator {
             }
         }
         List<Direction> attackDirections = Arrays.asList(Direction.create(-1, dir.y()), Direction.create(1, dir.y()));
-        attackDirections.stream().map(direction -> ((Square) start.clone()).move(direction.x(), direction.y()))
-                .filter(attack -> board.occupiedFromEnemy(attack, color.invert()))
-                .forEach(attack -> forOneDirection.addAttack(Move.create(start, attack)));
+        attackDirections.stream()
+                        .map(direction -> ((Square) start.clone()).move(direction.x(), direction.y()))
+                        .filter(attack -> board.occupiedFromEnemy(attack, color.invert()))
+                        .forEach(attack -> forOneDirection.addAttack(Move.create(start, attack)));
 
         return forOneDirection.create();
     }
