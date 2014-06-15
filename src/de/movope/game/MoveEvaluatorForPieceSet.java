@@ -21,7 +21,8 @@ public class MoveEvaluatorForPieceSet {
     private boolean kingInCheckAfter(Move move, Color color) {
         ChessBoard boardAfterMove = new ChessBoard(board);
         boardAfterMove.move(move.getFrom(), move.getTo());
-        return KingInCheck.forEnemyMoves(getMoveEvaluationForAllPiecesOf(boardAfterMove, color.invert()))
+        MoveEvaluation enemyMoves = getMoveEvaluationForAllPiecesOf(boardAfterMove, color.invert());
+        return KingInCheck.forEnemyMoves(enemyMoves)
                           .test(boardAfterMove);
     }
 
