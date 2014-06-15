@@ -18,14 +18,8 @@ public class MoveEvaluator {
     }
 
     public MoveEvaluation analyse(Color color) {
-        return analyse(color, true);
-    }
-
-    private MoveEvaluation analyse(Color color, boolean testKingInCheck) {
         MoveEvaluation evaluation = getMoveEvaluationForAllPiecesOf(color);
-        if (testKingInCheck) {
-            evaluation.filterMovesBy(move -> !kingInCheckAfter(move, color));
-        }
+        evaluation.filterMovesBy(move -> !kingInCheckAfter(move, color));
         return evaluation;
     }
 
@@ -38,7 +32,7 @@ public class MoveEvaluator {
     }
 
     private boolean kingInCheckFor(Color color) {
-        MoveEvaluation ofEnemy = analyse(color.invert(), false);
+        MoveEvaluation ofEnemy = getMoveEvaluationForAllPiecesOf(color.invert());
         for (Move move : ofEnemy.possibleAttacks()) {
             if (board.getPieceAt(move.getTo()).getPieceType() == PieceType.KING) {
                 return true;
