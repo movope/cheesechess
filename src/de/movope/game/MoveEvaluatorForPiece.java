@@ -30,7 +30,6 @@ public class MoveEvaluatorForPiece {
                         .addAttacks(result.possibleAttacks()));
 
         return forAllDirections.create();
-
     }
 
     private MoveEvaluation possibleMoves(Direction dir, Square start) {
@@ -89,6 +88,4 @@ public class MoveEvaluatorForPiece {
         }
         return pieceType.getDirections();
     }
-
-
 }
