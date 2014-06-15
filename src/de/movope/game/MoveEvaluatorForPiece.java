@@ -17,7 +17,7 @@ public class MoveEvaluatorForPiece {
         return new MoveEvaluatorForPiece(board);
     }
 
-    protected MoveEvaluation analyse(Square square) {
+    public MoveEvaluation analyse(Square square) {
         Piece piece = board.getPieceAt(square);
         pieceType = piece.getPieceType();
         color = piece.getColor();

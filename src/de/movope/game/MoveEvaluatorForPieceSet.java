@@ -21,7 +21,8 @@ public class MoveEvaluatorForPieceSet {
     private MoveEvaluation getMoveEvaluationForAllPiecesOf(Color color) {
         MoveEvaluation evaluation = MoveEvaluation.empty();
         for (String square : board.getSquaresWithPiece(color)) {
-            evaluation = evaluation.join(analyse(Square.create(square)));
+            MoveEvaluation ofSquare = MoveEvaluatorForPiece.on(board).analyse(Square.create(square));
+            evaluation = evaluation.join(ofSquare);
         }
         return evaluation;
     }
@@ -41,9 +42,5 @@ public class MoveEvaluatorForPieceSet {
         boolean checkmate = kingInCheckFor(color);
         board.move(move.getTo(), move.getFrom());
         return checkmate;
-    }
-
-    protected MoveEvaluation analyse(Square square) {
-        return MoveEvaluatorForPiece.on(board).analyse(square);
     }
 }
