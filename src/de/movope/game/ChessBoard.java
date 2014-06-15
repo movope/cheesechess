@@ -66,16 +66,6 @@ public class ChessBoard {
         initPieces(Color.BLACK);
     }
 
-    public Square getSquareOfKing(Color color) {
-        List<String> squares = getSquaresWithPiece(color);
-        for (String square: squares) {
-            if (getPieceAt(square).getPieceType() == PieceType.KING) {
-                return Square.create(square);
-            }
-        }
-        throw new IllegalArgumentException("There is no King!");
-    }
-
     private void initPieces(Color color) {
         int row = (color == Color.WHITE) ? 1 : 8;
         pieces.put("A" + row, new Piece(PieceType.ROOK, color));
