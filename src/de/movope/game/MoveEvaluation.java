@@ -9,13 +9,11 @@ public class MoveEvaluation {
 
     private Set<Move> moves = new HashSet<>();
     private Set<Move> attacks = new HashSet<>();
-    private Square start;
 
     private MoveEvaluation() {
     }
 
-    private MoveEvaluation(Square start, Set<Move> moves, Set<Move> attacks) {
-        this.start = start;
+    private MoveEvaluation(Set<Move> moves, Set<Move> attacks) {
         this.moves = moves;
         this.attacks = attacks;
     }
@@ -34,10 +32,6 @@ public class MoveEvaluation {
 
     public Set<Move> possibleAttacks() {
         return attacks;
-    }
-
-    public Square getStart() {
-        return start;
     }
 
     public MoveEvaluation join(MoveEvaluation evaluation) {
@@ -65,14 +59,8 @@ public class MoveEvaluation {
 
         private Set<Move> moves = new HashSet<>();
         private Set<Move> attacks = new HashSet<>();
-        private Square start;
 
-        private Builder(Square start) {
-            this.start = start;
-        }
-
-        public static Builder startAt(Square start) {
-            return new Builder(start);
+        public Builder() {
         }
 
         public Builder addMoves(Set<Move> moves) {
@@ -86,10 +74,7 @@ public class MoveEvaluation {
         }
 
         public MoveEvaluation create() {
-            if (start == null ) {
-                throw new IllegalArgumentException("Start-Square must be defined.");
-            }
-            return new MoveEvaluation(start, moves, attacks);
+            return new MoveEvaluation(moves, attacks);
         }
 
         public void addMove(Move move) {

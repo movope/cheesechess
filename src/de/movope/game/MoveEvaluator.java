@@ -59,7 +59,7 @@ public class MoveEvaluator {
         pieceType = piece.getPieceType();
         color = piece.getColor();
 
-        final MoveEvaluation.Builder forAllDirections = MoveEvaluation.Builder.startAt(square);
+        final MoveEvaluation.Builder forAllDirections = new MoveEvaluation.Builder();
 
         directions().stream()
                 .map(dir -> possibleMoves(dir, square))
@@ -73,7 +73,7 @@ public class MoveEvaluator {
         if (pieceType == PieceType.PAWN) {
             return possibleMovesForPawn(dir, start);
         }
-        final MoveEvaluation.Builder forOneDirection = MoveEvaluation.Builder.startAt(start);
+        final MoveEvaluation.Builder forOneDirection = new MoveEvaluation.Builder();
 
         Square target = (Square) start.clone();
 
@@ -92,7 +92,7 @@ public class MoveEvaluator {
     }
 
     private MoveEvaluation possibleMovesForPawn(Direction dir, Square start) {
-        final MoveEvaluation.Builder forOneDirection = MoveEvaluation.Builder.startAt(start);
+        final MoveEvaluation.Builder forOneDirection = new MoveEvaluation.Builder();
         Square target = (Square) start.clone();
 
         boolean firstMove = ((color == Color.BLACK && start.getFile() == 6)) ||
