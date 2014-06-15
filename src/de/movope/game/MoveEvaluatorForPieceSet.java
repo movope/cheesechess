@@ -25,6 +25,7 @@ public class MoveEvaluatorForPieceSet {
                           .test(boardAfterMove);
     }
 
+
     private MoveEvaluation getMoveEvaluationForAllPiecesOf(ChessBoard board, Color color) {
         MoveEvaluation evaluation = MoveEvaluation.empty();
         for (String square : board.getSquaresWithPiece(color)) {
