@@ -105,6 +105,19 @@ class MoveEvaluatorTest extends Specification {
         evaluation2.possibleTargets().size() == 31
     }
 
+
+    def "correct result of MoveEvaluation of all pieces for checkmate"() {
+        when:
+        board.move("F1", "H5")
+        board.move("F7", "F5")
+        board.move("D7", "D6")
+        ChessGameUtils.print(board)
+
+        then:
+        def evaluation = MoveEvaluator.on(board).analyse(Color.BLACK);
+        evaluation.possibleTargets().size() == 2
+    }
+
     def setUpPeacesOnBoardForBishop() {
         board.move("C1", "D4");
         board.move("E2", "E4");

@@ -2,6 +2,8 @@ package de.movope.game;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class MoveEvaluation {
 
@@ -45,6 +47,18 @@ public class MoveEvaluation {
         result.moves.addAll(moves);
         result.moves.addAll(evaluation.possibleTargets());
         return result;
+    }
+
+    public MoveEvaluation filterMovesBy(Predicate<Move> predicate) {
+        moves = moves.stream()
+                .filter(predicate)
+                .collect(Collectors.toSet());
+
+        attacks = attacks.stream()
+                .filter(predicate)
+                .collect(Collectors.toSet());
+
+        return this;
     }
 
     public static class Builder {

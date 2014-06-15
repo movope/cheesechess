@@ -18,14 +18,43 @@ public class MoveEvaluator {
     }
 
     public MoveEvaluation analyse(Color color) {
+        return analyse(color, true);
+    }
+
+    private MoveEvaluation analyse(Color color, boolean checkmateCheck) {
+        MoveEvaluation evaluation = getMoveEvaluationForAllPiecesOf(color);
+        if (checkmateCheck && kingInCheckFor(color)) {
+            evaluation.filterMovesBy(move -> !kingInCheckAfter(move, color));
+        }
+        return evaluation;
+    }
+
+    private MoveEvaluation getMoveEvaluationForAllPiecesOf(Color color) {
         MoveEvaluation evaluation = MoveEvaluation.empty();
-        for (String square: board.getSquaresWithPiece(color)) {
+        for (String square : board.getSquaresWithPiece(color)) {
             evaluation = evaluation.join(analyse(Square.create(square)));
         }
         return evaluation;
     }
 
-        public MoveEvaluation analyse(Square square) {
+    private boolean kingInCheckFor(Color color) {
+        MoveEvaluation ofEnemy = analyse(color.invert(), false);
+        for (Move move : ofEnemy.possibleAttacks()) {
+            if (board.getPieceAt(move.getTo()).getPieceType() == PieceType.KING) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean kingInCheckAfter(Move move, Color color) {
+        board.move(move.getFrom(), move.getTo());
+        boolean checkmate = kingInCheckFor(color);
+        board.move(move.getTo(), move.getFrom());
+        return checkmate;
+    }
+
+    protected MoveEvaluation analyse(Square square) {
         Piece piece = board.getPieceAt(square);
         pieceType = piece.getPieceType();
         color = piece.getColor();
@@ -35,7 +64,7 @@ public class MoveEvaluator {
         directions().stream()
                 .map(dir -> possibleMoves(dir, square))
                 .forEach(result -> forAllDirections.addMoves(result.possibleTargets())
-                                          .addAttacks(result.possibleAttacks()));
+                        .addAttacks(result.possibleAttacks()));
 
         return forAllDirections.create();
     }
