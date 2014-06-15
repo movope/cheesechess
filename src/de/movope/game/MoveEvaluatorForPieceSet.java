@@ -19,9 +19,9 @@ public class MoveEvaluatorForPieceSet {
     }
 
     private boolean kingInCheckAfter(Move move, Color color) {
-        ChessBoard copy = new ChessBoard(board);
-        copy.move(move.getFrom(), move.getTo());
-        return new KingInCheck(getMoveEvaluationForAllPiecesOf(copy, color.invert())).test(copy);
+        ChessBoard boardAfterMove = new ChessBoard(board);
+        boardAfterMove.move(move.getFrom(), move.getTo());
+        return new KingInCheck(getMoveEvaluationForAllPiecesOf(boardAfterMove, color.invert())).test(boardAfterMove);
     }
 
     private MoveEvaluation getMoveEvaluationForAllPiecesOf(ChessBoard board, Color color) {
