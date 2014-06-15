@@ -23,4 +23,9 @@ public class Piece {
     public PieceType getPieceType() {
         return pieceType ;
     }
+
+    @Override
+    public String toString() {
+        return "{" + pieceType + " " + color + '}';
+    }
 }
