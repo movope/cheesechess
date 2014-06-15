@@ -21,9 +21,9 @@ public class MoveEvaluator {
         return analyse(color, true);
     }
 
-    private MoveEvaluation analyse(Color color, boolean checkmateCheck) {
+    private MoveEvaluation analyse(Color color, boolean testKingInCheck) {
         MoveEvaluation evaluation = getMoveEvaluationForAllPiecesOf(color);
-        if (checkmateCheck && kingInCheckFor(color)) {
+        if (testKingInCheck) {
             evaluation.filterMovesBy(move -> !kingInCheckAfter(move, color));
         }
         return evaluation;

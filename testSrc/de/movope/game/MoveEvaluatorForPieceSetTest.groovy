@@ -50,4 +50,31 @@ class MoveEvaluatorForPieceSetTest extends Specification {
         def evaluation = MoveEvaluator.on(board).analyse(Color.BLACK);
         evaluation.possibleTargets().size() == 2
     }
+
+    def "evaluation contains no move after which the king is in check"() {
+        when:
+        board.move("C2", "C3")
+        board.move("F1", "C2")
+        board.move("F7", "F5")
+        board.move("D2", "D4")
+        board.move("D1", "D3")
+        board.move("F8", "E7")
+        ChessGameUtils.print(board)
+
+        then:
+        def evaluation1 = MoveEvaluator.on(board).analyse(Color.BLACK);
+        evaluation1.possibleTargets().size() == 27
+
+        when:
+        board.move("D3", "E3")
+        board.move("C2", "B3")
+        ChessGameUtils.print(board)
+
+        then:
+        def evaluation2 = MoveEvaluator.on(board).analyse(Color.BLACK);
+        !evaluation2.possibleTargets().contains(Move.create("E8","F7"))
+        !evaluation2.possibleTargets().contains(Move.create("E7","D6"))
+        !evaluation2.possibleTargets().contains(Move.create("E7","C6"))
+        evaluation2.possibleTargets().size() == 18
+    }
 }
