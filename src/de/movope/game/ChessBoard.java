@@ -10,6 +10,14 @@ public class ChessBoard {
 
     Map<String, Piece> pieces = new HashMap<>();
 
+    public ChessBoard() {}
+
+    public ChessBoard(ChessBoard board) {
+        for (Map.Entry<String, Piece> entry: board.pieces.entrySet()) {
+            pieces.put(entry.getKey(), entry.getValue());
+        }
+    }
+
     public List<String> getSquaresWithPiece(Color color) {
         return pieces.entrySet()
                 .stream()

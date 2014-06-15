@@ -22,4 +22,16 @@ class ChessBoardTest extends Specification {
         board.getSquaresWithPiece(Color.WHITE).size() == 16
         board.getSquaresWithPiece(Color.BLACK).size() == 16
     }
+
+    def "copy constructor works"() {
+        given:
+        ChessBoard copy = new ChessBoard(board)
+
+        when:
+        copy.move("A2", "A4");
+
+        then:
+        copy.getPieceAt("A2").getPieceType() == PieceType.NULL
+        board.getPieceAt("A2").getPieceType() == PieceType.PAWN
+    }
 }
