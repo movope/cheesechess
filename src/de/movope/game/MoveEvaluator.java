@@ -3,19 +3,19 @@ package de.movope.game;
 import java.util.Arrays;
 import java.util.List;
 
-public class MoveEvaluatorForPiece {
+public class MoveEvaluator {
 
     private ChessBoard board;
     private PieceType pieceType;
     private Color color;
     private boolean considerKingInCheck = false;
 
-    private MoveEvaluatorForPiece(ChessBoard board) {
+    private MoveEvaluator(ChessBoard board) {
         this.board = board;
     }
 
-    public static MoveEvaluatorForPiece on(ChessBoard board) {
-        return new MoveEvaluatorForPiece(board);
+    public static MoveEvaluator on(ChessBoard board) {
+        return new MoveEvaluator(board);
     }
 
     public MoveEvaluation analyse(Color color) {
@@ -31,7 +31,7 @@ public class MoveEvaluatorForPiece {
         return result;
     }
 
-    public MoveEvaluatorForPiece considerKingInCheck() {
+    public MoveEvaluator considerKingInCheck() {
         this.considerKingInCheck = true;
         return this;
     }

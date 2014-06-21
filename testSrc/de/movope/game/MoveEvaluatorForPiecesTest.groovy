@@ -12,7 +12,7 @@ class MoveEvaluatorForPiecesTest extends Specification {
 
     def "when entering a board and a position, you return a empty MoveEvaluationResult"() {
         when:
-        def result = MoveEvaluatorForPiece.on(board).analyse(Square.create("A2"))
+        def result = MoveEvaluator.on(board).analyse(Square.create("A2"))
 
         then:
         result != null
@@ -20,7 +20,7 @@ class MoveEvaluatorForPiecesTest extends Specification {
 
     def "when you enter a square outside the board, return empty MoveEvaluation"() {
         when:
-        def result = MoveEvaluatorForPiece.on(board).analyse(Square.create("A9"))
+        def result = MoveEvaluator.on(board).analyse(Square.create("A9"))
 
         then:
         result.isMovePossible() == false
@@ -28,7 +28,7 @@ class MoveEvaluatorForPiecesTest extends Specification {
 
     def "when you enter a square without piece, return null"() {
         when:
-        def result = MoveEvaluatorForPiece.on(board).analyse(Square.create("A4"))
+        def result = MoveEvaluator.on(board).analyse(Square.create("A4"))
 
         then:
         result.isMovePossible() == false
@@ -36,7 +36,7 @@ class MoveEvaluatorForPiecesTest extends Specification {
 
     def "when you enter D1 (queen), the result contains no moves and attacks"() {
         when:
-        def result = MoveEvaluatorForPiece.on(board).analyse(Square.create("D1"))
+        def result = MoveEvaluator.on(board).analyse(Square.create("D1"))
 
         then:
         result.isMovePossible() == false
@@ -48,7 +48,7 @@ class MoveEvaluatorForPiecesTest extends Specification {
         setUpPeacesOnBoardForBishop()
 
         when:
-        def result = MoveEvaluatorForPiece.on(board).analyse(Square.create("D4"))
+        def result = MoveEvaluator.on(board).analyse(Square.create("D4"))
 
         then:
         result.possibleTargets().size() == 6
@@ -59,7 +59,7 @@ class MoveEvaluatorForPiecesTest extends Specification {
         setUpPeacesOnBoardForQueen()
 
         when:
-        def result = MoveEvaluatorForPiece.on(board).analyse(Square.create("C4"))
+        def result = MoveEvaluator.on(board).analyse(Square.create("C4"))
 
         then:
         result.possibleTargets().size() == 15
@@ -71,7 +71,7 @@ class MoveEvaluatorForPiecesTest extends Specification {
         setUpPeacesOnBoardForKnight();
 
         when:
-        def result = MoveEvaluatorForPiece.on(board).analyse(Square.create("C4"))
+        def result = MoveEvaluator.on(board).analyse(Square.create("C4"))
 
         then:
         result.possibleTargets().size() == 5

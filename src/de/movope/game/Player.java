@@ -18,7 +18,7 @@ public class Player {
     }
 
     public void makeRandomMove() {
-        MoveEvaluation evaluation = MoveEvaluatorForPiece.on(board).considerKingInCheck().analyse(Color.BLACK);
+        MoveEvaluation evaluation = MoveEvaluator.on(board).considerKingInCheck().analyse(Color.BLACK);
         if (!evaluation.isMovePossible()) {
             gameOver();
             return;

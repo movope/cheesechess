@@ -15,7 +15,7 @@ class MoveEvaluatorForPieceSetTest extends Specification {
             ChessGameUtils.print(board)
 
             then:
-            def evaluation = MoveEvaluatorForPiece.on(board).considerKingInCheck().analyse(Color.BLACK);
+            def evaluation = MoveEvaluator.on(board).considerKingInCheck().analyse(Color.BLACK);
             evaluation.possibleTargets().size() == 20
     }
 
@@ -26,7 +26,7 @@ class MoveEvaluatorForPieceSetTest extends Specification {
         ChessGameUtils.print(board)
 
         then:
-        def evaluation = MoveEvaluatorForPiece.on(board).considerKingInCheck().analyse(Color.BLACK);
+        def evaluation = MoveEvaluator.on(board).considerKingInCheck().analyse(Color.BLACK);
         evaluation.possibleTargets().size() == 21
 
         when:
@@ -34,7 +34,7 @@ class MoveEvaluatorForPieceSetTest extends Specification {
         ChessGameUtils.print(board)
 
         then:
-        def evaluation2 = MoveEvaluatorForPiece.on(board).considerKingInCheck().analyse(Color.BLACK);
+        def evaluation2 = MoveEvaluator.on(board).considerKingInCheck().analyse(Color.BLACK);
         evaluation2.possibleTargets().size() == 31
     }
 
@@ -47,7 +47,7 @@ class MoveEvaluatorForPieceSetTest extends Specification {
         ChessGameUtils.print(board)
 
         then:
-        def evaluation = MoveEvaluatorForPiece.on(board).considerKingInCheck().analyse(Color.BLACK);
+        def evaluation = MoveEvaluator.on(board).considerKingInCheck().analyse(Color.BLACK);
         evaluation.possibleTargets().size() == 2
     }
 
@@ -62,7 +62,7 @@ class MoveEvaluatorForPieceSetTest extends Specification {
         ChessGameUtils.print(board)
 
         then:
-        def evaluation1 = MoveEvaluatorForPiece.on(board).considerKingInCheck().analyse(Color.BLACK);
+        def evaluation1 = MoveEvaluator.on(board).considerKingInCheck().analyse(Color.BLACK);
         evaluation1.possibleTargets().size() == 27
 
         when:
@@ -71,7 +71,7 @@ class MoveEvaluatorForPieceSetTest extends Specification {
         ChessGameUtils.print(board)
 
         then:
-        def evaluation2 = MoveEvaluatorForPiece.on(board).considerKingInCheck().analyse(Color.BLACK);
+        def evaluation2 = MoveEvaluator.on(board).considerKingInCheck().analyse(Color.BLACK);
         !evaluation2.possibleTargets().contains(Move.create("E8","F7"))
         !evaluation2.possibleTargets().contains(Move.create("E7","D6"))
         !evaluation2.possibleTargets().contains(Move.create("E7","C6"))

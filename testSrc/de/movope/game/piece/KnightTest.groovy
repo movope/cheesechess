@@ -24,7 +24,7 @@ class KnightTest extends Specification {
 
     def "correct targets for knight"() {
         when:
-        def evaluation = MoveEvaluatorForPiece.on(board).analyse(Square.create("C4"))
+        def evaluation = MoveEvaluator.on(board).analyse(Square.create("C4"))
 
         then:
         evaluation.possibleTargets().contains(Move.create("C4", "B6"))
