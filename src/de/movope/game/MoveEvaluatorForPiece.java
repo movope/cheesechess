@@ -17,6 +17,14 @@ public class MoveEvaluatorForPiece {
         return new MoveEvaluatorForPiece(board);
     }
 
+    public MoveEvaluation analyse(Color color) {
+        MoveEvaluation result = MoveEvaluation.empty();
+        board.getSquaresWithPiece(color).stream()
+                .map(square -> analyse(Square.create(square)))
+                .forEach(result::addAll);
+        return result;
+    }
+
     public MoveEvaluation analyse(Square square) {
         Piece piece = board.getPieceAt(square);
         pieceType = piece.getPieceType();

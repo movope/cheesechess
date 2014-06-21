@@ -13,24 +13,15 @@ public class MoveEvaluatorForPieceSet {
     }
 
     public MoveEvaluation analyse(Color color) {
-        MoveEvaluation evaluation = getMoveEvaluationForAllPiecesOf(board, color);
+        MoveEvaluation evaluation = MoveEvaluatorForPiece.on(board).analyse(color);
         return evaluation.filterMovesBy(move -> !kingInCheckAfter(move, color));
     }
 
     private boolean kingInCheckAfter(Move move, Color color) {
         ChessBoard boardAfterMove = new ChessBoard(board);
         boardAfterMove.execute(move);
-        MoveEvaluation enemyMoves = getMoveEvaluationForAllPiecesOf(boardAfterMove, color.invert());
+        MoveEvaluation enemyMoves = MoveEvaluatorForPiece.on(boardAfterMove).analyse(color.invert());
         return KingInCheck.forEnemyMoves(enemyMoves)
                           .test(boardAfterMove);
-    }
-
-
-    private MoveEvaluation getMoveEvaluationForAllPiecesOf(ChessBoard board, Color color) {
-        MoveEvaluation result = MoveEvaluation.empty();
-        board.getSquaresWithPiece(color).stream()
-                    .map(square -> MoveEvaluatorForPiece.on(board).analyse(Square.create(square)))
-                    .forEach(result::addAll);
-        return result;
     }
 }
