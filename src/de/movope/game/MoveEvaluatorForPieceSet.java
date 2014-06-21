@@ -18,9 +18,8 @@ public class MoveEvaluatorForPieceSet {
     }
 
     private boolean kingInCheckAfter(Move move, Color color) {
-        ChessBoard boardAfterMove = new ChessBoard(board);
-        boardAfterMove.execute(move);
         return new IsKingInCheck().forPlayer(color)
-                          .test(boardAfterMove);
+                          .on(board)
+                          .test(move);
     }
 }
