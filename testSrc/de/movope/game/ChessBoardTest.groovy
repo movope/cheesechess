@@ -28,7 +28,7 @@ class ChessBoardTest extends Specification {
         ChessBoard copy = new ChessBoard(board)
 
         when:
-        copy.move("A2", "A4");
+        copy.movePiece("A2", "A4");
 
         then:
         copy.getPieceAt("A2").getPieceType() == PieceType.NULL

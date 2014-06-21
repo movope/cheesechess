@@ -17,9 +17,9 @@ class PawnTest extends Specification {
     }
 
     def setUpPeacesOnBoard() {
-        board.move("A2", "A5")
-        board.move("D2", "D6")
-        board.move("E2", "E4")
+        board.movePiece("A2", "A5")
+        board.movePiece("D2", "D6")
+        board.movePiece("E2", "E4")
         ChessGameUtils.print(board);
     }
 

@@ -14,11 +14,11 @@ class KnightTest extends Specification {
     }
 
     def setUpPeacesOnBoard() {
-        board.move("B1", "C4");
-        board.move("A7", "A5");
-        board.move("D2", "H3");
-        board.move("D7", "D6");
-        board.move("E2", "E4");
+        board.movePiece("B1", "C4");
+        board.movePiece("A7", "A5");
+        board.movePiece("D2", "H3");
+        board.movePiece("D7", "D6");
+        board.movePiece("E2", "E4");
         ChessGameUtils.print(board);
     }
 

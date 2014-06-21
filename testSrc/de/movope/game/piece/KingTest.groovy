@@ -14,9 +14,9 @@ class KingTest extends Specification {
     }
 
     def setUpPeacesOnBoard() {
-        board.move("E1", "C4");
-        board.move("A8", "B5");
-        board.move("E2", "E4");
+        board.movePiece("E1", "C4");
+        board.movePiece("A8", "B5");
+        board.movePiece("E2", "E4");
         ChessGameUtils.print(board);
     }
 

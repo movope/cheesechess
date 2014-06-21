@@ -15,10 +15,10 @@ class RookTest extends Specification {
     }
 
     def setUpPeacesOnBoard() {
-        board.move("A1", "C5")
-        board.move("E2", "E4")
-        board.move("C2", "D4")
-        board.move("G7", "G5")
+        board.movePiece("A1", "C5")
+        board.movePiece("E2", "E4")
+        board.movePiece("C2", "D4")
+        board.movePiece("G7", "G5")
     }
 
 

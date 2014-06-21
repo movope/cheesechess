@@ -22,7 +22,7 @@ class MoveEvaluatorForPieceSetTest extends Specification {
     def "correct result of MoveEvaluation - setup 1"() {
         when:
         ChessGameUtils.print(board)
-        board.move("B7", "B6")
+        board.movePiece("B7", "B6")
         ChessGameUtils.print(board)
 
         then:
@@ -30,7 +30,7 @@ class MoveEvaluatorForPieceSetTest extends Specification {
         evaluation.possibleTargets().size() == 21
 
         when:
-        board.move("E7", "E6")
+        board.movePiece("E7", "E6")
         ChessGameUtils.print(board)
 
         then:
@@ -41,9 +41,9 @@ class MoveEvaluatorForPieceSetTest extends Specification {
 
     def "correct result of MoveEvaluation of all pieces for checkmate"() {
         when:
-        board.move("F1", "H5")
-        board.move("F7", "F5")
-        board.move("D7", "D6")
+        board.movePiece("F1", "H5")
+        board.movePiece("F7", "F5")
+        board.movePiece("D7", "D6")
         ChessGameUtils.print(board)
 
         then:
@@ -53,12 +53,12 @@ class MoveEvaluatorForPieceSetTest extends Specification {
 
     def "evaluation contains no move after which the king is in check"() {
         when:
-        board.move("C2", "C3")
-        board.move("F1", "C2")
-        board.move("F7", "F5")
-        board.move("D2", "D4")
-        board.move("D1", "D3")
-        board.move("F8", "E7")
+        board.movePiece("C2", "C3")
+        board.movePiece("F1", "C2")
+        board.movePiece("F7", "F5")
+        board.movePiece("D2", "D4")
+        board.movePiece("D1", "D3")
+        board.movePiece("F8", "E7")
         ChessGameUtils.print(board)
 
         then:
@@ -66,8 +66,8 @@ class MoveEvaluatorForPieceSetTest extends Specification {
         evaluation1.possibleTargets().size() == 27
 
         when:
-        board.move("D3", "E3")
-        board.move("C2", "B3")
+        board.movePiece("D3", "E3")
+        board.movePiece("C2", "B3")
         ChessGameUtils.print(board)
 
         then:
