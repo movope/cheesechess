@@ -2,11 +2,11 @@ package de.movope.game;
 
 import java.util.function.Predicate;
 
-public class KingInCheck implements Predicate<ChessBoard> {
+public class IsKingInCheck implements Predicate<ChessBoard> {
 
     private static Color color;
 
-    public KingInCheck() {
+    public IsKingInCheck() {
     }
 
     @Override
@@ -20,8 +20,8 @@ public class KingInCheck implements Predicate<ChessBoard> {
         return false;
     }
 
-    public KingInCheck forPlayer(Color color) {
-        KingInCheck.color = color;
+    public IsKingInCheck forPlayer(Color color) {
+        IsKingInCheck.color = color;
         return this;
     }
 }
