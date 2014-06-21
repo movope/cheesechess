@@ -34,13 +34,9 @@ public class MoveEvaluation {
         return attacks;
     }
 
-    public MoveEvaluation join(MoveEvaluation evaluation) {
-        MoveEvaluation result = MoveEvaluation.empty();
-        result.attacks.addAll(attacks);
-        result.attacks.addAll(evaluation.possibleAttacks());
-        result.moves.addAll(moves);
-        result.moves.addAll(evaluation.possibleTargets());
-        return result;
+    public void addAll(MoveEvaluation evaluation) {
+        attacks.addAll(evaluation.possibleAttacks());
+        moves.addAll(evaluation.possibleTargets());
     }
 
     public MoveEvaluation filterMovesBy(Predicate<Move> predicate) {

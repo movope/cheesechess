@@ -28,11 +28,10 @@ public class MoveEvaluatorForPieceSet {
 
 
     private MoveEvaluation getMoveEvaluationForAllPiecesOf(ChessBoard board, Color color) {
-        MoveEvaluation evaluation = MoveEvaluation.empty();
-        for (String square : board.getSquaresWithPiece(color)) {
-            MoveEvaluation ofSquare = MoveEvaluatorForPiece.on(board).analyse(Square.create(square));
-            evaluation = evaluation.join(ofSquare);
-        }
-        return evaluation;
+        MoveEvaluation result = MoveEvaluation.empty();
+        board.getSquaresWithPiece(color).stream()
+                    .map(square -> MoveEvaluatorForPiece.on(board).analyse(Square.create(square)))
+                    .forEach(result::addAll);
+        return result;
     }
 }
