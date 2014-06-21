@@ -7,7 +7,8 @@ public class IsKingInCheck implements Predicate<Move> {
     private static Color color;
     private ChessBoard board;
 
-    public IsKingInCheck() {
+    private IsKingInCheck(Color color) {
+        this.color = color;
     }
 
     @Override
@@ -23,9 +24,8 @@ public class IsKingInCheck implements Predicate<Move> {
         return false;
     }
 
-    public IsKingInCheck forPlayer(Color color) {
-        IsKingInCheck.color = color;
-        return this;
+    public static IsKingInCheck forPlayer(Color color) {
+        return new IsKingInCheck(color);
     }
 
     public IsKingInCheck on(ChessBoard board) {
