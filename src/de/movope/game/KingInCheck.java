@@ -4,23 +4,24 @@ import java.util.function.Predicate;
 
 public class KingInCheck implements Predicate<ChessBoard> {
 
-    private MoveEvaluation enemyMoves;
+    private static Color color;
 
-    private KingInCheck(MoveEvaluation enemyMoves) {
-        this.enemyMoves = enemyMoves;
-    }
-
-    static public KingInCheck forEnemyMoves(MoveEvaluation enemyMoves) {
-        return new KingInCheck(enemyMoves);
+    public KingInCheck() {
     }
 
     @Override
     public boolean test(ChessBoard board) {
+        MoveEvaluation enemyMoves = MoveEvaluatorForPiece.on(board).analyse(color.invert());
         for (Move attack : enemyMoves.possibleAttacks()) {
             if (board.getPieceAt(attack.to()).getPieceType() == PieceType.KING) {
                 return true;
             }
         }
         return false;
+    }
+
+    public KingInCheck forPlayer(Color color) {
+        KingInCheck.color = color;
+        return this;
     }
 }
