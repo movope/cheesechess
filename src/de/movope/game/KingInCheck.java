@@ -17,7 +17,7 @@ public class KingInCheck implements Predicate<ChessBoard> {
     @Override
     public boolean test(ChessBoard board) {
         for (Move attack : enemyMoves.possibleAttacks()) {
-            if (board.getPieceAt(attack.getTo()).getPieceType() == PieceType.KING) {
+            if (board.getPieceAt(attack.to()).getPieceType() == PieceType.KING) {
                 return true;
             }
         }

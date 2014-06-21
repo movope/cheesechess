@@ -19,11 +19,11 @@ public class Move {
         return new Move(from, to);
     }
 
-    public Square getFrom() {
+    public Square from() {
         return from;
     }
 
-    public Square getTo() {
+    public Square to() {
         return to;
     }
 

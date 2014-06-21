@@ -30,7 +30,7 @@ public class Player {
         } else {
             move = chooseOneOf(evaluation.possibleTargets());
         }
-        board.movePiece(move.getFrom(), move.getTo());
+        board.movePiece(move);
     }
 
     private void gameOver() {

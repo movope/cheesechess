@@ -36,11 +36,7 @@ public class ChessBoard {
     }
 
     public void movePiece(Move move) {
-        movePiece(move.getFrom().toString(), move.getTo().toString());
-    }
-
-    public void movePiece(Square from, Square to) {
-        movePiece(from.toString(), to.toString());
+        movePiece(move.from().toString(), move.to().toString());
     }
 
     public void movePiece(String from, String to) {
