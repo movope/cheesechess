@@ -14,8 +14,7 @@ public class MoveEvaluatorForPieceSet {
 
     public MoveEvaluation analyse(Color color) {
         MoveEvaluation evaluation = getMoveEvaluationForAllPiecesOf(board, color);
-        evaluation.filterMovesBy(move -> !kingInCheckAfter(move, color));
-        return evaluation;
+        return evaluation.filterMovesBy(move -> !kingInCheckAfter(move, color));
     }
 
     private boolean kingInCheckAfter(Move move, Color color) {
