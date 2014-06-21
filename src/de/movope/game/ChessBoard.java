@@ -35,6 +35,10 @@ public class ChessBoard {
         return getPieceAt(Square.create(square));
     }
 
+    public void movePiece(Move move) {
+        movePiece(move.getFrom().toString(), move.getTo().toString());
+    }
+
     public void movePiece(Square from, Square to) {
         movePiece(from.toString(), to.toString());
     }
