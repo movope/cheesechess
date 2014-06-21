@@ -8,6 +8,7 @@ public class MoveEvaluatorForPiece {
     private ChessBoard board;
     private PieceType pieceType;
     private Color color;
+    private boolean considerKingInCheck = false;
 
     private MoveEvaluatorForPiece(ChessBoard board) {
         this.board = board;
@@ -22,7 +23,17 @@ public class MoveEvaluatorForPiece {
         board.getSquaresWithPiece(color).stream()
                 .map(square -> analyse(Square.create(square)))
                 .forEach(result::addAll);
+        if(considerKingInCheck) {
+            result.filterMovesBy(move -> !IsKingInCheck.forPlayer(color)
+                    .on(board)
+                    .test(move));
+        }
         return result;
+    }
+
+    public MoveEvaluatorForPiece considerKingInCheck() {
+        this.considerKingInCheck = true;
+        return this;
     }
 
     public MoveEvaluation analyse(Square square) {

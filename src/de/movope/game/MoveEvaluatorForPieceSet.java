@@ -13,9 +13,8 @@ public class MoveEvaluatorForPieceSet {
     }
 
     public MoveEvaluation analyse(Color color) {
-        MoveEvaluation evaluation = MoveEvaluatorForPiece.on(board).analyse(color);
-        return evaluation.filterMovesBy(move -> !IsKingInCheck.forPlayer(color)
-                                                            .on(board)
-                                                            .test(move));
+        return MoveEvaluatorForPiece.on(board)
+                                    .considerKingInCheck()
+                                    .analyse(color);
     }
 }
