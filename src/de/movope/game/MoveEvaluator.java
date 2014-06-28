@@ -23,11 +23,13 @@ public class MoveEvaluator {
         board.getSquaresWithPiece(color).stream()
                 .map(square -> analyse(Square.create(square)))
                 .forEach(result::addAll);
+
         if(considerKingInCheck) {
             result.filterMovesBy(move -> !IsKingInCheck.forPlayer(color)
                     .on(board)
                     .test(move));
         }
+
         return result;
     }
 
