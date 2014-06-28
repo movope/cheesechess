@@ -1,4 +1,4 @@
-package main.java.de.movope.game;
+package de.movope.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
