@@ -26,21 +26,4 @@ public class ChessGame {
         System.out.println();
         System.out.println();
     }
-
-    public static void main(String[] arg) {
-        ChessGame game = new ChessGame();
-        game.init();
-
-        Player white = game.getWhitePlayer();
-        Player black = game.getBlackPlayer();
-
-        game.print();
-
-        for (int i = 0; i < 140 && !white.isGameOver() && !black.isGameOver(); i++) {
-            white.makeRandomMove();
-            game.print();
-            black.makeRandomMove();
-            game.print();
-        }
-    }
 }
