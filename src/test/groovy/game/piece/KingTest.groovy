@@ -1,6 +1,10 @@
 package de.movope.game.piece
 
-import de.movope.game.*
+import main.java.de.movope.game.ChessBoard
+import main.java.de.movope.game.ChessGameUtils
+import main.java.de.movope.game.Move
+import main.java.de.movope.game.MoveEvaluator
+import main.java.de.movope.game.Square
 import spock.lang.Specification
 
 class KingTest extends Specification {

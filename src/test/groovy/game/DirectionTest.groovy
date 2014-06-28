@@ -1,5 +1,6 @@
 package de.movope.game
 
+import main.java.de.movope.game.Direction
 import spock.lang.Specification
 
 class DirectionTest extends Specification {

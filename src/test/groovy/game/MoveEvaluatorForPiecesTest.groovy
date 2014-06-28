@@ -1,5 +1,9 @@
 package de.movope.game
 
+import main.java.de.movope.game.ChessBoard
+import main.java.de.movope.game.ChessGameUtils
+import main.java.de.movope.game.MoveEvaluator
+import main.java.de.movope.game.Square
 import spock.lang.Specification
 
 class MoveEvaluatorForPiecesTest extends Specification {

@@ -1,5 +1,8 @@
 package de.movope.game
 
+import main.java.de.movope.game.ChessBoard
+import main.java.de.movope.game.Color
+import main.java.de.movope.game.PieceType
 import spock.lang.Specification
 
 class ChessBoardTest extends Specification {

@@ -1,5 +1,6 @@
 package de.movope.game
 
+import main.java.de.movope.game.Square
 import spock.lang.Specification
 
 class SquareTest extends Specification {

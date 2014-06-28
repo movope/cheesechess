@@ -1,4 +1,4 @@
-package de.movope.game;
+package main.java.de.movope.game;
 
 import java.util.Map;
 
