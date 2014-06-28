@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-release" }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.3.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'groovy'
+
+jar {
+    baseName = 'gs-rest-service'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-release" }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    groovy "org.codehaus.groovy:groovy-all:1.8.6"
+    testCompile "org.spockframework:spock-core:0.6-groovy-1.8" }
+
+idea.module {
+    testSourceDirs += file('src/test/groovy')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
