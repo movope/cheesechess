@@ -17,6 +17,7 @@ class ChessBoardTest extends Specification {
         board.getPieceAt("B1").getPieceType() == PieceType.KNIGHT
     }
 
+
     def "correct number of peaces is created"() {
         expect:
         board.getSquaresWithPiece(Color.WHITE).size() == 16

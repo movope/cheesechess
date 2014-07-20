@@ -28,8 +28,11 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     groovy "org.codehaus.groovy:groovy-all:1.8.6"
-    testCompile "org.spockframework:spock-core:0.6-groovy-1.8" }
+    testCompile "org.spockframework:spock-core:0.6-groovy-1.8"
+    compile group: 'com.google.guava', name: 'guava', version: '17.0'
+}
 
 idea.module {
     testSourceDirs += file('src/test/groovy')

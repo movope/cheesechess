@@ -1,6 +1,8 @@
 package de.movope.game;
 
 
+import org.springframework.data.annotation.Id;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,11 +10,28 @@ import java.util.stream.Collectors;
 
 public class ChessBoard {
 
+    @Id
+    String id;
+
     Map<String, Piece> pieces = new HashMap<>();
 
-    public ChessBoard() {}
+    public ChessBoard() {
+    }
+
+    public ChessBoard(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+    public Map<String, Piece> getPieces() {
+        return pieces;
+    }
+
 
     public ChessBoard(ChessBoard board) {
+        this.id = board.id;
         for (Map.Entry<String, Piece> entry: board.pieces.entrySet()) {
             pieces.put(entry.getKey(), entry.getValue());
         }
