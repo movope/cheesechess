@@ -33,7 +33,7 @@ public class ChessGameUtils {
 
         for (Map.Entry<String, Piece> p : boardToPrint.pieces.entrySet()) {
             Square position = Square.create(p.getKey());
-            board[position.getRank()][position.getFile()] = p.getValue();
+            board[position.getFile()][position.getRank()] = p.getValue();
         }
         return board;
     }
