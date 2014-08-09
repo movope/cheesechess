@@ -86,7 +86,7 @@ public class ChessBoard {
     }
 
     private void initPieces(Color color) {
-        int row = (color == Color.WHITE) ? 8 : 1;
+        int row = (color == Color.WHITE) ? 1 : 8;
         pieces.put("A" + row, new Piece(PieceType.ROOK, color));
         pieces.put("H" + row, new Piece(PieceType.ROOK, color));
         pieces.put("B" + row, new Piece(PieceType.KNIGHT, color));
@@ -97,9 +97,9 @@ public class ChessBoard {
         pieces.put("E" + row, new Piece(PieceType.KING, color));
 
         if (color == Color.WHITE) {
-            row--;
-        } else {
             row++;
+        } else {
+            row--;
         }
 
         String[] files = {"A", "B", "C", "D", "E", "F", "G", "H"};
