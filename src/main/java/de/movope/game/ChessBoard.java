@@ -59,8 +59,6 @@ public class ChessBoard {
     }
 
     public void movePiece(String from, String to) {
-
-        System.out.println("Move: " + from + " -> " +to);
         if (pieces.get(to) != null) {
             System.out.println("One piece removed: " + pieces.get(to));
         }

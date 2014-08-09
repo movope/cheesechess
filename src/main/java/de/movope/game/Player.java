@@ -18,7 +18,8 @@ public class Player {
     }
 
     public void makeRandomMove() {
-        MoveEvaluation evaluation = MoveEvaluator.on(board)
+        ChessBoard boardCopy = new ChessBoard(board);
+        MoveEvaluation evaluation = MoveEvaluator.on(boardCopy)
                                                  .considerKingInCheck()
                                                  .analyse(color);
         if (!evaluation.isMovePossible()) {
@@ -44,5 +45,24 @@ public class Player {
         Move[] move = moves.toArray(new Move[moves.size()]);
         int rand = (int) (moves.size() * Math.random());
         return move[rand];
+    }
+
+    public Move getRandomMove(ChessBoard board) {
+        ChessBoard boardCopy = new ChessBoard(board);
+        MoveEvaluation evaluation = MoveEvaluator.on(boardCopy)
+                .considerKingInCheck()
+                .analyse(color);
+        if (!evaluation.isMovePossible()) {
+            gameOver();
+            return null;
+        }
+
+        Move move;
+        if (evaluation.possibleAttacks().size() > 0) {
+            move = chooseOneOf(evaluation.possibleAttacks());
+        } else {
+            move = chooseOneOf(evaluation.possibleTargets());
+        }
+        return move;
     }
 }
