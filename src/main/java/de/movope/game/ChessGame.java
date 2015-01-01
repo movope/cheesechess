@@ -14,21 +14,13 @@ public class ChessGame {
 
     private ChessGame(String id) {
         this.id = id;
-        board = new ChessBoard(id);
+        board = ChessBoard.createNew(id);
         white = new Player(board, Color.WHITE);
         black = new Player(board, Color.BLACK);
     }
 
     public static ChessGame createNew(String id) {
-        ChessGame game = new ChessGame(id);
-        game.init();
-        return game;
-    }
-
-
-
-    private void init() {
-        board.initPieces();
+        return new ChessGame(id);
     }
 
     public void makeRandomMoveForPlayer(Color color) {

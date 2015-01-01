@@ -22,19 +22,17 @@ public class ChessBoard {
         this.id = id;
     }
 
-    public String getId() {
-        return id;
-    }
-    public Map<String, Piece> getPieces() {
-        return pieces;
-    }
-
-
     public ChessBoard(ChessBoard board) {
         this.id = board.id;
         for (Map.Entry<String, Piece> entry: board.pieces.entrySet()) {
             pieces.put(entry.getKey(), entry.getValue());
         }
+    }
+
+    public static ChessBoard createNew(String id) {
+        ChessBoard board = new ChessBoard(id);
+        board.initPieces();
+        return board;
     }
 
     public List<String> getSquaresWithPiece(Color color) {
@@ -78,7 +76,7 @@ public class ChessBoard {
         return target.onBoard() && getPieceAt(target) == Piece.NULL;
     }
 
-    public void initPieces() {
+    private void initPieces() {
         initPieces(Color.WHITE);
         initPieces(Color.BLACK);
     }
