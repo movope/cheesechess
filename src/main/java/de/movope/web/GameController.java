@@ -26,6 +26,9 @@ public class GameController {
     @RequestMapping(value = "/game/{gameId}", method = RequestMethod.GET)
     public ChessBoardView getBoardFromGame(@PathVariable String gameId) {
         ChessGame game = gameRepository.findById(gameId);
+        if (game == null) {
+            throw new GameNotFoundException(gameId);
+        }
         checkNotNull(game, "Chessgame with id=" + gameId + " not found.");
         return new ChessBoardView(game.getBoard());
     }
@@ -50,4 +53,13 @@ public class GameController {
     public void delete() {
         gameRepository.deleteAll();
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    class GameNotFoundException extends RuntimeException {
+
+        public GameNotFoundException(String gameId) {
+            super("could not find game '" + gameId + "'.");
+        }
+    }
+
 }
