@@ -52,7 +52,7 @@ public class GameControllerRestTest {
 
         mockMvc.perform(put("/game/" + gameId)).andExpect(status().isCreated());
 
-        MvcResult result = mockMvc.perform(get("/game/" + gameId)).andExpect(status().isOk()).andReturn();
+        MvcResult result = mockMvc.perform(get("/game/{gameId}/board", gameId)).andExpect(status().isOk()).andReturn();
 
         ChessBoardView response = fromJson(result, ChessBoardView.class);
         assertEquals(new ChessBoardView(ChessBoard.createNew(gameId)), response);

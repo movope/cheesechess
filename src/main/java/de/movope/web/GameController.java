@@ -31,7 +31,7 @@ public class GameController {
     }
 
 
-    @RequestMapping(value = "/game/{gameId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/game/{gameId}/board", method = RequestMethod.GET)
     public ChessBoardView getBoardFromGame(@PathVariable String gameId) {
         ChessGame game = gameRepository.findById(gameId);
         if (game == null) {
