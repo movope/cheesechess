@@ -2,17 +2,38 @@ package de.movope.web;
 
 import de.movope.game.ChessBoard;
 import de.movope.game.ChessGameUtils;
-import de.movope.game.Piece;
+
+import java.util.Arrays;
 
 public class ChessBoardView {
 
-    Piece[][] boardView = new Piece[8][8];
+    PieceView[][] boardView = new PieceView[8][8];
 
-    public ChessBoardView(ChessBoard board) {
-        boardView = ChessGameUtils.getSquaresOfBoard(board);
+    public ChessBoardView() {
     }
 
-    public Piece[][] getBoardView() {
+    public ChessBoardView(ChessBoard board) {
+        boardView = ChessGameUtils.getViewOfBoard(board);
+    }
+
+    public PieceView[][] getBoardView() {
         return boardView;
+    }
+
+    public void setBoardView(PieceView[][] boardView) {
+        this.boardView = boardView;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChessBoardView)) return false;
+
+        return Arrays.deepEquals(boardView, ((ChessBoardView) o).boardView);
+    }
+
+    @Override
+    public int hashCode() {
+        return 55 + Arrays.hashCode(boardView);
     }
 }

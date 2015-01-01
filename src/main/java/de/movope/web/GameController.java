@@ -4,8 +4,11 @@ import de.movope.game.ChessGame;
 import de.movope.game.Color;
 import de.movope.game.Move;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -16,10 +19,15 @@ public class GameController {
     private ChessGameRepository gameRepository;
 
     @RequestMapping(value = "/game/{gameId}", method = RequestMethod.PUT)
-    public HttpStatus startNewGame(@PathVariable String gameId) {
+    public ResponseEntity<?> startNewGame(@PathVariable String gameId) {
         ChessGame game = ChessGame.createNew(gameId);
         gameRepository.save(game);
-        return HttpStatus.CREATED;
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setLocation(ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(gameId).toUri());
+        return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
     }
 
 

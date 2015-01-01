@@ -1,5 +1,7 @@
 package de.movope.game;
 
+import de.movope.web.PieceView;
+
 import java.util.Map;
 
 public class ChessGameUtils {
@@ -36,5 +38,25 @@ public class ChessGameUtils {
             board[7 - position.getFile()][position.getRank()] = p.getValue();
         }
         return board;
+    }
+
+    public static PieceView[][] getViewOfBoard(ChessBoard boardToPrint) {
+        PieceView[][] board = new PieceView[8][8];
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                board[i][j] = PieceView.NULL;
+            }
+        }
+
+        for (Map.Entry<String, Piece> p : boardToPrint.pieces.entrySet()) {
+            Square position = Square.create(p.getKey());
+            board[7 - position.getFile()][position.getRank()] = toPieceView(p.getValue());
+        }
+        return board;
+    }
+
+    private static PieceView toPieceView(Piece piece) {
+        return new PieceView(piece.getPieceType(), piece.getColor());
     }
 }
