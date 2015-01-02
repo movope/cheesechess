@@ -42,7 +42,7 @@ public class GameController {
     }
 
     @RequestMapping(value = "/game/{gameId}/move", method = RequestMethod.POST)
-    public HttpStatus makeMove(@PathVariable String gameId, @RequestBody MoveRessource moveRessource) {
+    public HttpStatus makeMove(@PathVariable String gameId, @RequestBody MoveResource moveRessource) {
         ChessGame game = gameRepository.findById(gameId);
         checkNotNull(game, "Chessgame with id=" + gameId + " not found.");
 

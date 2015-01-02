@@ -1,11 +1,11 @@
 package de.movope.web;
 
-public class MoveRessource {
+public class MoveResource {
 
     String from;
     String to;
 
-    public MoveRessource() {
+    public MoveResource() {
     }
 
     public void setFrom(String from) {
