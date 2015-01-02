@@ -1,4 +1,6 @@
-package de.movope.game;
+package de.movope.evaluation;
+
+import de.movope.game.*;
 
 import java.util.Arrays;
 import java.util.List;

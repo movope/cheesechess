@@ -1,4 +1,9 @@
-package de.movope.game;
+package de.movope.evaluation;
+
+import de.movope.game.ChessBoard;
+import de.movope.game.Color;
+import de.movope.game.Move;
+import de.movope.game.PieceType;
 
 import java.util.function.Predicate;
 

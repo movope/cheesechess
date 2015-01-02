@@ -1,4 +1,6 @@
-package de.movope.game;
+package de.movope.evaluation;
+
+import de.movope.game.Move;
 
 import java.util.Collection;
 import java.util.HashSet;

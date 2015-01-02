@@ -1,6 +1,7 @@
 package de.movope.game;
 
 
+import de.movope.evaluation.MoveEvaluator;
 import de.movope.util.ChessGameUtils;
 import org.springframework.data.annotation.Id;
 

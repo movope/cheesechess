@@ -3,7 +3,7 @@ package de.movope.game.piece
 import de.movope.game.ChessBoard
 import de.movope.util.ChessGameUtils
 import de.movope.game.Move
-import de.movope.game.MoveEvaluator
+import de.movope.evaluation.MoveEvaluator
 import de.movope.game.Square
 import spock.lang.Specification
 
