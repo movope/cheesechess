@@ -19,13 +19,6 @@ public class Player {
         gameOver = true;
     }
 
-    public Move getRandomMove(ChessBoard board) {
-        return MoveEvaluator.on(board)
-                .considerKingInCheck()
-                .analyse(color)
-                .selectMove();
-    }
-
     public void activateComputer() {
         isComputer = true;
     }
