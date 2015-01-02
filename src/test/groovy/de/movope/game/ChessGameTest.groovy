@@ -24,4 +24,17 @@ class ChessGameTest extends Specification {
         game.nextPlayerToMove() == Color.BLACK
     }
 
+    def "you can activate the computer for a color"() {
+        given:
+        ChessGame game = ChessGame.createNew("ben")
+
+        when:
+        game.activateComputeForColor(Color.BLACK)
+        game.execute(Move.create("A2", "A4"))
+        game.executeNextMoveForComputer();
+
+        then:
+        game.nextPlayerToMove() == Color.WHITE
+    }
+
 }

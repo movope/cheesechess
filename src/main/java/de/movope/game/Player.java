@@ -7,6 +7,7 @@ public class Player {
     private ChessBoard board;
     private Color color;
     private boolean gameOver = false;
+    private boolean isComputer = false;
 
     public Player(ChessBoard board, Color color) {
         this.board = board;
@@ -64,5 +65,13 @@ public class Player {
             move = chooseOneOf(evaluation.possibleTargets());
         }
         return move;
+    }
+
+    public void activateComputer() {
+        isComputer = true;
+    }
+
+    public boolean isControlledByComputer() {
+        return isComputer;
     }
 }

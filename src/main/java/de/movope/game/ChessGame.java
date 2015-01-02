@@ -3,22 +3,24 @@ package de.movope.game;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ChessGame {
 
     @Id
     private String id;
 
     ChessBoard board;
-    Player white;
-    Player black;
+    Map<Color, Player> players = new HashMap<>();
 
     Color colorOfNextMove = Color.WHITE;
 
     private ChessGame(String id) {
         this.id = id;
         board = ChessBoard.createNew(id);
-        white = new Player(board, Color.WHITE);
-        black = new Player(board, Color.BLACK);
+        players.put(Color.WHITE, new Player(board, Color.WHITE));
+        players.put(Color.BLACK, new Player(board, Color.BLACK));
     }
 
     public static ChessGame createNew(String id) {
@@ -26,14 +28,9 @@ public class ChessGame {
     }
 
     public void makeRandomMoveForPlayer(Color color) {
-        Move move = null;
-        if (color == Color.WHITE) {
-            move = white.getRandomMove(board);
-        } else if (color == Color.BLACK) {
-            move = black.getRandomMove(board);
-        }
+        Move move = players.get(color).getRandomMove(board);
         if (move != null) {
-            board.execute(move);
+            execute(move);
         }
     }
 
@@ -70,5 +67,15 @@ public class ChessGame {
 
     public Color nextPlayerToMove() {
         return colorOfNextMove;
+    }
+
+    public void activateComputeForColor(Color color) {
+        players.get(color).activateComputer();
+    }
+
+    public void executeNextMoveForComputer() {
+        if (players.get(nextPlayerToMove()).isControlledByComputer()) {
+            makeRandomMoveForPlayer(nextPlayerToMove());
+        }
     }
 }
