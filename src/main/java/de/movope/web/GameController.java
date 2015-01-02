@@ -52,7 +52,7 @@ public class GameController {
             throw new IllegalStateException("Move can not be executed!");
         }
         game.execute(move);
-        game.makeRandomMoveForPlayer(Color.BLACK);
+        game.executeNextMoveForComputer();
         gameRepository.save(game);
         return HttpStatus.CREATED;
     }
