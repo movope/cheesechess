@@ -12,4 +12,16 @@ class ChessGameTest extends Specification {
         game.nextPlayerToMove() == Color.WHITE
     }
 
+
+    def "after move of white player, black player has to execute next move"() {
+        given:
+        ChessGame game = ChessGame.createNew("ben")
+
+        when:
+        game.execute(Move.create("A2", "A4"))
+
+        then:
+        game.nextPlayerToMove() == Color.BLACK
+    }
+
 }

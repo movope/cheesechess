@@ -65,6 +65,7 @@ public class ChessGame {
 
     public void execute(Move move) {
         board.execute(move);
+        colorOfNextMove = colorOfNextMove.invert();
     }
 
     public Color nextPlayerToMove() {
