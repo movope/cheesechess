@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 
 class IsKingNotInCheck implements Predicate<Move> {
 
-    private static Color color;
+    private Color color;
     private ChessBoard board;
 
     private IsKingNotInCheck(Color color) {
