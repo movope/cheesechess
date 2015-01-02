@@ -2,12 +2,12 @@ package de.movope.game;
 
 import java.util.function.Predicate;
 
-public class IsKingInCheck implements Predicate<Move> {
+public class IsKingNotInCheck implements Predicate<Move> {
 
     private static Color color;
     private ChessBoard board;
 
-    private IsKingInCheck(Color color) {
+    private IsKingNotInCheck(Color color) {
         this.color = color;
     }
 
@@ -18,17 +18,17 @@ public class IsKingInCheck implements Predicate<Move> {
         MoveEvaluation enemyMoves = MoveEvaluator.on(boardAfterMove).ignoreKingInCheck().analyse(color.invert());
         for (Move attack : enemyMoves.possibleAttacks()) {
             if (boardAfterMove.getPieceAt(attack.to()).getPieceType() == PieceType.KING) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
-    public static IsKingInCheck forPlayer(Color color) {
-        return new IsKingInCheck(color);
+    public static IsKingNotInCheck forPlayer(Color color) {
+        return new IsKingNotInCheck(color);
     }
 
-    public IsKingInCheck on(ChessBoard board) {
+    public IsKingNotInCheck on(ChessBoard board) {
         this.board = board;
         return this;
     }

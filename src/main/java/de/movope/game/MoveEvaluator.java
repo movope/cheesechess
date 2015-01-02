@@ -25,9 +25,7 @@ public class MoveEvaluator {
                 .forEach(result::addAll);
 
         if(considerKingInCheck) {
-            result.filterMovesBy(move -> !IsKingInCheck.forPlayer(color)
-                    .on(board)
-                    .test(move));
+            result.filterMovesBy(IsKingNotInCheck.forPlayer(color).on(board));
         }
 
         return result;
