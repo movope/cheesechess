@@ -47,8 +47,9 @@ public class MoveEvaluator {
 
         directions().stream()
                 .map(dir -> possibleMoves(dir, square))
-                .forEach(result -> forAllDirections.addMoves(result.possibleTargets())
-                        .addAttacks(result.possibleAttacks()));
+                .forEach(result -> forAllDirections
+                                        .addMoves(result.possibleTargets())
+                                        .addAttacks(result.possibleAttacks()));
 
         return forAllDirections.create();
     }
@@ -79,12 +80,7 @@ public class MoveEvaluator {
         final MoveEvaluation.Builder forOneDirection = new MoveEvaluation.Builder();
         Square target = (Square) start.clone();
 
-        boolean firstMove = ((color == Color.BLACK && start.getFile() == 6)) ||
-                ((color == Color.WHITE) && start.getFile() == 1);
-
-        int maximumMoves = firstMove ? 2 : 1;
-
-        for (int i = 0; i < maximumMoves; i++) {
+        for (int i = 0; i < maximumMovesForPawn(start); i++) {
             target = target.move(dir.x(), dir.y());
             if (board.canPieceMoveTo(target)) {
                 forOneDirection.addMove(Move.create(start, target));
@@ -97,6 +93,15 @@ public class MoveEvaluator {
                 .forEach(attack -> forOneDirection.addAttack(Move.create(start, attack)));
 
         return forOneDirection.create();
+    }
+
+    private int maximumMovesForPawn(Square squareWithPawn) {
+        return hasPawnAlreadyMoved(squareWithPawn) ? 2 : 1;
+    }
+
+    private boolean hasPawnAlreadyMoved(Square start) {
+        return ((color == Color.BLACK && start.getFile() == 6)) ||
+                ((color == Color.WHITE) && start.getFile() == 1);
     }
 
     private List<Direction> directions() {
