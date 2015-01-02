@@ -30,9 +30,7 @@ public class ChessGame {
     }
 
     public void makeRandomMoveForPlayer(Color color) {
-        Move move = MoveEvaluator.on(board)
-                .analyse(color)
-                .selectMove();
+        Move move = MoveEvaluator.on(board).selectRandomMoveForColor(color);
 
         if (move != null) {
             execute(move);

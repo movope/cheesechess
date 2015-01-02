@@ -118,4 +118,9 @@ public class MoveEvaluator {
     public boolean isPlayerGameOver(Color color) {
         return ! analyse(color).isMovePossible();
     }
+
+    public Move selectRandomMoveForColor(Color color) {
+        MoveEvaluation evaluation = analyse(color);
+        return evaluation.selectMove();
+    }
 }
