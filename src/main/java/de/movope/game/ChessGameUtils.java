@@ -33,7 +33,7 @@ public class ChessGameUtils {
             }
         }
 
-        for (Map.Entry<String, Piece> p : boardToPrint.pieces.entrySet()) {
+        for (Map.Entry<String, Piece> p : boardToPrint.getPieces().entrySet()) {
             Square position = Square.create(p.getKey());
             board[7 - position.getFile()][position.getRank()] = p.getValue();
         }
@@ -49,7 +49,7 @@ public class ChessGameUtils {
             }
         }
 
-        for (Map.Entry<String, Piece> p : boardToPrint.pieces.entrySet()) {
+        for (Map.Entry<String, Piece> p : boardToPrint.getPieces().entrySet()) {
             Square position = Square.create(p.getKey());
             board[7 - position.getFile()][position.getRank()] = toPieceView(p.getValue());
         }

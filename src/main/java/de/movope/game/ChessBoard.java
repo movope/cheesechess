@@ -3,6 +3,7 @@ package de.movope.game;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ public class ChessBoard {
     @Id
     String id;
 
-    Map<String, Piece> pieces = new HashMap<>();
+    private Map<String, Piece> pieces = new HashMap<>();
 
     public ChessBoard() {
     }
@@ -33,6 +34,10 @@ public class ChessBoard {
         ChessBoard board = new ChessBoard(id);
         board.initPieces();
         return board;
+    }
+
+    public Map<String, Piece> getPieces() {
+        return Collections.unmodifiableMap(pieces);
     }
 
     public List<String> getSquaresWithPiece(Color color) {
@@ -104,5 +109,4 @@ public class ChessBoard {
         }
 
     }
-
 }
