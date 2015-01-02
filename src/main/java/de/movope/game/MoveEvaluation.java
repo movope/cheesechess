@@ -66,6 +66,10 @@ public class MoveEvaluation {
         return move[rand];
     }
 
+    public boolean contains(Move move) {
+        return (possibleTargets().contains(move) || possibleAttacks().contains(move));
+    }
+
     public static class Builder {
 
         private Set<Move> moves = new HashSet<>();

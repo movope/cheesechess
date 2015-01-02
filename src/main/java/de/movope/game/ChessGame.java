@@ -52,14 +52,7 @@ public class ChessGame {
         if (!(board.getPieceAt(move.from.toString()).getColor() == color)) {
             return false;
         }
-        MoveEvaluation evaluation = MoveEvaluator.on(board)
-                                                 .analyse(color);
-
-        if (evaluation.possibleTargets().contains(move) ||
-                evaluation.possibleAttacks().contains(move)) {
-            return true;
-        }
-        return false;
+        return MoveEvaluator.on(board).analyse(color).contains(move);
     }
 
     public void execute(Move move) {
