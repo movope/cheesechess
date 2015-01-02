@@ -1,5 +1,6 @@
 package de.movope.game
 
+import de.movope.util.ChessGameUtils
 import spock.lang.Specification
 
 class MoveEvaluatorForPiecesTest extends Specification {

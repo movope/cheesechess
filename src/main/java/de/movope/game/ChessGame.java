@@ -1,6 +1,7 @@
 package de.movope.game;
 
 
+import de.movope.util.ChessGameUtils;
 import org.springframework.data.annotation.Id;
 
 import java.util.HashMap;

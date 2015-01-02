@@ -1,7 +1,7 @@
 package de.movope.web;
 
 import de.movope.game.ChessBoard;
-import de.movope.game.ChessGameUtils;
+import de.movope.util.ChessGameUtils;
 
 import java.util.Arrays;
 
