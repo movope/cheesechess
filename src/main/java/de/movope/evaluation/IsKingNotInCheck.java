@@ -7,7 +7,7 @@ import de.movope.game.PieceType;
 
 import java.util.function.Predicate;
 
-public class IsKingNotInCheck implements Predicate<Move> {
+class IsKingNotInCheck implements Predicate<Move> {
 
     private static Color color;
     private ChessBoard board;
