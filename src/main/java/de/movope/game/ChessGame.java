@@ -67,13 +67,10 @@ public class ChessGame {
     }
 
     private void checkIfGameOver() {
-       if (! MoveEvaluator.on(board)
-                .considerKingInCheck()
-                .analyse(colorOfNextMove)
-                .isMovePossible()) {
+       if (MoveEvaluator.on(board)
+                        .isPlayerGameOver(colorOfNextMove)) {
             players.get(colorOfNextMove).gameOver();
         }
-
     }
 
     public Color nextPlayerToMove() {

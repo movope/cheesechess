@@ -109,4 +109,10 @@ public class MoveEvaluator {
         }
         return pieceType.getDirections();
     }
+
+    public boolean isPlayerGameOver(Color color) {
+        return ! considerKingInCheck()
+                .analyse(color)
+                .isMovePossible();
+    }
 }
