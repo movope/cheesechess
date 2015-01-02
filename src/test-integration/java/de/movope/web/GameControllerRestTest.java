@@ -25,7 +25,7 @@ public class GameControllerRestTest extends SystemTest {
     @Test
     public void Status404ReturnedIfGameDoesNotExist() throws Exception {
         String gameId = "notExisting";
-        mockMvc.perform(get("/game/{gameId}/board", gameId))
+        mockMvc.perform(get("/game/{id}/board", gameId))
                 .andExpect(status().isNotFound());
     }
 
@@ -33,7 +33,7 @@ public class GameControllerRestTest extends SystemTest {
     public void newGameCanBeStarted() throws Exception {
         String gameId = "ben";
 
-        mockMvc.perform(put("/game/" + gameId)).andExpect(status().isCreated());
+        mockMvc.perform(put("/game/{id}", gameId)).andExpect(status().isCreated());
 
         MvcResult result = mockMvc.perform(get("/game/{gameId}/board", gameId)).andExpect(status().isOk()).andReturn();
 
@@ -44,11 +44,11 @@ public class GameControllerRestTest extends SystemTest {
     @Test
     public void aValidMoveCanBeExecuted() throws Exception {
         String gameId = "ben";
-        mockMvc.perform(put("/game/" + gameId)).andExpect(status().isCreated());
+        mockMvc.perform(put("/game/{id}", gameId)).andExpect(status().isCreated());
 
         Move move = Move.create("A2", "A4");
 
-        mockMvc.perform(post("/game/{gameId}/move", gameId)
+        mockMvc.perform(post("/game/{id}/move", gameId)
                 .content(this.json(toResource(move)))
                 .contentType(contentType))
                 .andExpect(status().isOk());
@@ -56,7 +56,7 @@ public class GameControllerRestTest extends SystemTest {
         ChessBoard expected = ChessBoard.createNew("ben");
         expected.execute(move);
 
-        MvcResult result = mockMvc.perform(get("/game/{gameId}/board", gameId))
+        MvcResult result = mockMvc.perform(get("/game/{id}/board", gameId))
                 .andExpect(status().isOk())
                 .andReturn();
         ChessBoardView response = fromJson(result, ChessBoardView.class);
