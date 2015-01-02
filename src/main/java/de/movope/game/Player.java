@@ -1,7 +1,5 @@
 package de.movope.game;
 
-import java.util.Collection;
-
 public class Player {
 
     private Color color;
@@ -21,24 +19,11 @@ public class Player {
         gameOver = true;
     }
 
-    private Move chooseOneOf(Collection<Move> moves) {
-        Move[] move = moves.toArray(new Move[moves.size()]);
-        int rand = (int) (moves.size() * Math.random());
-        return move[rand];
-    }
-
     public Move getRandomMove(ChessBoard board) {
-        MoveEvaluation evaluation = MoveEvaluator.on(board)
+        return MoveEvaluator.on(board)
                 .considerKingInCheck()
-                .analyse(color);
-
-        Move move;
-        if (evaluation.possibleAttacks().size() > 0) {
-            move = chooseOneOf(evaluation.possibleAttacks());
-        } else {
-            move = chooseOneOf(evaluation.possibleTargets());
-        }
-        return move;
+                .analyse(color)
+                .selectMove();
     }
 
     public void activateComputer() {

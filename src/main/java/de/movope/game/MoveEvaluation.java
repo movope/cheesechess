@@ -1,5 +1,6 @@
 package de.movope.game;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -49,6 +50,20 @@ public class MoveEvaluation {
                 .collect(Collectors.toSet());
 
         return this;
+    }
+
+    public Move selectMove() {
+        if (possibleAttacks().size() > 0) {
+            return chooseOneOf(possibleAttacks());
+        } else {
+            return chooseOneOf(possibleTargets());
+        }
+    }
+
+    private Move chooseOneOf(Collection<Move> moves) {
+        Move[] move = moves.toArray(new Move[moves.size()]);
+        int rand = (int) (moves.size() * Math.random());
+        return move[rand];
     }
 
     public static class Builder {
