@@ -11,7 +11,7 @@ public class MoveEvaluator {
     private boolean considerKingInCheck = false;
 
     private MoveEvaluator(ChessBoard board) {
-        this.board = board;
+        this.board = new ChessBoard(board);
     }
 
     public static MoveEvaluator on(ChessBoard board) {

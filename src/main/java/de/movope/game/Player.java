@@ -4,37 +4,16 @@ import java.util.Collection;
 
 public class Player {
 
-    private ChessBoard board;
     private Color color;
     private boolean gameOver = false;
     private boolean isComputer = false;
 
-    public Player(ChessBoard board, Color color) {
-        this.board = board;
+    public Player(Color color) {
         this.color = color;
     }
 
     public boolean isGameOver() {
         return gameOver;
-    }
-
-    public void makeRandomMove() {
-        ChessBoard boardCopy = new ChessBoard(board);
-        MoveEvaluation evaluation = MoveEvaluator.on(boardCopy)
-                                                 .considerKingInCheck()
-                                                 .analyse(color);
-        if (!evaluation.isMovePossible()) {
-            gameOver();
-            return;
-        }
-
-        Move move;
-        if (evaluation.possibleAttacks().size() > 0) {
-            move = chooseOneOf(evaluation.possibleAttacks());
-        } else {
-            move = chooseOneOf(evaluation.possibleTargets());
-        }
-        board.execute(move);
     }
 
     private void gameOver() {
@@ -49,8 +28,7 @@ public class Player {
     }
 
     public Move getRandomMove(ChessBoard board) {
-        ChessBoard boardCopy = new ChessBoard(board);
-        MoveEvaluation evaluation = MoveEvaluator.on(boardCopy)
+        MoveEvaluation evaluation = MoveEvaluator.on(board)
                 .considerKingInCheck()
                 .analyse(color);
         if (!evaluation.isMovePossible()) {

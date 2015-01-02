@@ -19,8 +19,8 @@ public class ChessGame {
     private ChessGame(String id) {
         this.id = id;
         board = ChessBoard.createNew(id);
-        players.put(Color.WHITE, new Player(board, Color.WHITE));
-        players.put(Color.BLACK, new Player(board, Color.BLACK));
+        players.put(Color.WHITE, new Player(Color.WHITE));
+        players.put(Color.BLACK, new Player(Color.BLACK));
     }
 
     public static ChessGame createNew(String id) {
