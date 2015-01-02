@@ -96,10 +96,10 @@ public class MoveEvaluator {
     }
 
     private int maximumMovesForPawn(Square squareWithPawn) {
-        return hasPawnAlreadyMoved(squareWithPawn) ? 2 : 1;
+        return firstMoveForPawn(squareWithPawn) ? 2 : 1;
     }
 
-    private boolean hasPawnAlreadyMoved(Square start) {
+    private boolean firstMoveForPawn(Square start) {
         return ((color == Color.BLACK && start.getFile() == 6)) ||
                 ((color == Color.WHITE) && start.getFile() == 1);
     }
