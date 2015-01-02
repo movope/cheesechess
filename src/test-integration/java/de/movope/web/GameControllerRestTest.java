@@ -1,7 +1,7 @@
 package de.movope.web;
 
-import de.movope.game.ChessBoard;
-import de.movope.game.Move;
+import de.movope.domain.ChessBoard;
+import de.movope.domain.Move;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

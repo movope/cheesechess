@@ -1,4 +1,4 @@
-package de.movope.game
+package de.movope.domain
 
 import de.movope.evaluation.MoveEvaluator
 import de.movope.util.ChessGameUtils

@@ -1,4 +1,4 @@
-package de.movope.game
+package de.movope.domain
 
 import de.movope.util.ChessGameUtils
 import spock.lang.Specification

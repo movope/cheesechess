@@ -1,8 +1,8 @@
 package de.movope.web;
 
-import de.movope.game.ChessGame;
-import de.movope.game.Color;
-import de.movope.game.Move;
+import de.movope.domain.ChessGame;
+import de.movope.domain.Color;
+import de.movope.domain.Move;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

@@ -1,8 +1,8 @@
 package de.movope.util;
 
-import de.movope.game.ChessBoard;
-import de.movope.game.Piece;
-import de.movope.game.Square;
+import de.movope.domain.ChessBoard;
+import de.movope.domain.Piece;
+import de.movope.domain.Square;
 import de.movope.web.PieceView;
 
 import java.util.Map;

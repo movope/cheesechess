@@ -1,4 +1,4 @@
-package de.movope.game
+package de.movope.domain
 
 import spock.lang.Specification
 

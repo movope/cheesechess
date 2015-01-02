@@ -1,9 +1,9 @@
-package de.movope.game.piece
+package de.movope.domain.piece
 
-import de.movope.game.ChessBoard
+import de.movope.domain.ChessBoard
 import de.movope.util.ChessGameUtils
 import de.movope.evaluation.MoveEvaluator
-import de.movope.game.Square
+import de.movope.domain.Square
 import spock.lang.Specification
 
 class PawnTest extends Specification {

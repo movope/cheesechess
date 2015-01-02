@@ -1,7 +1,7 @@
 package de.movope.web;
 
-import de.movope.game.Color;
-import de.movope.game.PieceType;
+import de.movope.domain.Color;
+import de.movope.domain.PieceType;
 
 public class PieceView {
 
