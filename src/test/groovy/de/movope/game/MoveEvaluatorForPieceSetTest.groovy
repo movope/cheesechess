@@ -4,11 +4,7 @@ import spock.lang.Specification
 
 class MoveEvaluatorForPieceSetTest extends Specification {
 
-    ChessBoard board = new ChessBoard();
-
-    def setup() {
-        board.initPieces();
-    }
+    ChessBoard board = ChessBoard.createNew("ben");
 
     def "correct result of MoveEvaluation of all pieces at start"() {
             when:
