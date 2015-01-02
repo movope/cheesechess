@@ -12,6 +12,8 @@ public class ChessGame {
     Player white;
     Player black;
 
+    Color colorOfNextMove = Color.WHITE;
+
     private ChessGame(String id) {
         this.id = id;
         board = ChessBoard.createNew(id);
@@ -63,5 +65,9 @@ public class ChessGame {
 
     public void execute(Move move) {
         board.execute(move);
+    }
+
+    public Color nextPlayerToMove() {
+        return colorOfNextMove;
     }
 }
