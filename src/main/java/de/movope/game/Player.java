@@ -16,7 +16,7 @@ public class Player {
         return gameOver;
     }
 
-    private void gameOver() {
+    public void gameOver() {
         System.out.println(color + " lost! ");
         gameOver = true;
     }
@@ -31,10 +31,6 @@ public class Player {
         MoveEvaluation evaluation = MoveEvaluator.on(board)
                 .considerKingInCheck()
                 .analyse(color);
-        if (!evaluation.isMovePossible()) {
-            gameOver();
-            return null;
-        }
 
         Move move;
         if (evaluation.possibleAttacks().size() > 0) {

@@ -63,6 +63,17 @@ public class ChessGame {
     public void execute(Move move) {
         board.execute(move);
         colorOfNextMove = colorOfNextMove.invert();
+        checkIfGameOver();
+    }
+
+    private void checkIfGameOver() {
+       if (! MoveEvaluator.on(board)
+                .considerKingInCheck()
+                .analyse(colorOfNextMove)
+                .isMovePossible()) {
+            players.get(colorOfNextMove).gameOver();
+        }
+
     }
 
     public Color nextPlayerToMove() {
@@ -77,5 +88,14 @@ public class ChessGame {
         if (players.get(nextPlayerToMove()).isControlledByComputer()) {
             makeRandomMoveForPlayer(nextPlayerToMove());
         }
+    }
+
+    public Color colorOfWinningPlayer() {
+        for (Map.Entry<Color, Player>  entry : players.entrySet()) {
+            if (entry.getValue().isGameOver()) {
+                return entry.getKey().invert();
+            }
+        }
+        return Color.UNDEFINED;
     }
 }
