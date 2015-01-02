@@ -23,8 +23,9 @@ public class GameControllerRestTest extends SystemTest {
     }
 
     @Test
-    public void gameNotFound() throws Exception {
-        mockMvc.perform(get("/game/notexisting"))
+    public void Status404ReturnedIfGameDoesNotExist() throws Exception {
+        String gameId = "notExisting";
+        mockMvc.perform(get("/game/{gameId}/board", gameId))
                 .andExpect(status().isNotFound());
     }
 
