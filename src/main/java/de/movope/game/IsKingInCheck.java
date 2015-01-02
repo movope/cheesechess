@@ -15,7 +15,7 @@ public class IsKingInCheck implements Predicate<Move> {
     public boolean test(Move move) {
         ChessBoard boardAfterMove = new ChessBoard(board);
         boardAfterMove.execute(move);
-        MoveEvaluation enemyMoves = MoveEvaluator.on(boardAfterMove).analyse(color.invert());
+        MoveEvaluation enemyMoves = MoveEvaluator.on(boardAfterMove).ignoreKingInCheck().analyse(color.invert());
         for (Move attack : enemyMoves.possibleAttacks()) {
             if (boardAfterMove.getPieceAt(attack.to()).getPieceType() == PieceType.KING) {
                 return true;

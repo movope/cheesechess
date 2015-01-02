@@ -29,7 +29,6 @@ public class ChessGame {
 
     public void makeRandomMoveForPlayer(Color color) {
         Move move = MoveEvaluator.on(board)
-                .considerKingInCheck()
                 .analyse(color)
                 .selectMove();
 
@@ -54,8 +53,7 @@ public class ChessGame {
             return false;
         }
         MoveEvaluation evaluation = MoveEvaluator.on(board)
-                .considerKingInCheck()
-                .analyse(color);
+                                                 .analyse(color);
 
         if (evaluation.possibleTargets().contains(move) ||
                 evaluation.possibleAttacks().contains(move)) {

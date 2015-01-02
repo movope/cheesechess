@@ -8,7 +8,7 @@ public class MoveEvaluator {
     private ChessBoard board;
     private PieceType pieceType;
     private Color color;
-    private boolean considerKingInCheck = false;
+    private boolean considerKingInCheck = true;
 
     private MoveEvaluator(ChessBoard board) {
         this.board = new ChessBoard(board);
@@ -33,8 +33,8 @@ public class MoveEvaluator {
         return result;
     }
 
-    public MoveEvaluator considerKingInCheck() {
-        this.considerKingInCheck = true;
+    public MoveEvaluator ignoreKingInCheck() {
+        considerKingInCheck = false;
         return this;
     }
 
@@ -116,8 +116,6 @@ public class MoveEvaluator {
     }
 
     public boolean isPlayerGameOver(Color color) {
-        return ! considerKingInCheck()
-                .analyse(color)
-                .isMovePossible();
+        return ! analyse(color).isMovePossible();
     }
 }
