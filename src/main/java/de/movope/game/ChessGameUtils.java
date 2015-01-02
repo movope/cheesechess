@@ -11,8 +11,8 @@ public class ChessGameUtils {
         Piece[][] board = getSquaresOfBoard(boardToPrint);
 
             System.out.println("----------------------");
-            for (int i = 7; i >= 0; i--) {
-                System.out.print(i + 1 + " ");
+            for (int i = 0; i <= 7; i++) {
+                System.out.print( 8 - i  + " ");
                 for (int j = 0; j < 8; j++) {
                     System.out.print(board[i][j].printIdentifier() + " ");
                 }
