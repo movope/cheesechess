@@ -5,6 +5,7 @@ import de.movope.evaluation.MoveEvaluator;
 import de.movope.util.ChessGameUtils;
 import org.springframework.data.annotation.Id;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,16 +15,15 @@ public class ChessGame {
     private final String id;
 
     private final ChessBoard board;
-    private final Map<Color, Player> players = new HashMap<>();
+    private final Map<Color, Player> players;
 
     private Color colorOfNextMove = Color.WHITE;
 
     private ChessGame(String id) {
         this.id = id;
         board = ChessBoard.createNew(id);
-        players.put(Color.WHITE, new Player(Color.WHITE));
-        players.put(Color.BLACK, new Player(Color.BLACK));
-    }
+        players = newPlayers();
+        }
 
     public static ChessGame createNew(String id) {
         return new ChessGame(id);
@@ -89,5 +89,12 @@ public class ChessGame {
             }
         }
         return Color.UNDEFINED;
+    }
+
+    private static Map<Color, Player> newPlayers() {
+        Map<Color, Player> players = new HashMap<>();
+        players.put(Color.WHITE, new Player(Color.WHITE));
+        players.put(Color.BLACK, new Player(Color.BLACK));
+        return Collections.unmodifiableMap(players);
     }
 }
