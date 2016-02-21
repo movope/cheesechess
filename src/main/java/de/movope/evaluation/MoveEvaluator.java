@@ -3,6 +3,7 @@ package de.movope.evaluation;
 import de.movope.domain.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MoveEvaluator {
@@ -107,9 +108,9 @@ public class MoveEvaluator {
     private List<Direction> directions() {
         if (pieceType == PieceType.PAWN) {
             if (color == Color.WHITE) {
-                return Arrays.asList(Direction.create(0, 1));
+                return Collections.singletonList(Direction.create(0, 1));
             } else {
-                return Arrays.asList(Direction.create(0, -1));
+                return Collections.singletonList(Direction.create(0, -1));
             }
         }
         return pieceType.getDirections();
