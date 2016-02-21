@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Direction {
 
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     private Direction(int x, int y) {
         this.x = x;

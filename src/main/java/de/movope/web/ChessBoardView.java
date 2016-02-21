@@ -7,21 +7,10 @@ import java.util.Arrays;
 
 public class ChessBoardView {
 
-    PieceView[][] boardView = new PieceView[8][8];
-
-    public ChessBoardView() {
-    }
+    private final PieceView[][] boardView;
 
     public ChessBoardView(ChessBoard board) {
         boardView = ChessGameUtils.getViewOfBoard(board);
-    }
-
-    public PieceView[][] getBoardView() {
-        return boardView;
-    }
-
-    public void setBoardView(PieceView[][] boardView) {
-        this.boardView = boardView;
     }
 
     @Override

@@ -2,8 +2,8 @@ package de.movope.domain;
 
 public class Piece {
 
-    private PieceType pieceType;
-    private Color color;
+    private final PieceType pieceType;
+    private final Color color;
 
     public Piece(PieceType pieceType, Color color) {
         this.pieceType = pieceType;

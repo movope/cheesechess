@@ -2,8 +2,8 @@ package de.movope.web;
 
 public class MoveResource {
 
-    String from;
-    String to;
+    private String from;
+    private String to;
 
     public MoveResource() {
     }

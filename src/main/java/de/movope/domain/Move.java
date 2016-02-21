@@ -3,8 +3,8 @@ package de.movope.domain;
 
 public class Move {
 
-    Square from;
-    Square to;
+    private final Square from;
+    private final Square to;
 
     private Move(Square start, Square to) {
         this.from = start;

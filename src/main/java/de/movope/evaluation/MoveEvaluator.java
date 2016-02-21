@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MoveEvaluator {
 
-    private ChessBoard board;
+    private final ChessBoard board;
     private PieceType pieceType;
     private Color color;
     private boolean considerKingInCheck = true;

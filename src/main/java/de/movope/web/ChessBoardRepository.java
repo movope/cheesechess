@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface ChessBoardRepository extends MongoRepository<ChessBoard, String> {
 
-    public ChessBoard findById(String id);
+    ChessBoard findById(String id);
 }

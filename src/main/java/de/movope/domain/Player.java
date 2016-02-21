@@ -2,7 +2,7 @@ package de.movope.domain;
 
 public class Player {
 
-    private Color color;
+    private final Color color;
     private boolean gameOver = false;
     private boolean isComputer = false;
 

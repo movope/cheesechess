@@ -11,12 +11,12 @@ import java.util.Map;
 public class ChessGame {
 
     @Id
-    private String id;
+    private final String id;
 
-    ChessBoard board;
-    Map<Color, Player> players = new HashMap<>();
+    private final ChessBoard board;
+    private final Map<Color, Player> players = new HashMap<>();
 
-    Color colorOfNextMove = Color.WHITE;
+    private Color colorOfNextMove = Color.WHITE;
 
     private ChessGame(String id) {
         this.id = id;
@@ -49,7 +49,7 @@ public class ChessGame {
     }
 
     public boolean isMovePossible(Move move, Color color) {
-        if (!(board.getPieceAt(move.from.toString()).getColor() == color)) {
+        if (!(board.getPieceAt(move.from().toString()).getColor() == color)) {
             return false;
         }
         return MoveEvaluator.on(board).analyse(color).contains(move);

@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class Square implements Cloneable {
 
-    final private String[] ranks = {"A", "B", "C", "D", "E", "F", "G", "H"};
-    int file;
-    int rank;
+    private final String[] ranks = {"A", "B", "C", "D", "E", "F", "G", "H"};
+    private int file;
+    private int rank;
 
     private Square(int file, int rank) {
         this.file = file;
