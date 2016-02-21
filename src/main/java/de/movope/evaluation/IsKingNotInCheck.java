@@ -18,7 +18,7 @@ class IsKingNotInCheck implements Predicate<Move> {
 
     @Override
     public boolean test(Move move) {
-        ChessBoard boardAfterMove = new ChessBoard(board);
+        ChessBoard boardAfterMove = ChessBoard.copy(board);
         boardAfterMove.execute(move);
         MoveEvaluation enemyMoves = MoveEvaluator.on(boardAfterMove).ignoreKingInCheck().analyse(color.invert());
         for (Move attack : enemyMoves.possibleAttacks()) {

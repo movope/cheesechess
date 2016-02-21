@@ -20,9 +20,9 @@ class ChessBoardTest extends Specification {
         board.getSquaresWithPiece(Color.BLACK).size() == 16
     }
 
-    def "copy constructor works"() {
+    def "copy factory method works"() {
         given:
-        ChessBoard copy = new ChessBoard(board)
+        ChessBoard copy = ChessBoard.copy(board)
 
         when:
         copy.movePiece("A2", "A4");

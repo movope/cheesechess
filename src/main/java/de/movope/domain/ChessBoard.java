@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class ChessBoard {
 
     @Id
-    String id;
+    private final String id;
 
     private Map<String, Piece> pieces = new HashMap<>();
 
@@ -20,11 +20,12 @@ public class ChessBoard {
         this.id = id;
     }
 
-    public ChessBoard(ChessBoard board) {
-        this.id = board.id;
+    public static ChessBoard copy(ChessBoard board) {
+        ChessBoard copy = new ChessBoard(board.id);
         for (Map.Entry<String, Piece> entry: board.pieces.entrySet()) {
-            pieces.put(entry.getKey(), entry.getValue());
+            copy.pieces.put(entry.getKey(), entry.getValue());
         }
+        return copy;
     }
 
     public static ChessBoard createNew(String id) {

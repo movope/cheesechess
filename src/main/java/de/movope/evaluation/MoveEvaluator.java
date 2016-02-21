@@ -13,7 +13,7 @@ public class MoveEvaluator {
     private boolean considerKingInCheck = true;
 
     private MoveEvaluator(ChessBoard board) {
-        this.board = new ChessBoard(board);
+        this.board = ChessBoard.copy(board);
     }
 
     public static MoveEvaluator on(ChessBoard board) {
