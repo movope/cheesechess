@@ -4,11 +4,7 @@ import spock.lang.Specification
 
 class ChessBoardTest extends Specification {
 
-    ChessBoard board = new ChessBoard();
-
-    public setup() {
-        board.initPieces();
-    }
+    ChessBoard board = ChessBoard.createNew("some_id")
 
     def "you get the right piece for a specific square"() {
         expect:

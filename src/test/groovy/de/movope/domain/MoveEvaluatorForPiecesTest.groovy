@@ -6,11 +6,7 @@ import spock.lang.Specification
 
 class MoveEvaluatorForPiecesTest extends Specification {
 
-    ChessBoard board = new ChessBoard();
-
-    def setup() {
-        board.initPieces();
-    }
+    ChessBoard board = ChessBoard.createNew("some_id")
 
     def "when entering a board and a position, you return a empty MoveEvaluationResult"() {
         when:

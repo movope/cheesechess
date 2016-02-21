@@ -16,10 +16,7 @@ public class ChessBoard {
 
     private Map<String, Piece> pieces = new HashMap<>();
 
-    public ChessBoard() {
-    }
-
-    public ChessBoard(String id) {
+    private ChessBoard(String id) {
         this.id = id;
     }
 

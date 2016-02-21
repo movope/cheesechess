@@ -9,11 +9,9 @@ import spock.lang.Specification
 
 class RookTest extends Specification {
 
-    ChessBoard board;
+    ChessBoard board = ChessBoard.createNew("some_id")
 
     def setup() {
-        board = new ChessBoard();
-        board.initPieces();
         setUpPeacesOnBoard()
         ChessGameUtils.print(board);
     }
