@@ -3,21 +3,23 @@ package de.movope.domain;
 import java.util.Collections;
 import java.util.List;
 
+import static de.movope.domain.Direction.Builder.directions;
+
 public enum PieceType {
     NULL("+", 0,
           Collections.<Direction>emptyList()),
     PAWN("B", 0,
           Collections.<Direction>emptyList()),
     ROOK("T", 7,
-            Direction.Builder.create().parallel().directions()),
+            directions().parallel().create()),
     BISHOP("L", 7,
-            Direction.Builder.create().diagonal().directions()),
+            directions().diagonal().create()),
     QUEEN("Q", 7,
-            Direction.Builder.create().parallel().diagonal().directions()),
+            directions().parallel().diagonal().create()),
     KNIGHT("P", 1,
-            Direction.Builder.create().knight().directions()),
+            directions().knight().create()),
     KING("K", 1,
-            Direction.Builder.create().parallel().diagonal().directions());
+            directions().parallel().diagonal().create());
 
     final private String identifier;
     final private List<Direction> directions;

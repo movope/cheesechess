@@ -2,11 +2,13 @@ package de.movope.domain
 
 import spock.lang.Specification
 
+import static de.movope.domain.Direction.Builder.directions
+
 class DirectionTest extends Specification {
 
     def "builder with no flag creates empty list"() {
         when:
-        def directions = Direction.Builder.create().directions()
+        def directions = directions().create()
 
         then:
         directions.size() == 0
@@ -14,7 +16,7 @@ class DirectionTest extends Specification {
 
     def "builder with parallel flag creates correct list"() {
         when:
-        def directions = Direction.Builder.create().parallel().directions()
+        def directions = directions().parallel().create()
 
         then:
         directions.size() == 4
@@ -24,7 +26,7 @@ class DirectionTest extends Specification {
 
     def "builder with diagonal flag creates correct list"() {
         when:
-        def directions = Direction.Builder.create().diagonal().directions()
+        def directions = directions().diagonal().create()
 
         then:
         directions.size() == 4
@@ -34,7 +36,7 @@ class DirectionTest extends Specification {
 
     def "builder with parallel and diagonal flag creates correct list"() {
         when:
-        def directions = Direction.Builder.create().parallel().diagonal().directions()
+        def directions = directions().parallel().diagonal().create()
 
         then:
         directions.size() == 8
@@ -44,7 +46,7 @@ class DirectionTest extends Specification {
 
     def "builder with knight flag creates correct list"() {
         when:
-        def directions = Direction.Builder.create().knight().directions()
+        def directions = directions().knight().create()
 
         then:
         directions.size() == 8

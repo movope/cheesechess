@@ -33,10 +33,8 @@ public class Direction {
 
         Direction direction = (Direction) o;
 
-        if (x != direction.x) return false;
-        if (y != direction.y) return false;
+        return x == direction.x && y == direction.y;
 
-        return true;
     }
 
     @Override
@@ -52,7 +50,7 @@ public class Direction {
         private boolean diagonal = false;
         private boolean knight = false;
 
-        public static Builder create() {
+        public static Builder directions() {
             return new Builder();
         }
 
@@ -71,7 +69,7 @@ public class Direction {
             return this;
         }
 
-        public List<Direction> directions() {
+        public List<Direction> create() {
             List<Direction> result = new ArrayList<>();
             if (parallel) {
                 result.addAll(Arrays.asList(new Direction(0, 1), new Direction(1, 0), new Direction(-1, 0), new Direction(0, -1)));
