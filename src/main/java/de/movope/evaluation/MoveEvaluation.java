@@ -77,7 +77,11 @@ public class MoveEvaluation {
         private Set<Move> moves = new HashSet<>();
         private Set<Move> attacks = new HashSet<>();
 
-        public Builder() {
+        public static Builder aMoveEvaluation() {
+            return new Builder();
+        }
+
+        private Builder() {
         }
 
         public Builder addMoves(Set<Move> moves) {

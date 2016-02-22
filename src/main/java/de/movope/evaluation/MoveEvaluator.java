@@ -1,10 +1,18 @@
 package de.movope.evaluation;
 
-import de.movope.domain.*;
+import de.movope.domain.ChessBoard;
+import de.movope.domain.Color;
+import de.movope.domain.Direction;
+import de.movope.domain.Move;
+import de.movope.domain.Piece;
+import de.movope.domain.PieceType;
+import de.movope.domain.Square;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static de.movope.evaluation.MoveEvaluation.Builder.aMoveEvaluation;
 
 public class MoveEvaluator {
 
@@ -44,7 +52,7 @@ public class MoveEvaluator {
         pieceType = piece.getPieceType();
         color = piece.getColor();
 
-        final MoveEvaluation.Builder forAllDirections = new MoveEvaluation.Builder();
+        final MoveEvaluation.Builder forAllDirections = aMoveEvaluation();
 
         directions().stream()
                 .map(dir -> possibleMoves(dir, square))
@@ -59,7 +67,7 @@ public class MoveEvaluator {
         if (pieceType == PieceType.PAWN) {
             return possibleMovesForPawn(dir, start);
         }
-        final MoveEvaluation.Builder forOneDirection = new MoveEvaluation.Builder();
+        final MoveEvaluation.Builder forOneDirection = aMoveEvaluation();
 
         Square target = Square.copy(start);
 
@@ -78,7 +86,7 @@ public class MoveEvaluator {
     }
 
     private MoveEvaluation possibleMovesForPawn(Direction dir, Square start) {
-        final MoveEvaluation.Builder forOneDirection = new MoveEvaluation.Builder();
+        final MoveEvaluation.Builder forOneDirection = aMoveEvaluation();
         Square target = Square.copy(start);
 
         for (int i = 0; i < maximumMovesForPawn(start); i++) {
