@@ -1,8 +1,5 @@
 package de.movope.web;
 
-import de.movope.domain.ChessGame;
-import de.movope.domain.Color;
-import de.movope.domain.Move;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -10,18 +7,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 @RestController
 public class GameController {
 
     @Autowired
-    private ChessGameRepository gameRepository;
+    private GameService gameService;
 
     @RequestMapping(value = "/game/{gameId}", method = RequestMethod.PUT)
     public ResponseEntity<?> startNewGame(@PathVariable String gameId) {
-        ChessGame game = ChessGame.createNew(gameId);
-        gameRepository.save(game);
+        gameService.createCame(gameId);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(ServletUriComponentsBuilder
@@ -33,41 +28,17 @@ public class GameController {
 
     @RequestMapping(value = "/game/{gameId}/board", method = RequestMethod.GET)
     public ChessBoardView getBoardFromGame(@PathVariable String gameId) {
-        ChessGame game = gameRepository.findById(gameId);
-        if (game == null) {
-            throw new GameNotFoundException(gameId);
-        }
-        checkNotNull(game, "Chessgame with id=" + gameId + " not found.");
-        return new ChessBoardView(game.getBoard());
+        return gameService.getBoardFromGame(gameId);
     }
 
     @RequestMapping(value = "/game/{gameId}/move", method = RequestMethod.POST)
     public HttpStatus makeMove(@PathVariable String gameId, @RequestBody MoveResource moveRessource) {
-        ChessGame game = gameRepository.findById(gameId);
-        checkNotNull(game, "Chessgame with id=" + gameId + " not found.");
-
-        Move move = Move.create(moveRessource.getFrom(), moveRessource.getTo());
-
-        if (!game.isMovePossible(move, Color.WHITE)) {
-            throw new IllegalStateException("Move can not be executed!");
-        }
-        game.execute(move);
-        game.executeNextMoveForComputer();
-        gameRepository.save(game);
+        gameService.makeMove(gameId, moveRessource);
         return HttpStatus.CREATED;
     }
 
     @RequestMapping(value = "/game/delete", method = RequestMethod.DELETE)
     public void delete() {
-        gameRepository.deleteAll();
+        gameService.deleteAllGames();
     }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    class GameNotFoundException extends RuntimeException {
-
-        public GameNotFoundException(String gameId) {
-            super("could not find game '" + gameId + "'.");
-        }
-    }
-
 }
