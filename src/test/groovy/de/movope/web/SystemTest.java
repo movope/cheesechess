@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class SystemTest {
+public abstract class SystemTest {
 
     protected MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
             MediaType.APPLICATION_JSON.getSubtype(),
@@ -63,10 +63,14 @@ public class SystemTest {
         return null;
     }
 
-    protected String json(Object o) throws IOException {
+    protected String json(Object o) {
         MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
-        this.mappingJackson2HttpMessageConverter.write(
-                o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
+        try {
+            this.mappingJackson2HttpMessageConverter.write(
+                    o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return mockHttpOutputMessage.getBodyAsString();
     }
 }

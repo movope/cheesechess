@@ -63,7 +63,7 @@ public class GameControllerRestTest extends SystemTest {
         assertEquals(new ChessBoardView(expected), response);
     }
 
-    private MoveResource toResource(Move move) {
+    private static MoveResource toResource(Move move) {
         MoveResource resource = new MoveResource();
         resource.setTo(move.to().toString());
         resource.setFrom(move.from().toString());
