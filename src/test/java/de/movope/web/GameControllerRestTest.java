@@ -2,13 +2,15 @@ package de.movope.web;
 
 import de.movope.domain.ChessBoard;
 import de.movope.domain.Move;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MvcResult;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -39,7 +41,7 @@ public class GameControllerRestTest extends SystemTest {
         MvcResult result = mockMvc.perform(get("/game/{gameId}/board", gameId)).andExpect(status().isOk()).andReturn();
 
         ChessBoardView response = fromJson(result, ChessBoardView.class);
-        assertEquals(new ChessBoardView(ChessBoard.createNew(gameId)), response);
+        assertThat(response, is(new ChessBoardView(ChessBoard.createNew(gameId))));
     }
 
     @Test
@@ -61,7 +63,8 @@ public class GameControllerRestTest extends SystemTest {
                 .andExpect(status().isOk())
                 .andReturn();
         ChessBoardView response = fromJson(result, ChessBoardView.class);
-        assertEquals(new ChessBoardView(expected), response);
+
+        assertThat(response, is(new ChessBoardView(expected)));
     }
 
     private static MoveResource toResource(Move move) {
