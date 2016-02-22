@@ -7,11 +7,23 @@ import java.util.Arrays;
 
 public class ChessBoardView {
 
-    private final PieceView[][] boardView;
+    private PieceView[][] boardView;
+
+    public ChessBoardView() {
+    }
 
     public ChessBoardView(ChessBoard board) {
         boardView = ChessGameUtils.getViewOfBoard(board);
     }
+
+    public PieceView[][] getBoardView() {
+        return boardView;
+    }
+
+    public void setBoardView(PieceView[][] boardView) {
+        this.boardView = boardView;
+    }
+
 
     @Override
     public boolean equals(Object o) {
