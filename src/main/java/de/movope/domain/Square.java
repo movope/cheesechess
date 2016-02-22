@@ -2,7 +2,7 @@ package de.movope.domain;
 
 import java.util.Arrays;
 
-public class Square implements Cloneable {
+public class Square {
 
     private final String[] ranks = {"A", "B", "C", "D", "E", "F", "G", "H"};
     private int file;
@@ -13,12 +13,16 @@ public class Square implements Cloneable {
         this.rank = rank;
     }
 
-    static public Square create(String square) {
+    public static Square create(String square) {
         return new Square(Integer.valueOf(square.substring(1, 2)) - 1,
                 getRankAsNumber(square.substring(0, 1)));
     }
 
-    static private int getRankAsNumber(String rank) {
+    public static Square copy(Square square) {
+        return new Square(square.file, square.rank);
+    }
+
+    private static int getRankAsNumber(String rank) {
         switch (rank) {
             case "A":
                 return 0;
@@ -55,20 +59,6 @@ public class Square implements Cloneable {
     }
 
     @Override
-    public Object clone() {
-        Square clone = null;
-        try {
-            clone = (Square) super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        clone.file = file;
-        clone.rank = rank;
-        return clone;
-
-    }
-
-    @Override
     public String toString() {
         return ranks[rank] + (file + 1);
     }
@@ -80,9 +70,7 @@ public class Square implements Cloneable {
 
         Square square = (Square) o;
 
-        if (file != square.file) return false;
-        if (rank != square.rank) return false;
-        return true;
+        return file == square.file && rank == square.rank;
     }
 
     @Override
@@ -94,10 +82,7 @@ public class Square implements Cloneable {
     }
 
     public boolean onBoard() {
-        if (getFile() < 0 || getFile() > 7 ||
-                getRank() < 0 || getRank() > 7) {
-            return false;
-        }
-        return true;
+        return !(getFile() < 0 || getFile() > 7 ||
+                getRank() < 0 || getRank() > 7);
     }
 }
