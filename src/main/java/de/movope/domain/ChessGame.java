@@ -37,6 +37,10 @@ public class ChessGame {
         }
     }
 
+    public String getId() {
+        return id;
+    }
+
     public void print() {
         ChessGameUtils.print(board);
         System.out.println();

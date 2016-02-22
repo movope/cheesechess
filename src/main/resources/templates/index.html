@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hello Spring Boot!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p>ChessGame</p>
+<ul>
+    <li th:each="gameId : ${gameIds}" th:text="${gameId}">Item description here...</li>
+</ul>
+</body>
+</html>

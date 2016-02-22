@@ -1,7 +1,5 @@
 buildscript {
     repositories {
-        maven { url "http://repo.spring.io/libs-release" }
-        mavenLocal()
         mavenCentral()
     }
     dependencies {
@@ -21,13 +19,11 @@ jar {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
-    maven { url "http://repo.spring.io/libs-release" }
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     testCompile 'org.springframework:spring-test:4.2.4.RELEASE'
     testCompile "org.hamcrest:hamcrest-library:1.3"
