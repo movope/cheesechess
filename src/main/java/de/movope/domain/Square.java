@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class Square {
 
     private final String[] ranks = {"A", "B", "C", "D", "E", "F", "G", "H"};
-    private int file;
-    private int rank;
+    private final int file;
+    private final int rank;
 
     private Square(int file, int rank) {
         this.file = file;
