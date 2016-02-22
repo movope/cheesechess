@@ -57,7 +57,7 @@ public class GameController {
         return HttpStatus.CREATED;
     }
 
-    @RequestMapping("/game/delete")
+    @RequestMapping(value = "/game/delete", method = RequestMethod.DELETE)
     public void delete() {
         gameRepository.deleteAll();
     }
