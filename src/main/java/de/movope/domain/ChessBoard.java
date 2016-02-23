@@ -1,7 +1,7 @@
 package de.movope.domain;
 
 
-import org.springframework.data.annotation.Id;
+import com.google.common.base.Objects;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -103,4 +103,16 @@ public class ChessBoard {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessBoard that = (ChessBoard) o;
+        return Objects.equal(pieces, that.pieces);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(pieces);
+    }
 }

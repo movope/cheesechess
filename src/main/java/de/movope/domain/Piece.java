@@ -1,5 +1,7 @@
 package de.movope.domain;
 
+import com.google.common.base.Objects;
+
 public class Piece {
 
     private final PieceType pieceType;
@@ -27,5 +29,19 @@ public class Piece {
     @Override
     public String toString() {
         return "{" + pieceType + " " + color + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Piece piece = (Piece) o;
+        return pieceType == piece.pieceType &&
+                color == piece.color;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(pieceType, color);
     }
 }
