@@ -19,7 +19,7 @@ public class ChessGame {
     private final ChessBoard board;
     private final Map<Color, Player> players;
 
-    private Color colorOfNextMove = Color.WHITE;
+    private Color nextPlayerToMove = Color.WHITE;
 
     private ChessGame(String id) {
         this.id = id;
@@ -55,20 +55,20 @@ public class ChessGame {
 
     public void execute(Move move) {
         board.execute(move);
-        colorOfNextMove = colorOfNextMove.invert();
+        nextPlayerToMove = nextPlayerToMove.invert();
         checkIfGameOver();
     }
 
     private void checkIfGameOver() {
        if (MoveEvaluator.on(board)
-                        .isPlayerGameOver(colorOfNextMove)) {
-            players.get(colorOfNextMove).gameOver();
+                        .isPlayerGameOver(nextPlayerToMove)) {
+            players.get(nextPlayerToMove).gameOver();
         }
     }
 
     public void executeNextMoveForComputer() {
-        if (players.get(colorOfNextMove).isControlledByComputer()) {
-            makeRandomMoveForPlayer(colorOfNextMove);
+        if (players.get(nextPlayerToMove).isControlledByComputer()) {
+            makeRandomMoveForPlayer(nextPlayerToMove);
         }
     }
 
