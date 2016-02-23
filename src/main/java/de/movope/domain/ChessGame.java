@@ -99,8 +99,8 @@ public class ChessGame {
 
     private static Map<Color, Player> newPlayers() {
         Map<Color, Player> players = new HashMap<>();
-        players.put(Color.WHITE, new Player(Color.WHITE));
-        players.put(Color.BLACK, new Player(Color.BLACK));
+        players.put(Color.WHITE, new Player());
+        players.put(Color.BLACK, new Player());
         return Collections.unmodifiableMap(players);
     }
 }
