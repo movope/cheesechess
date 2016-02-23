@@ -31,14 +31,6 @@ public class ChessGame {
         return new ChessGame(id);
     }
 
-    public void makeRandomMoveForPlayer(Color color) {
-        Move move = MoveEvaluator.on(board).selectRandomMoveForColor(color);
-
-        if (move != null) {
-            execute(move);
-        }
-    }
-
     public String getId() {
         return id;
     }
@@ -81,6 +73,14 @@ public class ChessGame {
     public void executeNextMoveForComputer() {
         if (players.get(nextPlayerToMove()).isControlledByComputer()) {
             makeRandomMoveForPlayer(nextPlayerToMove());
+        }
+    }
+
+    private void makeRandomMoveForPlayer(Color color) {
+        Move move = MoveEvaluator.on(board).selectRandomMoveForColor(color);
+
+        if (move != null) {
+            execute(move);
         }
     }
 
