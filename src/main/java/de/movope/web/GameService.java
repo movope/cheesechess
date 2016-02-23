@@ -26,18 +26,16 @@ public class GameService {
     }
 
     public ChessBoardView getBoardFromGame(String gameId) {
+        checkIfGameExists(gameId);
+
         ChessGame game = chessGameRepository.findById(gameId);
-        if (game == null) {
-            throw new GameNotFoundException(gameId);
-        }
-        checkNotNull(game, "Chessgame with id=" + gameId + " not found.");
         return new ChessBoardView(game.getBoard());
     }
 
     public void makeMove(String gameId, MoveResource moveRessource) {
-        ChessGame game = chessGameRepository.findById(gameId);
-        checkNotNull(game, "Chessgame with id=" + gameId + " not found.");
+        checkIfGameExists(gameId);
 
+        ChessGame game = chessGameRepository.findById(gameId);
         Move move = Move.create(moveRessource.getFrom(), moveRessource.getTo());
 
         if (!game.isMovePossible(move, Color.WHITE)) {
@@ -50,5 +48,11 @@ public class GameService {
 
     public void deleteAllGames() {
         chessGameRepository.deleteAll();
+    }
+
+    private void checkIfGameExists(String gameId) {
+        if (!chessGameRepository.exists(gameId)) {
+            throw new GameNotFoundException(gameId);
+        }
     }
 }
