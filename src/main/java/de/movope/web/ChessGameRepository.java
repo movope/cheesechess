@@ -2,9 +2,13 @@ package de.movope.web;
 
 
 import de.movope.domain.ChessGame;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface ChessGameRepository extends MongoRepository<ChessGame, String> {
+import java.util.List;
+
+public interface ChessGameRepository {
 
     ChessGame findById(String id);
+    ChessGame save(ChessGame game);
+    void deleteAll();
+    List<ChessGame> findAll();
 }
