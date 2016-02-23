@@ -4,11 +4,13 @@ package de.movope.domain;
 import de.movope.evaluation.MoveEvaluator;
 import de.movope.util.ChessGameUtils;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+@Document
 public class ChessGame {
 
     @Id
@@ -72,7 +74,7 @@ public class ChessGame {
         }
     }
 
-    public Color nextPlayerToMove() {
+    private Color nextPlayerToMove() {
         return colorOfNextMove;
     }
 
