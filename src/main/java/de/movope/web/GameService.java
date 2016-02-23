@@ -19,7 +19,7 @@ public class GameService {
         this.chessGameRepository = chessGameRepository;
     }
 
-    public void createCame(String gameId) {
+    public void createGame(String gameId) {
         checkArgument(!chessGameRepository.exists(gameId), "A Game with id=" + gameId + " already exists.");
         ChessGame game = ChessGame.createNew(gameId);
         chessGameRepository.save(game);

@@ -16,7 +16,7 @@ public class GameController {
 
     @RequestMapping(value = "/game/{gameId}", method = RequestMethod.PUT)
     public ResponseEntity<?> startNewGame(@PathVariable String gameId) {
-        gameService.createCame(gameId);
+        gameService.createGame(gameId);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(ServletUriComponentsBuilder

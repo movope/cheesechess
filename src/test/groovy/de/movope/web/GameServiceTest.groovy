@@ -16,7 +16,7 @@ class GameServiceTest extends Specification {
 
     def "a new game can be started"() {
         when:
-        gameService.createCame(ID)
+        gameService.createGame(ID)
 
         then:
         chessGameRepository.findAll().size() == 1
@@ -26,10 +26,10 @@ class GameServiceTest extends Specification {
 
     def "two games can not have the same id"() {
         given:
-        gameService.createCame(ID)
+        gameService.createGame(ID)
 
         when:
-        gameService.createCame(ID)
+        gameService.createGame(ID)
 
         then:
         thrown IllegalArgumentException
@@ -38,7 +38,7 @@ class GameServiceTest extends Specification {
 
     def "a view of the chess-board is returned"() {
         given:
-        gameService.createCame(ID)
+        gameService.createGame(ID)
 
         when:
         def view = gameService.getBoardFromGame(ID)
@@ -50,7 +50,7 @@ class GameServiceTest extends Specification {
 
     def "a move can be executed"() {
         when:
-        gameService.createCame(ID)
+        gameService.createGame(ID)
         gameService.makeMove(ID, whitePawnMove())
 
         then:
@@ -62,9 +62,9 @@ class GameServiceTest extends Specification {
 
     def "games can be created and deleted"() {
         given:
-        gameService.createCame("id1")
-        gameService.createCame("id2")
-        gameService.createCame("id3")
+        gameService.createGame("id1")
+        gameService.createGame("id2")
+        gameService.createGame("id3")
 
         expect:
         chessGameRepository.findAll().size() == 3
