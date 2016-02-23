@@ -8,7 +8,7 @@ import spock.lang.Specification
 
 class PawnTest extends Specification {
 
-    ChessBoard board = ChessBoard.createNew("some_id");
+    ChessBoard board = ChessBoard.createNew();
 
     def setup() {
         setUpPeacesOnBoard()

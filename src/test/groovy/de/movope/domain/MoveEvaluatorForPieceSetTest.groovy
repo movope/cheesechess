@@ -6,7 +6,7 @@ import spock.lang.Specification
 
 class MoveEvaluatorForPieceSetTest extends Specification {
 
-    ChessBoard board = ChessBoard.createNew("ben");
+    ChessBoard board = ChessBoard.createNew();
 
     def "correct result of MoveEvaluation of all pieces at start"() {
             when:

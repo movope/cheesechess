@@ -9,7 +9,7 @@ import spock.lang.Specification
 
 class KnightTest extends Specification {
 
-    ChessBoard board = ChessBoard.createNew("some_id")
+    ChessBoard board = ChessBoard.createNew()
 
     def setup() {
         setUpPeacesOnBoard()
