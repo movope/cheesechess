@@ -76,6 +76,21 @@ class GameServiceTest extends Specification {
         chessGameRepository.findAll().isEmpty()
     }
 
+    def "all game-ids are returned"() {
+        given:
+        gameService.createGame("ID1")
+        gameService.createGame("ID2")
+        gameService.createGame("ID3")
+
+        when:
+        def gameIds = gameService.getAllGameIds()
+
+        then:
+        gameIds.contains("ID1")
+        gameIds.contains("ID2")
+        gameIds.contains("ID3")
+    }
+
     private static MoveResource whitePawnMove() {
         MoveResource moveResource = new MoveResource();
         moveResource.from = "A2"

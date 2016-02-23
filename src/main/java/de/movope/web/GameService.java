@@ -6,8 +6,10 @@ import de.movope.domain.Move;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service
 public class GameService {
@@ -54,5 +56,12 @@ public class GameService {
         if (!chessGameRepository.exists(gameId)) {
             throw new GameNotFoundException(gameId);
         }
+    }
+
+    public List<String> getAllGameIds() {
+        List<ChessGame> allGames = chessGameRepository.findAll();
+        return allGames.stream()
+                .map(ChessGame::getId)
+                .collect(Collectors.toList());
     }
 }
