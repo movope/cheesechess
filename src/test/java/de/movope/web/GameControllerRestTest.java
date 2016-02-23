@@ -1,7 +1,9 @@
 package de.movope.web;
 
 import de.movope.domain.ChessBoard;
+import de.movope.domain.Color;
 import de.movope.domain.Move;
+import de.movope.domain.PieceType;
 import de.movope.util.ChessGameUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,7 +66,8 @@ public class GameControllerRestTest extends SystemTest {
                 .andReturn();
         ChessBoardView response = fromJson(result, ChessBoardView.class);
 
-        assertThat(response, is(ChessGameUtils.getViewOfBoard(expected)));
+        assertThat(response.getBoardView()[6][0], is(PieceView.NULL));
+        assertThat(response.getBoardView()[4][0], is(new PieceView(PieceType.PAWN, Color.WHITE)));
     }
 
     private static MoveResource toResource(Move move) {

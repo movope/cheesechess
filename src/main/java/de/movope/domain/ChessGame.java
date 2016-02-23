@@ -78,10 +78,6 @@ public class ChessGame {
         return colorOfNextMove;
     }
 
-    public void activateComputeForColor(Color color) {
-        players.get(color).activateComputer();
-    }
-
     public void executeNextMoveForComputer() {
         if (players.get(nextPlayerToMove()).isControlledByComputer()) {
             makeRandomMoveForPlayer(nextPlayerToMove());
@@ -99,8 +95,8 @@ public class ChessGame {
 
     private static Map<Color, Player> newPlayers() {
         Map<Color, Player> players = new HashMap<>();
-        players.put(Color.WHITE, new Player());
-        players.put(Color.BLACK, new Player());
+        players.put(Color.WHITE, Player.newPlayer());
+        players.put(Color.BLACK, Player.computer());
         return Collections.unmodifiableMap(players);
     }
 }
