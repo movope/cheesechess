@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class ChessBoard {
 
-    private Map<String, Piece> pieces = new HashMap<>();
+    private final Map<String, Piece> pieces = new HashMap<>();
 
     private ChessBoard() {
     }
@@ -71,7 +71,7 @@ public class ChessBoard {
         return getPieceAt(target).getColor() == enemyColor;
     }
 
-    public boolean canPieceMoveTo(Square target) {
+    public boolean canPieceBeMovedTo(Square target) {
         return target.onBoard() && getPieceAt(target) == Piece.NULL;
     }
 

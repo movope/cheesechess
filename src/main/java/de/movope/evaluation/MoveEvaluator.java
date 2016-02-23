@@ -73,7 +73,7 @@ public class MoveEvaluator {
 
         for (int i = 0; i < pieceType.getMaximumMoves(); i++) {
             target = target.move(dir.x(), dir.y());
-            if (board.canPieceMoveTo(target)) {
+            if (board.canPieceBeMovedTo(target)) {
                 forOneDirection.addMove(Move.create(start, target));
             } else {
                 if (board.occupiedFromEnemy(target, color.invert())) {
@@ -91,7 +91,7 @@ public class MoveEvaluator {
 
         for (int i = 0; i < maximumMovesForPawn(start); i++) {
             target = target.move(dir.x(), dir.y());
-            if (board.canPieceMoveTo(target)) {
+            if (board.canPieceBeMovedTo(target)) {
                 forOneDirection.addMove(Move.create(start, target));
             }
         }
