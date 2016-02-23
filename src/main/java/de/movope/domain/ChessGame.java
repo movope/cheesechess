@@ -66,13 +66,9 @@ public class ChessGame {
         }
     }
 
-    private Color nextPlayerToMove() {
-        return colorOfNextMove;
-    }
-
     public void executeNextMoveForComputer() {
-        if (players.get(nextPlayerToMove()).isControlledByComputer()) {
-            makeRandomMoveForPlayer(nextPlayerToMove());
+        if (players.get(colorOfNextMove).isControlledByComputer()) {
+            makeRandomMoveForPlayer(colorOfNextMove);
         }
     }
 
