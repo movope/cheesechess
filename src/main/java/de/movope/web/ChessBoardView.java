@@ -1,8 +1,5 @@
 package de.movope.web;
 
-import de.movope.domain.ChessBoard;
-import de.movope.util.ChessGameUtils;
-
 import java.util.Arrays;
 
 public class ChessBoardView {
@@ -10,10 +7,6 @@ public class ChessBoardView {
     private PieceView[][] boardView;
 
     public ChessBoardView() {
-    }
-
-    public ChessBoardView(ChessBoard board) {
-        boardView = ChessGameUtils.getViewOfBoard(board);
     }
 
     public PieceView[][] getBoardView() {

@@ -2,7 +2,7 @@ package de.movope.web;
 
 import de.movope.domain.ChessBoard;
 import de.movope.domain.Move;
-import org.junit.Assert;
+import de.movope.util.ChessGameUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class GameControllerRestTest extends SystemTest {
         MvcResult result = mockMvc.perform(get("/game/{gameId}/board", gameId)).andExpect(status().isOk()).andReturn();
 
         ChessBoardView response = fromJson(result, ChessBoardView.class);
-        assertThat(response, is(new ChessBoardView(ChessBoard.createNew())));
+        assertThat(response, is(ChessGameUtils.getViewOfBoard(ChessBoard.createNew())));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class GameControllerRestTest extends SystemTest {
                 .andReturn();
         ChessBoardView response = fromJson(result, ChessBoardView.class);
 
-        assertThat(response, is(new ChessBoardView(expected)));
+        assertThat(response, is(ChessGameUtils.getViewOfBoard(expected)));
     }
 
     private static MoveResource toResource(Move move) {

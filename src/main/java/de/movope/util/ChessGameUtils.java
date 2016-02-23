@@ -3,6 +3,7 @@ package de.movope.util;
 import de.movope.domain.ChessBoard;
 import de.movope.domain.Piece;
 import de.movope.domain.Square;
+import de.movope.web.ChessBoardView;
 import de.movope.web.PieceView;
 
 import java.util.Map;
@@ -43,7 +44,7 @@ public class ChessGameUtils {
         return board;
     }
 
-    public static PieceView[][] getViewOfBoard(ChessBoard boardToPrint) {
+    private static PieceView[][] createPeaceViews(ChessBoard boardToPrint) {
         PieceView[][] board = new PieceView[8][8];
 
         for (int i = 0; i < 8; i++) {
@@ -57,6 +58,13 @@ public class ChessGameUtils {
             board[7 - position.getFile()][position.getRank()] = toPieceView(p.getValue());
         }
         return board;
+    }
+
+    public static ChessBoardView getViewOfBoard(ChessBoard boardToPrint) {
+        PieceView[][] board = createPeaceViews(boardToPrint);
+        ChessBoardView view = new ChessBoardView();
+        view.setBoardView(board);
+        return view;
     }
 
     private static PieceView toPieceView(Piece piece) {
