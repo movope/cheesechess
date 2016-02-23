@@ -24,6 +24,18 @@ class GameServiceTest extends Specification {
         game.board == ChessBoard.createNew()
     }
 
+    def "two games can not have the same id"() {
+        given:
+        gameService.createCame(ID)
+
+        when:
+        gameService.createCame(ID)
+
+        then:
+        thrown IllegalArgumentException
+    }
+
+
     def "a view of the chess-board is returned"() {
         given:
         gameService.createCame(ID)

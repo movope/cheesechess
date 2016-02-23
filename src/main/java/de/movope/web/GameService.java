@@ -6,6 +6,7 @@ import de.movope.domain.Move;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service
@@ -19,6 +20,7 @@ public class GameService {
     }
 
     public void createCame(String gameId) {
+        checkArgument(!chessGameRepository.exists(gameId), "A Game with id=" + gameId + " already exists.");
         ChessGame game = ChessGame.createNew(gameId);
         chessGameRepository.save(game);
     }
