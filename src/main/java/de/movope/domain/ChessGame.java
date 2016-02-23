@@ -2,7 +2,6 @@ package de.movope.domain;
 
 
 import de.movope.evaluation.MoveEvaluator;
-import de.movope.util.ChessGameUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -33,13 +32,6 @@ public class ChessGame {
 
     public String getId() {
         return id;
-    }
-
-    public void print() {
-        ChessGameUtils.print(board);
-        System.out.println();
-        System.out.println();
-        System.out.println();
     }
 
     public ChessBoard getBoard() {
