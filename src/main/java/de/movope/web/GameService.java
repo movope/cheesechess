@@ -35,7 +35,7 @@ public class GameService {
         return ChessGameUtils.getViewOfBoard(game.getBoard());
     }
 
-    public void makeMove(String gameId, MoveResource moveRessource) {
+    public void makeMoveWithWhitePlayer(String gameId, MoveResource moveRessource) {
         checkIfGameExists(gameId);
 
         ChessGame game = chessGameRepository.findById(gameId);

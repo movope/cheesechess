@@ -52,7 +52,7 @@ class GameServiceTest extends Specification {
     def "a move can be executed"() {
         when:
         gameService.createGame(ID)
-        gameService.makeMove(ID, whitePawnMove())
+        gameService.makeMoveWithWhitePlayer(ID, whitePawnMove())
 
         then:
         def game = chessGameRepository.findById(ID)

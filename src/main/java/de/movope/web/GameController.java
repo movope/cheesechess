@@ -33,7 +33,7 @@ public class GameController {
 
     @RequestMapping(value = "/game/{gameId}/move", method = RequestMethod.POST)
     public HttpStatus makeMove(@PathVariable String gameId, @RequestBody MoveResource moveRessource) {
-        gameService.makeMove(gameId, moveRessource);
+        gameService.makeMoveWithWhitePlayer(gameId, moveRessource);
         return HttpStatus.CREATED;
     }
 
