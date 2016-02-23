@@ -41,7 +41,7 @@ public class GameControllerRestTest extends SystemTest {
         MvcResult result = mockMvc.perform(get("/game/{gameId}/board", gameId)).andExpect(status().isOk()).andReturn();
 
         ChessBoardView response = fromJson(result, ChessBoardView.class);
-        assertThat(response, is(new ChessBoardView(ChessBoard.createNew(gameId))));
+        assertThat(response, is(new ChessBoardView(ChessBoard.createNew())));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class GameControllerRestTest extends SystemTest {
                 .contentType(contentType))
                 .andExpect(status().isOk());
 
-        ChessBoard expected = ChessBoard.createNew("ben");
+        ChessBoard expected = ChessBoard.createNew();
         expected.execute(move);
 
         MvcResult result = mockMvc.perform(get("/game/{id}/board", gameId))

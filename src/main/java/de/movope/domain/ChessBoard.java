@@ -11,25 +11,21 @@ import java.util.stream.Collectors;
 
 public class ChessBoard {
 
-    @Id
-    private final String id;
-
     private Map<String, Piece> pieces = new HashMap<>();
 
-    private ChessBoard(String id) {
-        this.id = id;
+    private ChessBoard() {
     }
 
     public static ChessBoard copy(ChessBoard board) {
-        ChessBoard copy = new ChessBoard(board.id);
+        ChessBoard copy = new ChessBoard();
         for (Map.Entry<String, Piece> entry: board.pieces.entrySet()) {
             copy.pieces.put(entry.getKey(), entry.getValue());
         }
         return copy;
     }
 
-    public static ChessBoard createNew(String id) {
-        ChessBoard board = new ChessBoard(id);
+    public static ChessBoard createNew() {
+        ChessBoard board = new ChessBoard();
         board.initPieces();
         return board;
     }
@@ -105,6 +101,6 @@ public class ChessBoard {
         for (int i = 0; i < 8; i++) {
             pieces.put(files[i] + row, new Piece(PieceType.PAWN, color));
         }
-
     }
+
 }

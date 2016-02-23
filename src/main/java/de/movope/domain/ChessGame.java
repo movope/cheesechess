@@ -21,7 +21,7 @@ public class ChessGame {
 
     private ChessGame(String id) {
         this.id = id;
-        board = ChessBoard.createNew(id);
+        board = ChessBoard.createNew();
         players = newPlayers();
         }
 
