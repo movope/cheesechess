@@ -76,7 +76,7 @@ public class MoveEvaluator {
             if (board.canPieceBeMovedTo(target)) {
                 forOneDirection.addMove(Move.create(start, target));
             } else {
-                if (board.occupiedFromEnemy(target, color.invert())) {
+                if (target.onBoard() && board.isSquareOccupiedByPiece(target, color.invert())) {
                     forOneDirection.addAttack(Move.create(start, target));
                 }
                 break;
@@ -98,7 +98,8 @@ public class MoveEvaluator {
         List<Direction> attackDirections = Arrays.asList(Direction.create(-1, dir.y()), Direction.create(1, dir.y()));
         attackDirections.stream()
                 .map(direction -> (Square.copy(start)).move(direction.x(), direction.y()))
-                .filter(attack -> board.occupiedFromEnemy(attack, color.invert()))
+                .filter(Square::onBoard)
+                .filter(attack -> board.isSquareOccupiedByPiece(attack, color.invert()))
                 .forEach(attack -> forOneDirection.addAttack(Move.create(start, attack)));
 
         return forOneDirection.create();

@@ -2,9 +2,12 @@ package de.movope.domain
 
 import spock.lang.Specification
 
+import static de.movope.domain.Color.BLACK
+import static de.movope.domain.Color.WHITE
+
 class ChessBoardTest extends Specification {
 
-    ChessBoard board = ChessBoard.createNew("some_id")
+    ChessBoard board = ChessBoard.createNew()
 
     def "you get the right piece for a specific square"() {
         expect:
@@ -16,8 +19,8 @@ class ChessBoardTest extends Specification {
 
     def "correct number of peaces is created"() {
         expect:
-        board.getSquaresWithPiece(Color.WHITE).size() == 16
-        board.getSquaresWithPiece(Color.BLACK).size() == 16
+        board.getSquaresWithPiece(WHITE).size() == 16
+        board.getSquaresWithPiece(BLACK).size() == 16
     }
 
     def "copy factory method works"() {
@@ -30,5 +33,17 @@ class ChessBoardTest extends Specification {
         then:
         copy.getPieceAt("A2").getPieceType() == PieceType.NULL
         board.getPieceAt("A2").getPieceType() == PieceType.PAWN
+    }
+
+    def "you can evaluate if square is occupied by piece"() {
+        expect:
+        board.isSquareOccupiedByPiece(Square.create("A2"), WHITE)
+        !board.isSquareOccupiedByPiece(Square.create("A2"), BLACK)
+
+        !board.isSquareOccupiedByPiece(Square.create("A4"), WHITE)
+        !board.isSquareOccupiedByPiece(Square.create("A4"), BLACK)
+
+        !board.isSquareOccupiedByPiece(Square.create("D8"), WHITE)
+        board.isSquareOccupiedByPiece(Square.create("D8"), BLACK)
     }
 }

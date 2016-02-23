@@ -39,14 +39,10 @@ public class ChessGame {
     }
 
     public boolean isMovePossible(Move move, Color color) {
-        if (!isSquareOccupiedByPiece(move.from(), color)) {
+        if (!board.isSquareOccupiedByPiece(move.from(), color)) {
             return false;
         }
         return MoveEvaluator.on(board).analyse(color).contains(move);
-    }
-
-    private boolean isSquareOccupiedByPiece(Square square, Color color) {
-        return board.getPieceAt(square.toString()).getColor() == color;
     }
 
     public void execute(Move move) {

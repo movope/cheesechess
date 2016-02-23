@@ -64,11 +64,8 @@ public class ChessBoard {
         pieces.put(to, transfer);
     }
 
-    public boolean occupiedFromEnemy(Square target, Color enemyColor) {
-        if ((target == null) || !target.onBoard()) {
-            return false;
-        }
-        return getPieceAt(target).getColor() == enemyColor;
+    public boolean isSquareOccupiedByPiece(Square square, Color color) {
+        return getPieceAt(square).getColor() == color;
     }
 
     public boolean canPieceBeMovedTo(Square target) {
