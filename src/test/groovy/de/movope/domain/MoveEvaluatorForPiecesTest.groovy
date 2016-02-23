@@ -21,7 +21,7 @@ class MoveEvaluatorForPiecesTest extends Specification {
         def result = MoveEvaluator.on(board).analyse(Square.create("A9"))
 
         then:
-        result.isMovePossible() == false
+        !result.isMovePossible()
     }
 
     def "when you enter a square without piece, return null"() {
@@ -29,7 +29,7 @@ class MoveEvaluatorForPiecesTest extends Specification {
         def result = MoveEvaluator.on(board).analyse(Square.create("A4"))
 
         then:
-        result.isMovePossible() == false
+        !result.isMovePossible()
     }
 
     def "when you enter D1 (queen), the result contains no moves and attacks"() {
@@ -37,7 +37,7 @@ class MoveEvaluatorForPiecesTest extends Specification {
         def result = MoveEvaluator.on(board).analyse(Square.create("D1"))
 
         then:
-        result.isMovePossible() == false
+        !result.isMovePossible()
     }
 
 
