@@ -36,4 +36,9 @@ public class MongoChessGameRepositoryAdapter implements ChessGameRepository {
     public List<ChessGame> findAll() {
         return mongoChessGameRepository.findAll();
     }
+
+    @Override
+    public boolean exists(String gameId) {
+        return mongoChessGameRepository.exists(gameId);
+    }
 }

@@ -11,4 +11,5 @@ public interface ChessGameRepository {
     ChessGame save(ChessGame game);
     void deleteAll();
     List<ChessGame> findAll();
+    boolean exists(String gameId);
 }

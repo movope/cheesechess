@@ -4,6 +4,7 @@ import de.movope.domain.ChessGame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InMemChessGameRepository implements ChessGameRepository {
 
@@ -37,5 +38,13 @@ public class InMemChessGameRepository implements ChessGameRepository {
     @Override
     public List<ChessGame> findAll() {
         return games;
+    }
+
+    @Override
+    public boolean exists(String gameId) {
+        return games.stream()
+                .map(ChessGame::getId)
+                .collect(Collectors.toList())
+                .contains(gameId);
     }
 }
