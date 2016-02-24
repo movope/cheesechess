@@ -10,8 +10,7 @@ public class Player {
     }
 
     public static Player computer() {
-        Player player = new Player(true);
-        return  player;
+        return new Player(true);
     }
 
     public static Player newPlayer() {
