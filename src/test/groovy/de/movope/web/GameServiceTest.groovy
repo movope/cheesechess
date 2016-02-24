@@ -5,7 +5,7 @@ import de.movope.domain.Color
 import de.movope.domain.Piece
 import de.movope.domain.PieceType
 import de.movope.domain.Square
-import de.movope.util.ChessGamePrinter
+import de.movope.ChessGamePrinter
 import spock.lang.Specification
 
 class GameServiceTest extends Specification {

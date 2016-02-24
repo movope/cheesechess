@@ -1,6 +1,6 @@
 package de.movope.domain
 
-import de.movope.util.ChessGamePrinter
+import de.movope.ChessGamePrinter
 import spock.lang.Specification
 
 class ChessGameTest extends Specification {

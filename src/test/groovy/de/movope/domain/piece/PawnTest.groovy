@@ -1,7 +1,7 @@
 package de.movope.domain.piece
 
 import de.movope.domain.ChessBoard
-import de.movope.util.ChessGamePrinter
+import de.movope.ChessGamePrinter
 import de.movope.evaluation.MoveEvaluator
 import de.movope.domain.Square
 import spock.lang.Specification

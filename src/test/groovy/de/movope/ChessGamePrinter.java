@@ -1,4 +1,4 @@
-package de.movope.util;
+package de.movope;
 
 import de.movope.domain.ChessBoard;
 import de.movope.domain.Piece;

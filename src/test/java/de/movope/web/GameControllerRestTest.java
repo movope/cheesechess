@@ -5,7 +5,6 @@ import de.movope.domain.Color;
 import de.movope.domain.Move;
 import de.movope.domain.PieceType;
 import de.movope.util.ChessBoardMapper;
-import de.movope.util.ChessGamePrinter;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
