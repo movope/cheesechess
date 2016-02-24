@@ -42,7 +42,9 @@ public class GameControllerRestTest extends SystemTest {
     public void newGameCanBeStarted() throws Exception {
         String gameId = "ben";
 
-        mockMvc.perform(put("/game/{id}", gameId)).andExpect(status().isCreated());
+        mockMvc.perform(post("/game/create")
+                .param("gameId", gameId))
+                .andExpect(status().isCreated());
 
         MvcResult result = mockMvc.perform(get("/game/{gameId}/board", gameId)).andExpect(status().isOk()).andReturn();
 
@@ -53,14 +55,16 @@ public class GameControllerRestTest extends SystemTest {
     @Test
     public void aValidMoveCanBeExecuted() throws Exception {
         String gameId = "ben";
-        mockMvc.perform(put("/game/{id}", gameId)).andExpect(status().isCreated());
+        mockMvc.perform(post("/game/create")
+                .param("gameId", gameId))
+                .andExpect(status().isCreated());
 
         Move move = Move.create("A2", "A4");
 
         mockMvc.perform(post("/game/{id}/move", gameId)
                 .content(this.json(toResource(move)))
                 .contentType(contentType))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
 
         ChessBoard expected = ChessBoard.createNew();
         expected.execute(move);
