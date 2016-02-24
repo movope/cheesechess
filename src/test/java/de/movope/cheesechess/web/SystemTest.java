@@ -1,6 +1,7 @@
 package de.movope.cheesechess.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.movope.cheesechess.Application;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.runner.RunWith;

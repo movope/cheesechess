@@ -1,4 +1,4 @@
-package de.movope.cheesechess.web;
+package de.movope.cheesechess;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
