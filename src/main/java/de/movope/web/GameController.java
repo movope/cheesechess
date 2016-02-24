@@ -1,5 +1,7 @@
 package de.movope.web;
 
+import de.movope.web.api.ChessBoardView;
+import de.movope.web.api.MoveResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

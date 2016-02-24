@@ -1,4 +1,4 @@
-package de.movope.web;
+package de.movope.web.api;
 
 import java.util.Arrays;
 

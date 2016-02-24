@@ -1,4 +1,4 @@
-package de.movope.web;
+package de.movope.web.api;
 
 import de.movope.domain.Color;
 import de.movope.domain.PieceType;

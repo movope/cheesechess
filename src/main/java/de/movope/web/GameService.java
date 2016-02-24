@@ -3,8 +3,9 @@ package de.movope.web;
 import de.movope.domain.ChessGame;
 import de.movope.domain.Color;
 import de.movope.domain.Move;
-import de.movope.util.ChessBoardMapper;
-import de.movope.util.ChessGamePrinter;
+import de.movope.web.api.ChessBoardMapper;
+import de.movope.web.api.ChessBoardView;
+import de.movope.web.api.MoveResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
