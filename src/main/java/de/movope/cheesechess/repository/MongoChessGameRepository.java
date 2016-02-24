@@ -1,4 +1,4 @@
-package de.movope.cheesechess.web;
+package de.movope.cheesechess.repository;
 
 
 import de.movope.cheesechess.domain.ChessGame;

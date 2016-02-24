@@ -4,6 +4,7 @@ import de.movope.cheesechess.domain.ChessBoard;
 import de.movope.cheesechess.domain.Color;
 import de.movope.cheesechess.domain.Move;
 import de.movope.cheesechess.domain.PieceType;
+import de.movope.cheesechess.repository.ChessGameRepository;
 import de.movope.cheesechess.web.api.ChessBoardMapper;
 import de.movope.cheesechess.web.api.ChessBoardView;
 import de.movope.cheesechess.web.api.MoveResource;

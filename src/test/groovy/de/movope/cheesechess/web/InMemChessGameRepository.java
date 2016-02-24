@@ -1,6 +1,7 @@
 package de.movope.cheesechess.web;
 
 import de.movope.cheesechess.domain.ChessGame;
+import de.movope.cheesechess.repository.ChessGameRepository;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,6 +5,7 @@ import de.movope.cheesechess.domain.Color
 import de.movope.cheesechess.domain.Piece
 import de.movope.cheesechess.domain.PieceType
 import de.movope.cheesechess.domain.Square
+import de.movope.cheesechess.repository.ChessGameRepository
 import de.movope.cheesechess.web.api.ChessBoardMapper
 import de.movope.cheesechess.web.api.MoveResource
 import spock.lang.Specification

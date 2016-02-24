@@ -1,6 +1,8 @@
-package de.movope.cheesechess.web;
+package de.movope.cheesechess.repository;
 
 import de.movope.cheesechess.domain.ChessGame;
+import de.movope.cheesechess.repository.ChessGameRepository;
+import de.movope.cheesechess.repository.MongoChessGameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
