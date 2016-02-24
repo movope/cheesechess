@@ -1,7 +1,7 @@
 package de.movope.domain.piece
 
 import de.movope.domain.ChessBoard
-import de.movope.util.ChessGameUtils
+import de.movope.util.ChessGamePrinter
 import de.movope.domain.Move
 import de.movope.evaluation.MoveEvaluator
 import de.movope.domain.Square
@@ -21,7 +21,7 @@ class KnightTest extends Specification {
         board.movePiece("D2", "H3");
         board.movePiece("D7", "D6");
         board.movePiece("E2", "E4");
-        ChessGameUtils.print(board);
+        ChessGamePrinter.print(board);
     }
 
     def "correct targets for knight"() {

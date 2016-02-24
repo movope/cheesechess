@@ -3,7 +3,8 @@ package de.movope.web;
 import de.movope.domain.ChessGame;
 import de.movope.domain.Color;
 import de.movope.domain.Move;
-import de.movope.util.ChessGameUtils;
+import de.movope.util.ChessBoardMapper;
+import de.movope.util.ChessGamePrinter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class GameService {
         checkIfGameExists(gameId);
 
         ChessGame game = chessGameRepository.findById(gameId);
-        return ChessGameUtils.getViewOfBoard(game.getBoard());
+        return ChessBoardMapper.getViewOfBoard(game.getBoard());
     }
 
     public void makeMoveWithWhitePlayer(String gameId, MoveResource moveRessource) {

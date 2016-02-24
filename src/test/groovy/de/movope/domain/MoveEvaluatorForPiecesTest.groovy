@@ -1,7 +1,7 @@
 package de.movope.domain
 
 import de.movope.evaluation.MoveEvaluator
-import de.movope.util.ChessGameUtils
+import de.movope.util.ChessGamePrinter
 import spock.lang.Specification
 
 class MoveEvaluatorForPiecesTest extends Specification {
@@ -80,7 +80,7 @@ class MoveEvaluatorForPiecesTest extends Specification {
         board.movePiece("E2", "E4");
         board.movePiece("F2", "F3");
         board.movePiece("B7", "B6");
-        ChessGameUtils.print(board);
+        ChessGamePrinter.print(board);
     }
 
     def setUpPeacesOnBoardForQueen() {
@@ -89,7 +89,7 @@ class MoveEvaluatorForPiecesTest extends Specification {
         board.movePiece("D2", "D6");
         board.movePiece("E2", "E4");
         board.movePiece("C7", "B6");
-        ChessGameUtils.print(board);
+        ChessGamePrinter.print(board);
     }
 
     def setUpPeacesOnBoardForKnight() {
@@ -98,6 +98,6 @@ class MoveEvaluatorForPiecesTest extends Specification {
         board.movePiece("D2", "H3");
         board.movePiece("D7", "D6");
         board.movePiece("E2", "E4");
-        ChessGameUtils.print(board);
+        ChessGamePrinter.print(board);
     }
 }

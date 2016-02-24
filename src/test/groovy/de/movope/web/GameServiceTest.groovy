@@ -5,7 +5,7 @@ import de.movope.domain.Color
 import de.movope.domain.Piece
 import de.movope.domain.PieceType
 import de.movope.domain.Square
-import de.movope.util.ChessGameUtils
+import de.movope.util.ChessGamePrinter
 import spock.lang.Specification
 
 class GameServiceTest extends Specification {
@@ -46,7 +46,7 @@ class GameServiceTest extends Specification {
 
         then:
         def game = chessGameRepository.findById(ID)
-        view == ChessGameUtils.getViewOfBoard(game.getBoard())
+        view == ChessGamePrinter.getViewOfBoard(game.getBoard())
     }
 
     def "a move can be executed"() {

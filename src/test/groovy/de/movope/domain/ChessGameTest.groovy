@@ -1,6 +1,6 @@
 package de.movope.domain
 
-import de.movope.util.ChessGameUtils
+import de.movope.util.ChessGamePrinter
 import spock.lang.Specification
 
 class ChessGameTest extends Specification {
@@ -38,7 +38,7 @@ class ChessGameTest extends Specification {
         for (Move m : movesToGameOver) {
             game.execute(m)
         }
-        ChessGameUtils.print(game.board)
+        ChessGamePrinter.print(game.board)
 
         then:
         game.colorOfWinningPlayer() == Color.WHITE

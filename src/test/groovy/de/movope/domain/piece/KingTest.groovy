@@ -1,7 +1,7 @@
 package de.movope.domain.piece
 
 import de.movope.domain.ChessBoard
-import de.movope.util.ChessGameUtils
+import de.movope.util.ChessGamePrinter
 import de.movope.domain.Move
 import de.movope.evaluation.MoveEvaluator
 import de.movope.domain.Square
@@ -19,7 +19,7 @@ class KingTest extends Specification {
         board.movePiece("E1", "C4");
         board.movePiece("A8", "B5");
         board.movePiece("E2", "E4");
-        ChessGameUtils.print(board);
+        ChessGamePrinter.print(board);
     }
 
     def "correct targets for king"() {

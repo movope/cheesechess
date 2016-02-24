@@ -1,7 +1,7 @@
 package de.movope.domain.piece
 
 import de.movope.domain.ChessBoard
-import de.movope.util.ChessGameUtils
+import de.movope.util.ChessGamePrinter
 import de.movope.domain.Move
 import de.movope.evaluation.MoveEvaluator
 import de.movope.domain.Square
@@ -13,7 +13,7 @@ class RookTest extends Specification {
 
     def setup() {
         setUpPeacesOnBoard()
-        ChessGameUtils.print(board);
+        ChessGamePrinter.print(board);
     }
 
     def setUpPeacesOnBoard() {

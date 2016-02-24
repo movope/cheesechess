@@ -4,7 +4,8 @@ import de.movope.domain.ChessBoard;
 import de.movope.domain.Color;
 import de.movope.domain.Move;
 import de.movope.domain.PieceType;
-import de.movope.util.ChessGameUtils;
+import de.movope.util.ChessBoardMapper;
+import de.movope.util.ChessGamePrinter;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class GameControllerRestTest extends SystemTest {
         MvcResult result = mockMvc.perform(get("/game/{gameId}/board", gameId)).andExpect(status().isOk()).andReturn();
 
         ChessBoardView response = fromJson(result, ChessBoardView.class);
-        assertThat(response, is(ChessGameUtils.getViewOfBoard(ChessBoard.createNew())));
+        assertThat(response, is(ChessBoardMapper.getViewOfBoard(ChessBoard.createNew())));
     }
 
     @Test

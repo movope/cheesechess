@@ -1,7 +1,7 @@
 package de.movope.domain.piece
 
 import de.movope.domain.ChessBoard
-import de.movope.util.ChessGameUtils
+import de.movope.util.ChessGamePrinter
 import de.movope.evaluation.MoveEvaluator
 import de.movope.domain.Square
 import spock.lang.Specification
@@ -18,7 +18,7 @@ class PawnTest extends Specification {
         board.movePiece("A2", "A5")
         board.movePiece("D2", "D6")
         board.movePiece("E2", "E4")
-        ChessGameUtils.print(board);
+        ChessGamePrinter.print(board);
     }
 
     def "correct targets for pawn"() {
