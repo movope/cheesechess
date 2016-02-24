@@ -3,21 +3,20 @@ package de.movope.domain;
 public class Player {
 
     private boolean gameOver = false;
-    private boolean isComputer = false;
+    private final boolean isComputer;
 
-    private Player() {
+    private Player(boolean isComputer) {
+        this.isComputer = isComputer;
     }
 
     public static Player computer() {
-        Player player = new Player();
-        player.isComputer = true;
+        Player player = new Player(true);
         return  player;
     }
 
     public static Player newPlayer() {
-        return  new Player();
+        return  new Player(false);
     }
-
 
     public boolean isGameOver() {
         return gameOver;
