@@ -3,6 +3,7 @@ package de.movope.cheesechess.web;
 
 import de.movope.cheesechess.web.api.ChessBoardView;
 import de.movope.cheesechess.web.api.MoveResource;
+import de.movope.cheesechess.web.api.NewGameRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,7 @@ public class GameViewController {
 
         List<String> gameIds = gameService.getAllGameIds();
         model.addAttribute("gameIds", gameIds);
-
+        model.addAttribute("newGameRequest", new NewGameRequest());
         return "index";
     }
 
@@ -49,5 +50,13 @@ public class GameViewController {
         model.addAttribute("move", move);
         gameService.makeMoveWithWhitePlayer(gameId, move);
         return "redirect:/game/" + gameId;
+    }
+
+    @RequestMapping(value = "/game/new", method = POST)
+    public String createNewGame(@ModelAttribute(value = "newGameRequest") NewGameRequest request,
+                                Model model) {
+        gameService.createGame(request.getGameId());
+        model.addAttribute("newGameRequest", request);
+        return "redirect:/game/overview";
     }
 }

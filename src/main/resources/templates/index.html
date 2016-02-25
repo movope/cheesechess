@@ -11,5 +11,15 @@
         <a href="game.html" th:href="@{/game/} + ${gameId}" th:text="${gameId}">Link zu Game </a>
     </li>
 </ul>
+<br/>
+<br/>
+
+
+<form action="#" th:action="@{/game/new}" th:object="${newGameRequest}" method="post">
+    <p>Create new Game: <input type="text" th:field="*{gameId}"/></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+
 </body>
 </html>
