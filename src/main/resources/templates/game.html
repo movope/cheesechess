@@ -5,11 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p>Overview Games</p>
-<ul>
-    <li th:each="gameId : ${gameIds}">
-        <a href="game.html" th:href="@{/game/} + ${gameId}" th:text="${gameId}">Link zu Game </a>
-    </li>
-</ul>
+<p>Show Game</p>
+
+    This is about Game <span th:text="${gameId}">gameId</span>
 </body>
 </html>
