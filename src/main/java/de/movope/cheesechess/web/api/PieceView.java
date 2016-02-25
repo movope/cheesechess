@@ -1,5 +1,6 @@
 package de.movope.cheesechess.web.api;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.movope.cheesechess.domain.Color;
 import de.movope.cheesechess.domain.PieceType;
 
@@ -16,6 +17,11 @@ public class PieceView {
     public PieceView(PieceType pieceType, Color color) {
         this.pieceType = pieceType;
         this.color = color;
+    }
+
+    @JsonIgnore
+    public String getImgUrl() {
+        return pieceType.toString() + "_" + color.toString() + ".png";
     }
 
     public PieceType getPieceType() {

@@ -15,7 +15,9 @@
     <th:block th:each="pieceRow : ${pieces}">
         <tr>
             <th:block th:each="piece : ${pieceRow}">
-                <td th:text="${piece.pieceType}">piece</td>
+                <td>
+                    <img th:src="@{/images/} + ${piece.imgUrl}"/>
+                </td>
             </th:block>
         </tr>
     </th:block>
