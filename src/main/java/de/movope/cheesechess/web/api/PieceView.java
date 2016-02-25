@@ -7,8 +7,8 @@ public class PieceView {
 
     public static final PieceView NULL = new PieceView();
 
-    private PieceType pieceType;
-    private Color color;
+    private PieceType pieceType = PieceType.NULL;
+    private Color color= Color.UNDEFINED;
 
     public PieceView() {
     }

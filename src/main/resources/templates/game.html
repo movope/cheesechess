@@ -7,6 +7,18 @@
 <body>
 <p>Show Game</p>
 
-    This is about Game <span th:text="${gameId}">gameId</span>
+    This is about Game <span th:text="${gameId}">gameId</span>.
+
+<br/>
+<br/>
+<table>
+    <th:block th:each="pieceRow : ${pieces}">
+        <tr>
+            <th:block th:each="piece : ${pieceRow}">
+                <td th:text="${piece.pieceType}">piece</td>
+            </th:block>
+        </tr>
+    </th:block>
+</table>
 </body>
 </html>

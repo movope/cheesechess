@@ -1,6 +1,7 @@
 package de.movope.cheesechess.web;
 
 
+import de.movope.cheesechess.web.api.ChessBoardView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,8 @@ public class GameViewController {
     public String game(Model model, @PathVariable(value = "gameId") String gameId) {
 
         model.addAttribute("gameId", gameId);
+        ChessBoardView board = gameService.getBoardFromGame(gameId);
+        model.addAttribute("pieces", board.getBoardView());
         return "game";
     }
 }
