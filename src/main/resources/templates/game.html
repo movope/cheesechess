@@ -20,5 +20,14 @@
         </tr>
     </th:block>
 </table>
+
+<br/>
+<br/>
+
+<form action="#" th:action="@{/game/} + ${gameId} + @{/move/new}" th:object="${move}" method="post">
+    <p>From: <input type="text" th:field="*{from}"/></p>
+    <p>To: <input type="text" th:field="*{to}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
 </body>
 </html>
