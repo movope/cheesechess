@@ -4,8 +4,10 @@
     <title>CheeseChess</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
+<h1>CheeseChess - your stinky opponent</h1>
+
 <body>
-<p>Overview Games</p>
+<p>All Games:</p>
 <ul>
     <li th:each="gameId : ${gameIds}">
         <a href="game.html" th:href="@{/game/} + ${gameId}" th:text="${gameId}">Link zu Game </a>
