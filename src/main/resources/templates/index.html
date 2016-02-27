@@ -8,11 +8,13 @@
 
 <body>
 <p>All Games:</p>
-<ul>
-    <li th:each="gameId : ${gameIds}">
-        <a href="game.html" th:href="@{/game/} + ${gameId}" th:text="${gameId}">Link zu Game </a>
-    </li>
-</ul>
+<div id="gameIds">
+    <ul>
+        <li th:each="gameId : ${gameIds}">
+            <a href="game.html" th:href="@{/game/} + ${gameId}" th:text="${gameId}">Link zu Game </a>
+        </li>
+    </ul>
+</div>
 <br/>
 <br/>
 
